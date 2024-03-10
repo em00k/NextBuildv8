@@ -1,0 +1,272 @@
+/NextBuildv8/Scripts/nextlib.bas:442: warning: [W150] Parameter 'nn' is never used
+/NextBuildv8/Scripts/nextlib.bas:442: warning: [W150] Parameter 'na' is never used
+/NextBuildv8/Scripts/nextlib.bas:457: warning: [W160] SUB 'MMU8new' declared as FASTCALL with 2 parameters
+/NextBuildv8/Scripts/nextlib.bas:456: warning: [W150] Parameter 'slot' is never used
+/NextBuildv8/Scripts/nextlib.bas:456: warning: [W150] Parameter 'memorybank' is never used
+/NextBuildv8/Scripts/nextlib.bas:490: warning: [W150] Parameter 'memorybank' is never used
+/NextBuildv8/Scripts/nextlib.bas:529: warning: [W150] Parameter 'slot' is never used
+/NextBuildv8/Scripts/nextlib.bas:566: warning: [W150] Parameter 'slot' is never used
+/NextBuildv8/Scripts/nextlib.bas:578: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:578: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:578: warning: [W150] Parameter 's' is never used
+/NextBuildv8/Scripts/nextlib.bas:608: warning: [W150] Parameter 'switch' is never used
+/NextBuildv8/Scripts/nextlib.bas:625: warning: [W160] SUB 'ScrollLayer' declared as FASTCALL with 2 parameters
+/NextBuildv8/Scripts/nextlib.bas:624: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:624: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:637: warning: [W160] SUB 'PlotL2' declared as FASTCALL with 3 parameters
+/NextBuildv8/Scripts/nextlib.bas:636: warning: [W150] Parameter 'X' is never used
+/NextBuildv8/Scripts/nextlib.bas:636: warning: [W150] Parameter 'Y' is never used
+/NextBuildv8/Scripts/nextlib.bas:636: warning: [W150] Parameter 'T' is never used
+/NextBuildv8/Scripts/nextlib.bas:682: warning: [W160] SUB 'PlotL2Shadow' declared as FASTCALL with 3 parameters
+/NextBuildv8/Scripts/nextlib.bas:681: warning: [W150] Parameter 'X' is never used
+/NextBuildv8/Scripts/nextlib.bas:681: warning: [W150] Parameter 'Y' is never used
+/NextBuildv8/Scripts/nextlib.bas:681: warning: [W150] Parameter 'T' is never used
+/NextBuildv8/Scripts/nextlib.bas:703: warning: [W160] SUB 'CIRCLEL2' declared as FASTCALL with 4 parameters
+/NextBuildv8/Scripts/nextlib.bas:702: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:702: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:702: warning: [W150] Parameter 'radius' is never used
+/NextBuildv8/Scripts/nextlib.bas:702: warning: [W150] Parameter 'col' is never used
+/NextBuildv8/Scripts/nextlib.bas:903: warning: [W160] SUB 'NextRegA' declared as FASTCALL with 2 parameters
+/NextBuildv8/Scripts/nextlib.bas:902: warning: [W150] Parameter 'reg' is never used
+/NextBuildv8/Scripts/nextlib.bas:902: warning: [W150] Parameter 'value' is never used
+/NextBuildv8/Scripts/nextlib.bas:917: warning: [W150] Parameter 'bank' is never used
+/NextBuildv8/Scripts/nextlib.bas:932: warning: [W150] Parameter 'source' is never used
+/NextBuildv8/Scripts/nextlib.bas:932: warning: [W150] Parameter 'dest' is never used
+/NextBuildv8/Scripts/nextlib.bas:1011: warning: [W150] Parameter 'Total' is never used
+/NextBuildv8/Scripts/nextlib.bas:1011: warning: [W150] Parameter 'spraddress' is never used
+/NextBuildv8/Scripts/nextlib.bas:1011: warning: [W150] Parameter 'bank' is never used
+/NextBuildv8/Scripts/nextlib.bas:1044: warning: [W160] SUB 'InitSprites2' declared as FASTCALL with 3 parameters
+/NextBuildv8/Scripts/nextlib.bas:1043: warning: [W150] Parameter 'Total' is never used
+/NextBuildv8/Scripts/nextlib.bas:1043: warning: [W150] Parameter 'spraddress' is never used
+/NextBuildv8/Scripts/nextlib.bas:1043: warning: [W150] Parameter 'bank' is never used
+/NextBuildv8/Scripts/nextlib.bas:1103: warning: [W150] Parameter 'spriteid' is never used
+/NextBuildv8/Scripts/nextlib.bas:1103: warning: [W150] Parameter 'visible' is never used
+/NextBuildv8/Scripts/nextlib.bas:1127: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:1127: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:1127: warning: [W150] Parameter 'spriteid' is never used
+/NextBuildv8/Scripts/nextlib.bas:1127: warning: [W150] Parameter 'pattern' is never used
+/NextBuildv8/Scripts/nextlib.bas:1127: warning: [W150] Parameter 'mflip' is never used
+/NextBuildv8/Scripts/nextlib.bas:1127: warning: [W150] Parameter 'anchor' is never used
+/NextBuildv8/Scripts/nextlib.bas:1258: warning: [W150] Parameter 'fname' is never used
+/NextBuildv8/Scripts/nextlib.bas:1425: warning: [W150] Parameter 'bank' is never used
+/NextBuildv8/Scripts/nextlib.bas:1608: warning: [W150] Parameter 'filen' is never used
+/NextBuildv8/Scripts/nextlib.bas:1608: warning: [W150] Parameter 'address' is never used
+/NextBuildv8/Scripts/nextlib.bas:1608: warning: [W150] Parameter 'length' is never used
+/NextBuildv8/Scripts/nextlib.bas:1608: warning: [W150] Parameter 'offset' is never used
+/NextBuildv8/Scripts/nextlib.bas:1740: warning: [W150] Parameter 'address' is never used
+/NextBuildv8/Scripts/nextlib.bas:1740: warning: [W150] Parameter 'length' is never used
+/NextBuildv8/Scripts/nextlib.bas:1869: warning: [W150] Parameter 'X' is never used
+/NextBuildv8/Scripts/nextlib.bas:1869: warning: [W150] Parameter 'Y' is never used
+/NextBuildv8/Scripts/nextlib.bas:1869: warning: [W150] Parameter 'T' is never used
+/NextBuildv8/Scripts/nextlib.bas:1869: warning: [W150] Parameter 'B' is never used
+/NextBuildv8/Scripts/nextlib.bas:1956: warning: [W150] Parameter 'X' is never used
+/NextBuildv8/Scripts/nextlib.bas:1956: warning: [W150] Parameter 'Y' is never used
+/NextBuildv8/Scripts/nextlib.bas:1956: warning: [W150] Parameter 'T' is never used
+/NextBuildv8/Scripts/nextlib.bas:2026: warning: [W150] Parameter 'X' is never used
+/NextBuildv8/Scripts/nextlib.bas:2026: warning: [W150] Parameter 'Y' is never used
+/NextBuildv8/Scripts/nextlib.bas:2026: warning: [W150] Parameter 'T' is never used
+/NextBuildv8/Scripts/nextlib.bas:2026: warning: [W150] Parameter 'b' is never used
+/NextBuildv8/Scripts/nextlib.bas:2130: warning: [W150] Parameter 'X' is never used
+/NextBuildv8/Scripts/nextlib.bas:2130: warning: [W150] Parameter 'Y' is never used
+/NextBuildv8/Scripts/nextlib.bas:2130: warning: [W150] Parameter 'T' is never used
+/NextBuildv8/Scripts/nextlib.bas:2130: warning: [W150] Parameter 'b' is never used
+/NextBuildv8/Scripts/nextlib.bas:2130: warning: [W150] Parameter 'c' is never used
+/NextBuildv8/Scripts/nextlib.bas:2225: warning: [W160] SUB 'FDoTile16' declared as FASTCALL with 4 parameters
+/NextBuildv8/Scripts/nextlib.bas:2224: warning: [W150] Parameter 'tile' is never used
+/NextBuildv8/Scripts/nextlib.bas:2224: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:2224: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:2224: warning: [W150] Parameter 'bank' is never used
+/NextBuildv8/Scripts/nextlib.bas:2377: warning: [W160] SUB 'FDoTile8' declared as FASTCALL with 4 parameters
+/NextBuildv8/Scripts/nextlib.bas:2376: warning: [W150] Parameter 'tile' is never used
+/NextBuildv8/Scripts/nextlib.bas:2376: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:2376: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:2376: warning: [W150] Parameter 'bank' is never used
+/NextBuildv8/Scripts/nextlib.bas:2519: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:2519: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:2519: warning: [W150] Parameter 'm' is never used
+/NextBuildv8/Scripts/nextlib.bas:2519: warning: [W150] Parameter 'fntbnk' is never used
+/NextBuildv8/Scripts/nextlib.bas:2519: warning: [W150] Parameter 'colormask' is never used
+/NextBuildv8/Scripts/nextlib.bas:2621: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:2621: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:2621: warning: [W150] Parameter 'm' is never used
+/NextBuildv8/Scripts/nextlib.bas:2621: warning: [W150] Parameter 'fntbnk' is never used
+/NextBuildv8/Scripts/nextlib.bas:2766: warning: [W160] SUB 'FPlotL2' declared as FASTCALL with 3 parameters
+/NextBuildv8/Scripts/nextlib.bas:2765: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:2765: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:2765: warning: [W150] Parameter 'c' is never used
+/NextBuildv8/Scripts/nextlib.bas:2830: warning: [W160] SUB 'FPlotLineV' declared as FASTCALL with 4 parameters
+/NextBuildv8/Scripts/nextlib.bas:2829: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:2829: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:2829: warning: [W150] Parameter 'h' is never used
+/NextBuildv8/Scripts/nextlib.bas:2829: warning: [W150] Parameter 'c' is never used
+/NextBuildv8/Scripts/nextlib.bas:2906: warning: [W160] SUB 'FPlotLineW' declared as FASTCALL with 4 parameters
+/NextBuildv8/Scripts/nextlib.bas:2905: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:2905: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:2905: warning: [W150] Parameter 'w' is never used
+/NextBuildv8/Scripts/nextlib.bas:2905: warning: [W150] Parameter 'c' is never used
+/NextBuildv8/Scripts/nextlib.bas:2984: warning: [W150] Parameter 'address' is never used
+/NextBuildv8/Scripts/nextlib.bas:2984: warning: [W150] Parameter 'colours' is never used
+/NextBuildv8/Scripts/nextlib.bas:2984: warning: [W150] Parameter 'offset' is never used
+/NextBuildv8/Scripts/nextlib.bas:3030: warning: [W150] Parameter 'colour' is never used
+/NextBuildv8/Scripts/nextlib.bas:3097: warning: [W150] Parameter 'x1' is never used
+/NextBuildv8/Scripts/nextlib.bas:3097: warning: [W150] Parameter 'x2' is never used
+/NextBuildv8/Scripts/nextlib.bas:3097: warning: [W150] Parameter 'y1' is never used
+/NextBuildv8/Scripts/nextlib.bas:3097: warning: [W150] Parameter 'y2' is never used
+/NextBuildv8/Scripts/nextlib.bas:3114: warning: [W150] Parameter 'x1' is never used
+/NextBuildv8/Scripts/nextlib.bas:3114: warning: [W150] Parameter 'x2' is never used
+/NextBuildv8/Scripts/nextlib.bas:3114: warning: [W150] Parameter 'y1' is never used
+/NextBuildv8/Scripts/nextlib.bas:3114: warning: [W150] Parameter 'y2' is never used
+/NextBuildv8/Scripts/nextlib.bas:3130: warning: [W150] Parameter 'x1' is never used
+/NextBuildv8/Scripts/nextlib.bas:3130: warning: [W150] Parameter 'x2' is never used
+/NextBuildv8/Scripts/nextlib.bas:3130: warning: [W150] Parameter 'y1' is never used
+/NextBuildv8/Scripts/nextlib.bas:3130: warning: [W150] Parameter 'y2' is never used
+/NextBuildv8/Scripts/nextlib.bas:3146: warning: [W150] Parameter 'x1' is never used
+/NextBuildv8/Scripts/nextlib.bas:3146: warning: [W150] Parameter 'x2' is never used
+/NextBuildv8/Scripts/nextlib.bas:3146: warning: [W150] Parameter 'y1' is never used
+/NextBuildv8/Scripts/nextlib.bas:3146: warning: [W150] Parameter 'y2' is never used
+/NextBuildv8/Scripts/nextlib.bas:3162: warning: [W150] Parameter 'address' is never used
+/NextBuildv8/Scripts/nextlib.bas:3162: warning: [W150] Parameter 'blkoff' is never used
+/NextBuildv8/Scripts/nextlib.bas:3162: warning: [W150] Parameter 'numberoftiles' is never used
+/NextBuildv8/Scripts/nextlib.bas:3162: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:3162: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:3162: warning: [W150] Parameter 'width' is never used
+/NextBuildv8/Scripts/nextlib.bas:3162: warning: [W150] Parameter 'mapwidth' is never used
+/NextBuildv8/Scripts/nextlib.bas:3341: warning: [W150] Parameter 'repeats' is never used
+/NextBuildv8/Scripts/nextlib.bas:3361: warning: [W150] Parameter 'repeats' is never used
+C:/NextBuildv8/zxbasic/src/arch/zxnext/library/keys.bas:50: warning: [W150] Parameter 'scancode' is never used
+C:/NextBuildv8/zxbasic/src/arch/zxnext/library/hex.bas:29: warning: [W150] Parameter 'num' is never used
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:48: warning: [W160] SUB 'UpdateMap' declared as FASTCALL with 4 parameters
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:47: warning: [W150] Parameter 'ux' is never used
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:47: warning: [W150] Parameter 'uy' is never used
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:47: warning: [W150] Parameter 'uv' is never used
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:47: warning: [W150] Parameter 'ucol' is never used
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:75: warning: [W160] SUB 'CopyToBanks' declared as FASTCALL with 4 parameters
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:74: warning: [W150] Parameter 'startb' is never used
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:74: warning: [W150] Parameter 'destb' is never used
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:74: warning: [W150] Parameter 'nrbanks' is never used
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:74: warning: [W150] Parameter 'copylen' is never used
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:116: warning: [W150] Parameter 'txx' is never used
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:116: warning: [W150] Parameter 'tyy' is never used
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:116: warning: [W150] Parameter 'helptextin' is never used
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:116: warning: [W150] Parameter 'col' is never used
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:168: warning: [W150] Parameter 'colour' is never used
+C://NextBuildv8//Sources//TileMapBrowser/Decode-inc.bas:10: warning: [W150] Parameter 'row' is never used
+C://NextBuildv8//Sources//TileMapBrowser/Decode-inc.bas:10: warning: [W150] Parameter 'pattern' is never used
+C://NextBuildv8//Sources//TileMapBrowser/Decode-inc.bas:589: warning: [W150] Parameter 'count' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:435: warning: [W160] SUB 'PeekMemLen' declared as FASTCALL with 3 parameters
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:434: warning: [W150] Parameter 'address' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:434: warning: [W150] Parameter 'length' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:955: warning: [W150] Parameter 'memory_pointer' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:955: warning: [W150] Parameter 'string_position' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1029: warning: [W150] Parameter 'memory_pointer' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1029: warning: [W150] Parameter 'array_string' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1029: warning: [W150] Parameter 'string_position' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1126: warning: [W150] Parameter 'array_as' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1285: warning: [W160] SUB 'PeekMem' declared as FASTCALL with 3 parameters
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1284: warning: [W150] Parameter 'address' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1284: warning: [W150] Parameter 'delimeter' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1325: warning: [W160] SUB 'NewPlotL2' declared as FASTCALL with 3 parameters
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1324: warning: [W150] Parameter 'x' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1324: warning: [W150] Parameter 'y' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1324: warning: [W150] Parameter 'c' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1491: warning: [W150] Parameter 'plot_ink' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1501: warning: [W150] Parameter 'index_c' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1501: warning: [W150] Parameter 'red_c' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1501: warning: [W150] Parameter 'green_c' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1501: warning: [W150] Parameter 'blue_c' is never used
+/NextBuildv8/Scripts/nextlib.bas:530: warning: [W190] Function 'GetMMU' should return a value
+/NextBuildv8/Scripts/nextlib.bas:541: warning: [W190] Function 'checkints' should return a value
+/NextBuildv8/Scripts/nextlib.bas:567: warning: [W190] Function 'GetReg' should return a value
+/NextBuildv8/Scripts/nextlib.bas:1405: warning: [W190] Function 'ReserveBank' should return a value
+C:/NextBuildv8/zxbasic/src/arch/zxnext/library/keys.bas:51: warning: [W190] Function 'MultiKeys' should return a value
+C:/NextBuildv8/zxbasic/src/arch/zxnext/library/keys.bas:72: warning: [W190] Function 'GetKeyScanCode' should return a value
+C:/NextBuildv8/zxbasic/src/arch/zxnext/library/hex.bas:30: warning: [W190] Function 'hex' should return a value
+/NextBuildv8/Scripts/nextlib.bas:442: warning: [W170] Function 'MMU8' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:456: warning: [W170] Function 'MMU8new' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:490: warning: [W170] Function 'MMU16' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:529: warning: [W170] Function 'GetMMU' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:566: warning: [W170] Function 'GetReg' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:578: warning: [W170] Function 'Debug' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:608: warning: [W170] Function 'ShowLayer2' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:624: warning: [W170] Function 'ScrollLayer' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:636: warning: [W170] Function 'PlotL2' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:681: warning: [W170] Function 'PlotL2Shadow' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:702: warning: [W170] Function 'CIRCLEL2' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:902: warning: [W170] Function 'NextRegA' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:917: warning: [W170] Function 'swapbank' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:932: warning: [W170] Function 'zx7Unpack' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:1011: warning: [W170] Function 'InitSprites' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:1103: warning: [W170] Function 'RemoveSprite' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:1188: warning: [W170] Function 'LoadBMPOld' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:1258: warning: [W170] Function 'LoadBMP' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:1402: warning: [W170] Function 'ReserveBank' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:1425: warning: [W170] Function 'FreeBank' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:1204: warning: [W170] Function 'LoadSD' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:1740: warning: [W170] Function 'SaveSD' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:1869: warning: [W170] Function 'DoTileBank16' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:1956: warning: [W170] Function 'DoTile8' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:2026: warning: [W170] Function 'DoTileBank8' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:2130: warning: [W170] Function 'DoTileBank8Test' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:2224: warning: [W170] Function 'FDoTile16' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:2376: warning: [W170] Function 'FDoTile8' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:2519: warning: [W170] Function 'L2Text' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:2621: warning: [W170] Function 'FL2Text' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:2905: warning: [W170] Function 'FPlotLineW' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:3030: warning: [W170] Function 'CLS256' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:3114: warning: [W170] Function 'ClipULA' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:3130: warning: [W170] Function 'ClipTile' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:3146: warning: [W170] Function 'ClipSprite' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:3162: warning: [W170] Function 'TileMap' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:3318: warning: [W170] Function 'FlipBuffer' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:3330: warning: [W170] Function 'EnableShadow' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:3335: warning: [W170] Function 'DisableShadow' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:3341: warning: [W170] Function 'WaitRetrace' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:3391: warning: [W170] Function 'WaitKey' is never called and has been ignored
+C:/NextBuildv8/zxbasic/src/arch/zxnext/library/keys.bas:22: warning: [W170] Function 'GetKey' is never called and has been ignored
+C:/NextBuildv8/zxbasic/src/arch/zxnext/library/keys.bas:50: warning: [W170] Function 'MultiKeys' is never called and has been ignored
+C:/NextBuildv8/zxbasic/src/arch/zxnext/library/hex.bas:103: warning: [W170] Function 'hex8' is never called and has been ignored
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:5: warning: [W170] Function 'RollIn' is never called and has been ignored
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:25: warning: [W170] Function 'RollOut' is never called and has been ignored
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:47: warning: [W170] Function 'UpdateMap' is never called and has been ignored
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:168: warning: [W170] Function 'ColourRow' is never called and has been ignored
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:196: warning: [W170] Function 'DrawPattern' is never called and has been ignored
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:265: warning: [W170] Function 'AddPatterBuffer' is never called and has been ignored
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:274: warning: [W170] Function 'SubPatterBuffer' is never called and has been ignored
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:285: warning: [W170] Function 'ReSetPatterBuffer' is never called and has been ignored
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:294: warning: [W170] Function 'DrawRownDown' is never called and has been ignored
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:301: warning: [W170] Function 'ScrollPatternUp' is never called and has been ignored
+C://NextBuildv8//Sources//TileMapBrowser/Decode-inc.bas:2: warning: [W170] Function 'colour_pattern' is never called and has been ignored
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:434: warning: [W170] Function 'PeekMemLen' is never called and has been ignored
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:476: warning: [W170] Function 'LoadMod' is never called and has been ignored
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:908: warning: [W150] Variable 'col' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1126: warning: [W170] Function 'ClearArray' is never called and has been ignored
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1324: warning: [W170] Function 'NewPlotL2' is never called and has been ignored
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1385: warning: [W170] Function 'MyCustomISR' is never called and has been ignored
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1391: warning: [W170] Function 'ISR' is never called and has been ignored
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1447: warning: [W170] Function 'SetUpIM' is never called and has been ignored
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1491: warning: [W170] Function 'SetPlotInk' is never called and has been ignored
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:1554: warning: [W170] Function 'rand' is never called and has been ignored
+C://NextBuildv8//Sources//TileMapBrowser/tilemapetext-inc.bas:3: warning: [W150] Variable 'pat_p' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:57: warning: [W150] Variable 'sx' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:59: warning: [W150] Variable 'pen_color2' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:60: warning: [W150] Variable 'sy' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:61: warning: [W150] Variable 'sy2' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:62: warning: [W150] Variable 'sc' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:63: warning: [W150] Variable 'bsy2' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:65: warning: [W150] Variable 'Draw_Box_x' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:66: warning: [W150] Variable 'Draw_Box_y' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:67: warning: [W150] Variable 'Draw_Box_w' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:68: warning: [W150] Variable 'Draw_Box_h' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:70: warning: [W150] Variable 'vert' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:79: warning: [W150] Variable 'pattern_v' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:87: warning: [W150] Variable 'wheel_value' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:88: warning: [W150] Variable 'wheel_delta' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:89: warning: [W150] Variable 'wheel_last' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:90: warning: [W150] Variable 'edit_panel' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:150: warning: [W150] Variable 'xx1' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:150: warning: [W150] Variable 'xx2' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:150: warning: [W150] Variable 'xx3' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:150: warning: [W150] Variable 'yy1' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:150: warning: [W150] Variable 'yy2' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:150: warning: [W150] Variable 'yy3' is never used
+C:\\NextBuildv8\\Sources\\TileMapBrowser\\Tracker-NXMOD-2-with-decode.bas:151: warning: [W150] Variable 'c' is never used

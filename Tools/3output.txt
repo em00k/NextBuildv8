@@ -1,0 +1,274 @@
+#define BIT_UP			 4	' 16 
+#define BIT_DOWN		 5	' 32 
+#define BIT_LEFT		 6	' 64 
+#define BIT_RIGHT		 7	' 128 
+#define DIR_NONE		 %00000000 
+#define DIR_UP			 %00010000 
+#define DIR_DOWN		 %00100000 
+#define DIR_LEFT		 %01000000 
+#define DIR_RIGHT		 %10000000 
+#define DIR_UP_I		 %11101111 
+#define DIR_DOWN_I		 %11011111 
+#define DIR_LEFT_I		 %10111111 
+#define DIR_RIGHT_I		 %01111111 
+'----------------------------------------------------------------------------- 
+'-- I/O ports - ZX Spectrum classic (48, 128, Timex, Pentagon, ...) ports 
+#define ULA_P_FE                         $FE     ' BORDER + MIC + BEEP + read Keyboard 
+#define TIMEX_P_FF                       $FF     ' Timex video control port 
+#define ZX128_MEMORY_P_7FFD              $7FFD   ' ZX Spectrum 128 ports 
+#define ZX128_MEMORY_P_DFFD              $DFFD 
+#define ZX128P3_MEMORY_P_1FFD            $1FFD 
+#define AY_REG_P_FFFD                    $FFFD 
+#define AY_DATA_P_BFFD                   $BFFD 
+#define Z80_DMA_PORT_DATAGEAR            $6B     ' on ZXN the zxnDMA handles this in zxnDMA mode 
+#define Z80_DMA_PORT_MB02                $0B     ' on ZXN the zxnDMA handles this in Zilog mode 
+#define DIVMMC_CONTROL_P_E3              $E3 
+#define SPI_CS_P_E7                      $E7 
+#define SPI_DATA_P_EB                    $EB 
+#define KEMPSTON_MOUSE_X_P_FBDF          $FBDF 
+#define KEMPSTON_MOUSE_Y_P_FFDF          $FFDF 
+#define KEMPSTON_MOUSE_B_P_FADF          $FADF   ' kempston mouse wheel+buttons 
+#define KEMPSTON_JOY1_P_1F               $1F 
+#define KEMPSTON_JOY2_P_37               $37 
+'----------------------------------------------------------------------------- 
+'-- I/O ports - ZX Spectrum NEXT specific ports 
+#define TBBLUE_REGISTER_SELECT_P_243B    $243B 
+    ' -- port $243B = 9275  Read+Write (detection bitmask: %0010_0100_0011_1011) 
+    '   -- selects NextREG mapped at port TBBLUE_REGISTER_ACCESS_P_253B 
+#define TBBLUE_REGISTER_ACCESS_P_253B    $253B 
+    ' -- port $253B = 9531  Read?+Write? (detection bitmask: %0010_0101_0011_1011) 
+    '   -- data for selected NextREG (read/write depends on the register selected) 
+' indexes into DAC_CHANNEL_* def-arrays, depending on the type of DAC you want to use 
+#define DAC_GS_COVOX_INDEX                   1 
+#define DAC_PENTAGON_ATM_INDEX               2 
+#define DAC_SPECDRUM_INDEX                   3 
+#define DAC_SOUNDRIVE1_INDEX                 4 
+#define DAC_SOUNDRIVE2_INDEX                 5 
+#define DAC_COVOX_INDEX                      6 
+#define DAC_PROFI_COVOX_INDEX                7 
+    ' -- enable 8bit DACs with PERIPHERAL_3_NR_08, use DAC_*_INDEX to access particular set of ports 
+    'DEFARRAY    DAC_CHANNEL_A  @@,  @@, $FB, $DF, $1F, $F1,  @@, $3F 
+    'DEFARRAY    DAC_CHANNEL_B  @@, $B3,  @@,  @@, $0F, $F3, $0F,  @@ 
+    'DEFARRAY    DAC_CHANNEL_C  @@, $B3,  @@,  @@, $4F, $F9, $4F,  @@ 
+    'DEFARRAY    DAC_CHANNEL_D  @@,  @@, $FB, $DF, $5F, $FB,  @@, $5F 
+    ' -- like for example: ld bc,DAC_CHANNEL_B[DAC_PROFI_COVOX_INDEX] 
+#define I2C_SCL_P_103B                   $103B   ' i2c bus port (clock) (write only?) 
+#define I2C_SDA_P_113B                   $113B   ' i2c bus port (data) (read+write) 
+#define UART_TX_P_133B                   $133B   ' UART tx port (read+write) 
+#define UART_RX_P_143B                   $143B   ' UART rx port (read+write) 
+#define UART_CTRL_P_153B                 $153B   ' UART control port (read+write) 
+#define ZILOG_DMA_P_0B                   $0B 
+#define ZXN_DMA_P_6B                     $6B 
+    ' -- port $6B = 107 Read+Write (detection bitmask: %xxxx_xxxx_0110_1011) 
+    '   - The zxnDMA is mostly compatible with Zilog DMA chip (Z8410) (at least 
+    '     as far as old ZX apps are concerned), but has many modifications. 
+    '   - core3.1.1 update - Zilog/zxnDMA mode is now selected by port number, not PERIPHERAL_2_NR_06! 
+    '   - core3.0 update - (REMOVED) specific behaviour details can be selected (PERIPHERAL_2_NR_06) 
+#define LAYER2_ACCESS_P_123B             $123B 
+    ' -- port $123B = 4667 Read+Write (detection bitmask: %0001_0010_0011_1011) 
+    '   - see ports.txt or wiki for details (has become a bit more complex over time) 
+#define LAYER2_ACCESS_WRITE_OVER_ROM     $01     ' map Layer2 bank into ROM area (0000..3FFF) for WRITE-only (reads as ROM) 
+#define LAYER2_ACCESS_L2_ENABLED         $02     ' enable Layer2 (make banks form nextreg $12 visible) 
+#define LAYER2_ACCESS_READ_OVER_ROM      $04     ' map Layer2 bank into ROM area (0000..3FFF) for READ-only 
+#define LAYER2_ACCESS_SHADOW_OVER_ROM    $08     ' bank selected by bits 6-7 is from "shadow Layer 2" banks range (nextreg $13) 
+#define LAYER2_ACCESS_BANK_OFFSET        $10     ' bit 2-0 is bank offset for current active mapping +0..+7 (other bits are reserved, use 0) 
+#define LAYER2_ACCESS_OVER_ROM_BANK_M    $C0     ' (mask of) value 0..3 selecting bank mapped for R/W (Nextreg $12 or $13) 
+#define LAYER2_ACCESS_OVER_ROM_BANK_0    $00     ' screen lines 0..63    (256x192) or columns 0..63    (320x256) or columns 0..127   (640x256) 
+#define LAYER2_ACCESS_OVER_ROM_BANK_1    $40     ' screen lines 64..127  (256x192) or columns 64..127  (320x256) or columns 128..255 (640x256) 
+#define LAYER2_ACCESS_OVER_ROM_BANK_2    $80     ' screen lines 128..191 (256x192) or columns 128..191 (320x256) or columns 256..383 (640x256) 
+#define LAYER2_ACCESS_OVER_ROM_48K       $C0     ' maps all 0..191 lines into $0000..$BFFF region (256x192) or 2/3 of columns in 320x256/640x256 
+#define SPRITE_STATUS_SLOT_SELECT_P_303B     $303B 
+    ' -- port $303B = 12347  Read+Write (detection bitmask: %0011_0000_0011_1011) 
+    '   -- write: 
+    '     - sets both "sprite slot" (0..63) and "pattern slot" (0..63 +128) 
+    '     - once the sprite/pattern slots are set, they act independently and 
+    '     each port ($xx57 and $xx5B) will auto-increment its own slot index 
+    '     (to resync one can write to this port again). 
+    '     - the +128 flag will make the pattern upload start at byte 128 of pattern 
+    '     slot (second half of slot) 
+    '     - The sprite-slot (sprite-attributes) may be optionally interlinked with 
+    '     NextReg $34 (feature controlled by NextReg $34) 
+    '     - auto-increments of slot position from value 63 are officially 
+    '     "undefined behaviour", wrap to 0 is not guaranteed. (only setting slots 
+    '     explicitly back to valid 0..63 will make your code future-proof) 
+    '   -- read (will also reset both collision and max-sprites flags): 
+    '     - bit 1 = maximum sprites per line hit (set when sprite renderer ran 
+    '               out of time when preparing next scanline) 
+    '     - bit 0 = collision flag (set when any sprites draw non-transparent 
+    '               pixel at the same location) 
+    '     Both flags contain values for current scanline already at the beginning 
+    '     of scanline (sprite engine renders one line ahead into buffer and updates 
+    '     flags progressively as it renders the sprites) 
+#define SPRITE_STATUS_MAXIMUM_SPRITES    $02 
+#define SPRITE_STATUS_COLLISION          $01 
+#define SPRITE_SLOT_SELECT_PATTERN_HALF  128     ' add it to 0..63 index to make pattern upload start at second half of pattern 
+#define SPRITE_ATTRIBUTE_P_57            $57 
+    ' -- port $xx57 = 87 write-only (detection bitmask: %xxxx_xxxx_0101_0111) 
+    '  - writing 4 or 5 bytes long structures to control particular sprite 
+    '  - after 4/5 bytes block the sprite slot index is auto-incremented 
+    '  - for detailed documentation check official docs or wiki (too long) 
+#define SPRITE_PATTERN_P_5B              $5B 
+    ' -- port $xx5B = 91 write-only (detection bitmask: %xxxx_xxxx_0101_1011) 
+    '  - each pattern slot is 256 bytes long = one 16x16 pattern of 8-bit pixels 
+    '    or two 16x16 patterns of 4-bit pixels. 
+    '  - Patterns are uploaded in "English" order (left to right, top to bottom), 
+    '    one byte encodes single pixel in 8 bit mode and two pixels in 4 bit 
+    '    mode (bits 7-4 are "left" pixel, 3-0 are "right" pixel) 
+    '  - pixels are offset (index) into active sprite palette 
+#define TURBO_SOUND_CONTROL_P_FFFD       $FFFD   ' write with bit 7 = 1 (port shared with AY) 
+'----------------------------------------------------------------------------- 
+'-- NEXT HW Registers (NextReg) 
+#define MACHINE_ID_NR_00                 $00 
+#define NEXT_VERSION_NR_01               $01 
+#define NEXT_RESET_NR_02                 $02 
+#define MACHINE_TYPE_NR_03               $03 
+#define ROM_MAPPING_NR_04                $04     'In config mode, allows RAM to be mapped to ROM area. 
+#define PERIPHERAL_1_NR_05               $05     'Sets joystick mode, video frency and Scandoubler. 
+#define PERIPHERAL_2_NR_06               $06     'Enables turbo/50Hz/60Hz keys, DivMMC, Multiface and audio (beep/AY) 
+#define TURBO_CONTROL_NR_07              $07 
+#define PERIPHERAL_3_NR_08               $08     'ABC/ACB Stereo, Internal Speaker, SpecDrum, Timex Video Modes, Turbo Sound Next, RAM contention and [un]lock 128k paging. 
+#define PERIPHERAL_4_NR_09               $09     'Sets scanlines, AY mono output, Sprite-id lockstep, disables Kempston and divMMC ports. 
+#define PERIPHERAL_5_NR_0A               $0A     'Mouse buttons and DPI settings (core 3.1.5) 
+#define NEXT_VERSION_MINOR_NR_0E         $0E 
+#define ANTI_BRICK_NR_10                 $10 
+#define VIDEO_TIMING_NR_11               $11 
+#define LAYER2_RAM_BANK_NR_12            $12     'bank number where visible Layer 2 video memory begins. 
+#define LAYER2_RAM_SHADOW_BANK_NR_13     $13     'bank number for "shadow" write-over-rom mapping 
+#define GLOBAL_TRANSPARENCY_NR_14        $14     'Sets the color treated as transparent for ULA/Layer2/LoRes 
+#define SPRITE_CONTROL_NR_15             $15     'LoRes mode, Sprites configuration, layers priority 
+    ' bit 7: enable LoRes mode 
+    ' bit 6: sprite rendering (1=sprite 0 on top of other, 0=sprite 0 at bottom) 
+    ' bit 5: If 1, the clipping works even in "over border" mode 
+    ' 4-2: layers priority: 000=SLU, 001=LSU, 010=SUL, 011=LUS, 100=USL, 101=ULS, 110=S,mix(U+L), 111=S,mix(U+L-5) 
+    ' bit 1: enable sprites over border, bit 0: show sprites 
+#define LAYER2_XOFFSET_NR_16             $16 
+#define LAYER2_YOFFSET_NR_17             $17 
+#define CLIP_LAYER2_NR_18                $18 
+#define CLIP_SPRITE_NR_19                $19 
+#define CLIP_ULA_LORES_NR_1A             $1A 
+#define CLIP_TILEMAP_NR_1B               $1B 
+#define CLIP_WINDOW_CONTROL_NR_1C        $1C     'set to 15 to reset all clip-window indices to 0 
+#define VIDEO_LINE_MSB_NR_1E             $1E 
+#define VIDEO_LINE_LSB_NR_1F             $1F 
+#define VIDEO_INTERUPT_CONTROL_NR_22     $22     'Controls the timing of raster interrupts and the ULA frame interrupt. 
+#define VIDEO_INTERUPT_VALUE_NR_23       $23 
+#define ULA_XOFFSET_NR_26                $26     'since core 3.0 
+#define ULA_YOFFSET_NR_27                $27     'since core 3.0 
+#define HIGH_ADRESS_KEYMAP_NR_28         $28     'reads first 8b part of value written to $44 (even unfinished 16b write) 
+#define LOW_ADRESS_KEYMAP_NR_29          $29 
+#define HIGH_DATA_TO_KEYMAP_NR_2A        $2A 
+#define LOW_DATA_TO_KEYMAP_NR_2B         $2B 
+#define DAC_B_MIRROR_NR_2C               $2C     'reads as MSB of Pi I2S left side sample, LSB waits at $2D 
+#define DAC_AD_MIRROR_NR_2D              $2D     'another alias for $2D, reads LSB of value initiated by $2C or $2E read 
+#define SOUNDDRIVE_DF_MIRROR_NR_2D       $2D     'Nextreg port-mirror of port 0xDF 
+#define DAC_C_MIRROR_NR_2E               $2E     'reads as MSB of Pi I2S right side sample, LSB waits at $2D 
+#define TILEMAP_XOFFSET_MSB_NR_2F        $2F 
+#define TILEMAP_XOFFSET_LSB_NR_30        $30 
+#define TILEMAP_YOFFSET_NR_31            $31 
+#define LORES_XOFFSET_NR_32              $32 
+#define LORES_YOFFSET_NR_33              $33 
+#define SPRITE_ATTR_SLOT_SEL_NR_34       $34     'Sprite-attribute slot index for $35-$39/$75-$79 port $57 mirrors 
+#define SPRITE_ATTR0_NR_35               $35     'port $57 mirror in nextreg space (accessible to copper) 
+#define SPRITE_ATTR1_NR_36               $36 
+#define SPRITE_ATTR2_NR_37               $37 
+#define SPRITE_ATTR3_NR_38               $38 
+#define SPRITE_ATTR4_NR_39               $39 
+#define PALETTE_INDEX_NR_40              $40     'Chooses a ULANext palette number to configure. 
+#define PALETTE_VALUE_NR_41              $41     'Used to upload 8-bit colors to the ULANext palette. 
+#define PALETTE_FORMAT_NR_42             $42     'ink-mask for ULANext modes 
+#define PALETTE_CONTROL_NR_43            $43     'Enables or disables ULANext interpretation of attribute values and toggles active palette. 
+#define PALETTE_VALUE_9BIT_NR_44         $44     'Holds the additional blue color bit for RGB333 color selection. 
+#define TRANSPARENCY_FALLBACK_COL_NR_4A  $4A     '8-bit colour to be drawn when all layers are transparent 
+#define SPRITE_TRANSPARENCY_I_NR_4B      $4B     'index of transparent colour in sprite palette (only bottom 4 bits for 4-bit patterns) 
+#define TILEMAP_TRANSPARENCY_I_NR_4C     $4C     'index of transparent colour in tilemap graphics (only bottom 4 bits) 
+#define MMU0_0000_NR_50                  $50     'Set a Spectrum RAM page at position 0x0000 to 0x1FFF 
+#define MMU1_2000_NR_51                  $51     'Set a Spectrum RAM page at position 0x2000 to 0x3FFF 
+#define MMU2_4000_NR_52                  $52     'Set a Spectrum RAM page at position 0x4000 to 0x5FFF 
+#define MMU3_6000_NR_53                  $53     'Set a Spectrum RAM page at position 0x6000 to 0x7FFF 
+#define MMU4_8000_NR_54                  $54     'Set a Spectrum RAM page at position 0x8000 to 0x9FFF 
+#define MMU5_A000_NR_55                  $55     'Set a Spectrum RAM page at position 0xA000 to 0xBFFF 
+#define MMU6_C000_NR_56                  $56     'Set a Spectrum RAM page at position 0xC000 to 0xDFFF 
+#define MMU7_E000_NR_57                  $57     'Set a Spectrum RAM page at position 0xE000 to 0xFFFF 
+#define COPPER_DATA_NR_60                $60 
+#define COPPER_CONTROL_LO_NR_61          $61 
+#define COPPER_CONTROL_HI_NR_62          $62 
+#define COPPER_DATA_16B_NR_63            $63     ' same as $60, but waits for full 16b before write 
+#define VIDEO_LINE_OFFSET_NR_64          $64     ' (core 3.1.5) 
+#define ULA_CONTROL_NR_68                $68 
+#define DISPLAY_CONTROL_NR_69            $69 
+#define LORES_CONTROL_NR_6A              $6A 
+#define TILEMAP_CONTROL_NR_6B            $6B 
+#define TILEMAP_DEFAULT_ATTR_NR_6C       $6C 
+#define TILEMAP_BASE_ADR_NR_6E           $6E     'Tilemap base address of map 
+#define TILEMAP_GFX_ADR_NR_6F            $6F     'Tilemap definitions (graphics of tiles) 
+#define LAYER2_CONTROL_NR_70             $70 
+#define LAYER2_XOFFSET_MSB_NR_71         $71     ' for 320x256 and 640x256 L2 modes (core 3.0.6+) 
+#define SPRITE_ATTR0_INC_NR_75           $75     'port $57 mirror in nextreg space (accessible to copper) (slot index++) 
+#define SPRITE_ATTR1_INC_NR_76           $76 
+#define SPRITE_ATTR2_INC_NR_77           $77 
+#define SPRITE_ATTR3_INC_NR_78           $78 
+#define SPRITE_ATTR4_INC_NR_79           $79 
+#define USER_STORAGE_0_NR_7F             $7F 
+#define EXPANSION_BUS_ENABLE_NR_80       $80 
+#define EXPANSION_BUS_CONTROL_NR_81      $81 
+#define INTERNAL_PORT_DECODING_0_NR_82   $82     'bits 0-7 
+#define INTERNAL_PORT_DECODING_1_NR_83   $83     'bits 8-15 
+#define INTERNAL_PORT_DECODING_2_NR_84   $84     'bits 16-23 
+#define INTERNAL_PORT_DECODING_3_NR_85   $85     'bits 24-31 
+#define EXPANSION_BUS_DECODING_0_NR_86   $86     'bits 0-7 mask 
+#define EXPANSION_BUS_DECODING_1_NR_87   $87     'bits 8-15 mask 
+#define EXPANSION_BUS_DECODING_2_NR_88   $88     'bits 16-23 mask 
+#define EXPANSION_BUS_DECODING_3_NR_89   $89     'bits 24-31 mask 
+#define EXPANSION_BUS_PROPAGATE_NR_8A    $8A     'Monitoring internal I/O or adding external keyboard 
+#define ALTERNATE_ROM_NR_8C              $8C     'Enable alternate ROM or lock 48k ROM 
+#define ZX_MEM_MAPPING_NR_8E             $8E     'shortcut to set classic zx128+3 memory model at one place 
+#define PI_GPIO_OUT_ENABLE_0_NR_90       $90     'pins 0-7 
+#define PI_GPIO_OUT_ENABLE_1_NR_91       $91     'pins 8-15 
+#define PI_GPIO_OUT_ENABLE_2_NR_92       $92     'pins 16-23 
+#define PI_GPIO_OUT_ENABLE_3_NR_93       $93     'pins 24-27 
+#define PI_GPIO_0_NR_98                  $98     'pins 0-7 
+#define PI_GPIO_1_NR_99                  $99     'pins 8-15 
+#define PI_GPIO_2_NR_9A                  $9A     'pins 16-23 
+#define PI_GPIO_3_NR_9B                  $9B     'pins 24-27 
+#define PI_PERIPHERALS_ENABLE_NR_A0      $A0 
+#define PI_I2S_AUDIO_CONTROL_NR_A2       $A2 
+'PI_I2S_CLOCK_DIVIDE_NR_A3        $A3    ' REMOVED in core 3.1.5 (no more master-mode) 
+#define ESP_WIFI_GPIO_OUTPUT_NR_A8       $A8 
+#define ESP_WIFI_GPIO_NR_A9              $A9 
+#define EXTENDED_KEYS_0_NR_B0            $B0     'read Next compound keys as standalone keys (outside of zx48 matrix) 
+#define EXTENDED_KEYS_1_NR_B1            $B1     'read Next compound keys as standalone keys (outside of zx48 matrix) 
+'DIVMMC_TRAP_ENABLE_1_NR_B2       $B2    ' NOT IMPLEMENTED in core yet (as of 3.1.4), may happen in future 
+'DIVMMC_TRAP_ENABLE_2_NR_B4       $B4    ' NOT IMPLEMENTED in core yet (as of 3.1.4), may happen in future 
+#define DEBUG_LED_CONTROL_NR_FF          $FF     'Turns debug LEDs on and off on TBBlue implementations that have them. 
+'----------------------------------------------------------------------------- 
+'-- common memory addresses 
+#define MEM_ROM_CHARS_3C00               $3C00   ' actual chars start at $3D00 with space 
+#define MEM_ZX_SCREEN_4000               $4000 
+#define MEM_ZX_ATTRIB_5800               $5800 
+#define MEM_LORES0_4000                  $4000 
+#define MEM_LORES1_6000                  $6000 
+#define MEM_TIMEX_SCR0_4000              $4000 
+#define MEM_TIMEX_SCR1_6000              $6000 
+'----------------------------------------------------------------------------- 
+'-- Copper commands 
+#define COPPER_NOOP                      %00000000 
+#define COPPER_WAIT_H                    %10000000 
+#define COPPER_HALT_B                    $FF   ' 2x $FF = wait for (511,63) = infinite wait 
+'----------------------------------------------------------------------------- 
+' DMA (Register 6) 
+#define DMA_RESET					 $C3 
+#define DMA_RESET_PORT_A_TIMING		 $C7 
+#define DMA_RESET_PORT_B_TIMING		 $CB 
+#define DMA_LOAD					 $CF 
+#define DMA_CONTINUE				 $D3 
+#define DMA_DISABLE_INTERUPTS		 $AF 
+#define DMA_ENABLE_INTERUPTS		 $AB 
+#define DMA_RESET_DISABLE_INTERUPTS	 $A3 
+#define DMA_ENABLE_AFTER_RETI		 $B7 
+#define DMA_READ_STATUS_BYTE		 $BF 
+#define DMA_REINIT_STATUS_BYTE		 $8B 
+#define DMA_START_READ_SENCE		 $A7 
+#define DMA_FORCE_READY				 $B3 
+#define DMA_DISABLE					 $83 
+#define DMA_ENABLE					 $87 
+#define DMA_READ_MASK_FOLLOWS		 $BB 

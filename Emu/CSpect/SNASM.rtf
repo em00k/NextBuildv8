@@ -1,0 +1,468 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang2057\deflangfe2057{\fonttbl{\f0\fswiss\fprq2\fcharset0 Arial;}{\f1\froman\fprq2\fcharset0 Times New Roman;}{\f2\fmodern\fprq1\fcharset0 Courier New;}}
+{\colortbl ;\red0\green0\blue255;\red0\green128\blue0;}
+{\stylesheet{ Normal;}{\s1 heading 1;}{\s2 heading 2;}{\s3 heading 3;}}
+{\*\generator Riched20 10.0.19041}{\*\mmathPr\mnaryLim0\mdispDef1\mwrapIndent1440 }\viewkind4\uc1 
+\pard\keepn\nowidctlpar\s1\li-1276\sb240\sa60\qc\kerning32\b\f0\fs32 SNASM V3.2.00 \endash  6502/Z80 assembler\par
+
+\pard\nowidctlpar\li-1276\qc\kerning0\b0\f1\fs24\'a9 Copyright Michael Dailly, 2002-2020. All rights reserved.\par
+\par
+I can be reached at:-\par
+{{\field{\*\fldinst{HYPERLINK "mailto:mike@dailly.org" }}{\fldrslt{\ul\cf1\cf1\ul mike@dailly.org}}}}\f1\fs24\line or\line {{\field{\*\fldinst{HYPERLINK http://dailly.blogspot.com/ }}{\fldrslt{http://dailly.blogspot.com/\ul0\cf0}}}}\f1\fs24\par
+\par
+\par
+\par
+
+\pard\nowidctlpar\li-1276\b SNASM\b0  is a fully featured 65xxx and Z80 cross assembler. It supports complex macros, dynamic instruction creation and full 6502,65c02, 65816 and Z80 support. It is also supports symbol output to #CSpec and VICE emulators as well as a basic MAP.  It is actively being used by myself for retro development so is being constantly upgraded with new features.  \par
+\par
+\par
+\par
+\par
+\b THIS ASSEMBLER IS TOTALY FREE AND CAN BE USED BY ANYONE FOR ANYTHING. BEING FREE, I ACCEPT NO RESPONSIBILITY FOR ANY PROBLEMS RESULTING IN THE USE OF THIS PROGRAM. IF YOU ARE GOING TO INCLUDE IT IN ANOTHER PACKAGE, YOU ARE STILL FREE TO DO SO, BUT PLEASE LET ME KNOW.\par
+
+\pard\keepn\nowidctlpar\s3\li-1276\sb240\sa60\f0\fs26\par
+
+\pard\nowidctlpar\b0\fs24\par
+\par
+
+\pard\keepn\nowidctlpar\s3\li-1276\sb240\sa60\b\fs26 Command Line:\par
+
+\pard\nowidctlpar\li-1276\b0\f1\fs24\tab SNasm [options] <inputname> <outputname>\par
+\tab -sym\tab\tab\tab Dumps the symbol table in Minus4w format\par
+\tab -vice\tab\tab\tab Dumps the symbol table in VICE format\par
+          -map               \tab\tab Start of a symbolic DUMP, not much use just now.\par
+\tab -commay\tab\tab Disables \b ZeroPage,y\b0  warnings\par
+          -next\tab\tab\tab Enables ZX Spectrum Next instructions\par
+          -d SYM[=VAL]\tab define a value. If Value not provided, sym=1\par
+    \par
+ \par
+
+\pard\keepn\nowidctlpar\s3\li-1276\sb240\sa60\b\f0\fs26\par
+\page Numerical\par
+
+\pard\nowidctlpar\fi720\li-1276\b0\f1\fs24 0 - 9\tab\tab\tab\tab Decimal\par
+$A-$F\tab\tab\tab Hex\par
+%0-%1\tab\tab\tab Binary\par
+?0-7 \tab\tab\tab\tab Octal\par
+A-Z[A-Z0-9_][:]\tab\tab Label\par
+@A-Z[A-Z0-9_][:]\tab\tab Local Label\par
+!A-Z[A-Z0-9_][:]\tab\tab Local Label\par
+
+\pard\nowidctlpar\li-1276\par
+\par
+\par
+
+\pard\keepn\nowidctlpar\s3\li-1276\sb240\sa60\b\f0\fs26 Addressing Modes\par
+
+\pard\nowidctlpar\li-1276\b0\f1\fs24 #expression\tab\tab\tab Immediate mode\par
+expression\tab\tab\tab Zeropage is <256\par
+expression\tab\tab\tab Absolute if >=256\par
+expression,x\tab\tab\tab Zeropage+X if <256\par
+expression,x\tab\tab\tab Absolute +X if >=256\par
+expression,y\tab\tab\tab Zeropage+Y if <256\par
+expression,y\tab\tab\tab Absolute +Y if >=256\par
+(expression)\tab\tab\tab Indirect\par
+(expression),y\tab\tab\tab Zero page indirect +Y\par
+(expression),z\tab\tab\tab Zero page indirect +Z\tab\tab (45GS02)\par
+(expression,x)\tab\tab\tab Zero page indirect +X\par
+[$00]                                   Direct Page  \tab\tab\tab (65816 / 45GS02)\par
+[$00],y                                Direct Page+Y\tab\tab\tab (65816)\par
+[$00],z                                Direct Page+Z\tab\tab\tab (45GS02)\par
+>expression                         24 bit LONG\tab\tab\tab (65816)\par
+>expression,x\tab\tab\tab 24 bit LONG+X\tab\tab (65816)\par
+(expression,x)\tab\tab\tab Absolute+X\tab\tab\tab (65816, 65c02)\par
+expression,s\tab\tab\tab Stack relative\tab\tab\tab (65816)\par
+(expression,s),y\tab\tab Indirect stack relative + Y\tab (65816)\par
+expression,expression\tab\tab Block transfer only\tab\tab (65816)\par
+\par
+\par
+
+\pard\nowidctlpar\fi720\li-1276\par
+
+\pard\keepn\nowidctlpar\s3\li-1276\sb240\sa60\b\f0\fs26\par
+Assembler Directives:\par
+
+\pard\nowidctlpar\li-1276\b0\f1\fs22 ; \tab\tab\tab\tab\tab Comment till end of line\par
+ORG\tab   <Expression>\tab\tab\tab No forward referencing allowed. (Pads - see notes)\par
+PCORG <Expression>\tab\tab\tab No forward referencing allowed. (Does \b\i NOT \b0\i0 pad, sets PC only)\line ALIGN  <Expression>\tab\tab\tab Align PC to POW2 value (i.e. 2,4,8,16,32,64 etc...)\par
+END\tab\tab\tab\tab\tab end of source file.\par
+\par
+DB\tab <expression>,\rdblquote String\rdblquote ,\'85.\par
+DW\tab <expression>, <expression>\par
+DS\tab <expression>\tab\tab\tab reserve space \par
+HEX     AABBCCDD....etc\tab\tab define hex block\par
+\par
+Label[:]\tab equ\tab <expression>\tab\tab equate label to value\par
+Label[:]=\tab <expression>\tab\tab equate label to value\par
+Label[:]\tab def\tab <expression>\tab\tab can be redefined\par
+Label[:]\tab rb\tab <expression>\tab\tab reserve byte \tab (structures)\par
+Label[:]\tab rw\tab <expression>\tab\tab reserve word\tab (structures)\par
+Label[:]\tab\tab\tab\tab\tab Set to current PC\line @Label[:]\tab\tab\tab\tab Local labels. Set to current PC,\par
+
+\pard\nowidctlpar\fi556\li2324\tab Valid until next \ldblquote Label[:]\rdblquote\line\tab\tab (also !Label[:]  and  .Label[:])\line\par
+
+\pard\nowidctlpar\li-1276\par
+
+\pard\keepn\nowidctlpar\s3\li-1276\sb240\sa60\page\b\f0\fs26 Assembler Commands:\par
+
+\pard\nowidctlpar\li-1276\b0\f1\fs22\line           RSRESET\tab\tab\tab\tab\tab sets to 0\tab\tab\tab (structures)\par
+\tab RSSET\tab [Expression]\tab\tab\tab\tab if no expression, defaults to 0\tab (structures)\par
+\par
+\tab SEG\tab\tab NAME,<bank>:<offset>,<target_pc>\tab\tab Define segment block\line\tab SEG\tab\tab NAME,<flatAddress>,<target_pc>\tab\tab Define segment block\par
+\par
+          ALIGN  \tab POW2_Size\tab\tab\tab Align to a POW2 size\par
+\par
+\tab INCLUDE\tab <Drive:\\Path\\FileName>\tab include a file for assembly\par
+\tab INCBIN\tab <Drive:\\Path\\FileName>\tab include a raw binary file\par
+\par
+\tab MESSAGE\tab\ldblquote Text\rdblquote ,Expression,[\'85]\tab\tab Like a BASIC print statement (pass2 only)\par
+\tab MESSAGE\tab 0\tab\tab\tab\tab Prints 0\par
+\tab MESSAGE\tab\ldblquote L1:\rdblquote ,L1,\rdblquote  L2: \ldblquote ,L2\tab\tab Print L1: [Label]  L2: [Label]\par
+\par
+\tab Label[:] MACRO\tab\tab\tab\tab define a macro\par
+\tab ENDM\tab\tab\tab\tab\tab\tab end of macro definition\par
+\tab\\0..\\9,\\a..\\f\tab\tab\tab\tab\tab 16 macro parameters (eg.  "\b lda #\\0\b0 "  or  "\b\\1 #$00\b0 " )\par
+\tab IF,IFDEF,IFNDEF,ELSE,ENDIF\tab\tab Conditional compilation\par
+\par
+\tab LONGA         <on/off>\tab\tab\tab\tab Turn 16 accumulator register on/off in 65816 mode.\par
+\tab LONGI          <on/off>\tab\tab\tab\tab Turn 16 bit index register on/off  in 65816 mode.\par
+\par
+\tab SAVEBIN   \ldblquote name\rdblquote , start, len\tab\tab\tab Save a binary blob\par
+\tab SAVESNA  \ldblquote name\rdblquote , PC [,Stack]\tab\tab Save SNA. Stack=$4000 by default\line           SAVENEX  \ldblquote name\rdblquote , PC [,Stack]\tab\tab Save NEX. Stack=$4000 by default\par
+\tab SAVEPRG   \ldblquote name\rdblquote , StartAdd\tab\tab\tab Save PRG. \par
+\tab\par
+\tab FOR VAR=XX to YY step SS\tab\tab\tab Repeat the code inside the loop, VAR can be used as a symbol.\par
+\tab NEXT\line\par
+\page\b\f0\fs26 OPT\b0\f1\fs22\tab\tab\tab\tab\tab compiler options  \tab\tab (eg.  \ldblquote\b opt   prg\b0\rdblquote )\par
+Prg\tab\tab\tab\tab\tab outputs a 2 byte .PRG file header at the start of the output file.\par
+Plus4=StartAddress\tab\tab\tab outputs a basic command to exe a start address (for the Plus/4)\line C64=StartAddress\tab\tab\tab outputs a basic command to exe a start address (for the C64)\par
+MEGA65=StartAddress\tab\tab outputs a basic command to exe a start address (for the Mega65)\par
+SNA=StartAddress : StackAdd\tab Save SNA, and set Set start address and stack base\par
+Illegal\tab\tab\tab\tab Enable undocumented opcodes    (\b dcm\b0 , \b ins\b0 , \b lax\b0 , \b xaa\b0 )\par
+A65c02\tab\tab\tab\tab Enable 65c02 opcodes\par
+A65816\tab\tab\tab\tab Enable 65816 opcodes + 16bit registers & 24bit address space\par
+A45GS02\tab\tab\tab\tab Enable 45GS02 (Mega65) opcodes\par
+Z80\tab\tab\tab\tab\tab Enable Z80 opcodes\tab\par
+ZXNEXT\tab\tab\tab\tab Enable ZX Next opcodes\par
+\par
+\b\f0\fs26 SNasm Expressions\par
+\b0\f1\fs24 +\tab\tab\tab\tab Add\b\f0\fs26\par
+\b0\f1\fs24 -\tab\tab\tab\tab Subtract\par
+*\tab\tab\tab\tab Multiply\par
+/\tab\tab\tab\tab Divide\par
+^\tab\tab\tab\tab XOR\par
+XOR\tab\tab\tab\tab XOR value\par
+( )\tab\tab\tab\tab Sub-calculation\par
+<<\tab\tab\tab\tab Shift Left\par
+>>\tab\tab\tab\tab Shift Right\par
+$\tab\tab\tab\tab Hex\line ?\tab\tab\tab\tab Octal\par
+%\tab\tab\tab\tab Bin\par
+&\tab\tab\tab\tab And\par
+AND\tab\tab\tab\tab And\par
+|\tab\tab\tab\tab Or\par
+OR\tab\tab\tab\tab Or\par
+~\tab\tab\tab\tab Not\par
+NOT\tab\tab\tab\tab Not\par
+[_A-Z][A-Z0-9]\tab\tab Label\par
+@[_A-Z][A-Z0-9]\tab\tab Local Label\par
+![_A-Z][A-Z0-9]\tab\tab Local Label\par
+.[_A-Z][A-Z0-9]\tab\tab Local Label\par
+RS\tab\tab\tab\tab Current RS counter\par
+PC\tab\tab\tab\tab Current SNASM program counter. \par
+*\tab\tab\tab\tab Current SNASM program counter. \par
+LO( )\tab\tab\tab\tab Low byte (<256) of value\par
+HI( )\tab\tab\tab\tab High byte (>256) of value\par
+FILESIZE( )\tab\tab\tab Get the size of a file\par
+\tab\tab\tab\tab\par
+
+\pard\nowidctlpar\fi720\li-1276\par
+\par
+
+\pard\keepn\nowidctlpar\s3\li-1276\sb240\sa60\b\f0\fs28\page Notes\par
+\b0\fs24 1) \b #<expression>\b0  If the value is \b >255\b0  then the value is cropped ( AND 255 )\line 2) The Assembler is \b\i not\b0\i0  case sensitive. Strings will maintain all case however.\line\f1 3) \ldblquote\b ASL A\b0\rdblquote  and \ldblquote\b ASL\b0\rdblquote  will give the same result. The \ldblquote\b A\b0\rdblquote  is optional.\line 4) Macro parameters can be used to construct labels, and even commands.\b\f0\fs26\par
+
+\pard\nowidctlpar\li-1276\b0\f1\fs24\tab\tab Testmacro\tab macro\par
+\tab\tab label\\3:\tab\tab\\0\\1\tab\\2\par
+\tab\tab\tab\tab dw\tab label\\3\par
+\tab\tab\tab\tab endm\par
+\par
+\tab\tab\tab\tab Testmacro\tab ld,x,#$55,index\par
+\tab\tab Which gives:-\par
+\tab\tab labelindex:\tab ldx\tab #$55\par
+\tab\par
+5) SNASM will not save out a file if there are \b ERRORS\b0 . But will do so if there are only \b WARNINGS\b0 .\par
+    However SaveBin and SaveSNA commands will always save.\par
+6) A source file with \b ORG $100 \b0 and then \b ORG $200 \b0  will output 256 bytes, since changing ORG pad's to the address.\par
+7) If you wish to assemble a section of code to copy into place then use PCORG to set the new address then PCORG to reset to the correct PC. i.e,\line\par
+\tab\tab\tab ORG $2000\tab\tab\tab\tab\tab ; main address\par
+\tab\tab\tab ldx\tab #$00\tab\tab\tab\tab\tab ; Code before relocation chunk\par
+\tab\tab CurrPC:\par
+\tab\tab\tab PCORG\tab $300\tab\tab\tab\tab ; relocate PC\par
+\tab\tab\tab lda\tab #$00\tab\tab\tab\tab\tab ; relocatable code here\par
+\tab\tab EndPC:\tab\tab\tab\tab\tab\tab ; label to work out SIZE of relocatable chunk\par
+\tab\tab\tab PCORG\tab CurrPC+(EndPC-$300)\tab ; Move PC back to correct address\par
+\tab\tab\tab nop\tab\tab\tab\tab\tab\tab ; carry on with code\par
+\par
+\par
+\b\fs28\par
+\par
+\page Known Bugs\par
+\b0\fs24\par
+1) Nested \b if/else/endif \b0 statements don\rquote t seem to work. (Inside macros at in case)\par
+\b\fs28\line\line Whats I\rquote d still like to add?\b0\par
+
+\pard\nowidctlpar\fi1276\li-1276\fs24 1) File Listing. Standard output file listing.\par
+2) DO/WHILE construction for building tables etc.\par
+3) Any requests that need to be added.\par
+
+\pard\nowidctlpar\li-1276\par
+\par
+\par
+For any comments, requests, bugs etc. please feel free to drop me a line at one of the above e-mail addresses. \par
+\par
+\par
+\par
+\par
+\ul\page New Z80 opcodes on the NEXT (more to come)\par
+\ulnone    swapnib             ED 23           \tab A bits 7-4 swap with A bits 3-0\par
+   mul                    ED 30           \tab multiply D*E = DE (no flags set)  (8*8=16bit)\par
+   add  hl,a             ED 31           \tab Add A to HL (no flags set)\par
+   add  de,a             ED 32           \tab Add A to DE (no flags set)\par
+   add  bc,a             ED 33           \tab Add A to BC (no flags set)\par
+   add  hl,$0000     ED 34 LO HI     Add A to HL (no flags set)\par
+   add  de,$0000     ED 35 LO HI     Add A to DE (no flags set)\par
+   add  bc,$0000     ED 36 LO HI     Add A to BC (no flags set)\par
+   outinb                 ED 90           \tab out (c),(hl), hl++\par
+   ldix                     ED A4           \tab As LDI,  but if byte==A does not copy\par
+   ldirx                   ED B4           \tab As LDIR, but if byte==A does not copy\par
+   lddx                   ED AC           \tab As LDD,  but if byte==A does not copy, and DE is incremented\par
+   lddrx                  ED BC           \tab As LDDR,  but if byte==A does not copy\par
+   ldws                   ED A5                 As LDI, Does not affect B, but does D++, and L++\par
+   mirror a              ED 24           \tab mirror the bits in A     \par
+   mirror de            ED 26           \tab mirror the bits in DE     \par
+   push $0000        ED 8A LO HI     push 16bit immediate value\par
+   nextreg reg,val   ED 91 reg,val   \tab Set a NEXT register (like doing out($243b),reg then out($253b),val )\par
+   nextreg reg,a     ED 92 reg,a     \tab Set a NEXT register using A (like doing out($243b),reg then out($253b),A )\par
+   pixeldn               ED 93           \tab Move down a line on the ULA screen\par
+   pixelad               ED 94           \tab using D,E (as Y,X) calculate the ULA screen address and store in HL\par
+   setae                   ED 95           \tab Using the lower 3 bits of E (X coordinate), set the correct bit value in A\par
+   test $00              ED 27            \tab and  A with $XX and set bits. A is not changed.\par
+   jp (c)\tab         ED                       jp (  IN (C)*64) + PC&$c000 )\par
+   bsla  de,b           ED 28      \tab Barrel shift DE by B\par
+   bsra  de,b           ED 28      \tab Barrel shift DE by B\par
+   bsrl  de,b           ED 28      \tab\tab Barrel shift DE by B\par
+   bsrf  de,b           ED 28      \tab Barrel shift DE by B\par
+   brlc  de,b           ED 28      \tab Barrel shift DE by B\par
+\par
+\par
+\par
+\ul Command line examples\par
+\ulnone -d  ENABLE_TEST                 enable testing (set to 1)\line -d  MAX_BULLETS=16          Set Max bullets to 16\par
+-d  MAX_BULLETS=$10        Set Max bullets to 16\par
+-d  KILL_LEFT= -32                Set object let kill to -32\par
+-d  KILL_LEFT= -$20              Set object let kill to -32\par
+\par
+\par
+\page\par
+\b\f0\fs26 History\line\b0\f1\fs24\par
+
+\pard\widctlpar\li-1276\cf2\f2\fs20 V1.0\tab - 2002 - First release\par
+\par
+V1.1 \endash  2005\par
+\tab\tab Fixed include bug (EOF not reset correctly)\par
+
+\pard\widctlpar\fi556\li-556 Added incbin - should have been there already... lost?\par
+\par
+
+\pard\widctlpar\li-1276 V1.2 \endash  2005\par
+\tab\tab Added PDS style "HEX" command\par
+\tab\tab Added "if", "ifdef", "ifndef", "else" and "elseif"\par
+\tab\tab local labels can now start with "@" or "!"\par
+\tab\tab local labels are now allowed inside macros\par
+\tab\tab added "opt" command with "prg"\par
+\par
+V1.3 \endash  2005\par
+\tab\tab Fixed "PCORG".\par
+\tab\tab Added  opt "plus4" and "c64".\par
+
+\pard\widctlpar\fi1276\li-1276 Added -sym command line option to dump symbol table\par
+
+\pard\widctlpar\li-1276\par
+V1.4 \endash  2006\par
+\tab\tab Added INCPRG to allow including of PRG files (ignores header)\par
+\tab\tab Fixed "Warning" error/crash.\par
+\par
+V1.5 \endash  2006\par
+\tab\tab Added LAX instruction (load A and X)\par
+\tab\tab Added INS instruction\par
+\tab\tab Added DCM instruction\par
+\par
+V1.6 \endash  2006\par
+\tab\tab Added VICE symbol table support to output\par
+\tab\tab Fixed crash in warning system\par
+\tab\tab Fixed STA ZeroPage,y  compile error  (now gives a warning and does sta $0000,y)\par
+\tab\tab Fixed ALL zeropage,y problems... only stx and ldx are now allowed.\par
+\tab\tab Now saves output if there are warnings, but no errors.\par
+\tab\tab "opt C64=add" added.\par
+
+\pard\nowidctlpar\li-1276\cf0\f1\fs24\par
+
+\pard\widctlpar\li-1276\cf2\f2\fs20 V1.6.1 \endash  2006\par
+\tab\tab Quick fix for crash when include file not found.\par
+
+\pard\widctlpar\cf0\f1\fs24\par
+
+\pard\widctlpar\li-1276\cf2\f2\fs20 V1.6.2 \endash  2006\par
+\tab\tab Command line crash. (no output file given)\par
+\tab\tab Command line crash. (no source file given)\par
+\par
+V1.6.3 \endash  2007\par
+\tab\tab Added a list symbol option\par
+\tab\tab Some undocumented ops added \tab\tab (opt Illegal)\par
+\par
+\page V1.7.0 \endash  Nov 2007\par
+\tab\tab Changed symbol list to MAP\par
+\tab\tab Added 65816 support (16bit) \tab (opt A65816) \endash  incomplete\par
+\tab\tab Added 65c02 support (8bit)  \tab (opt A65c02) \endash  incomplete\par
+\tab\tab Now allows multiple symbol format outputs at once (Minus4, vice, MAP etc.)\par
+\par
+V1.7.1 \endash  Nov 2007\par
+\tab\tab FULL 65816 support now available.\par
+\tab\tab Fixed \ldblquote LAX $00,y\rdblquote  command (allowing zeropage,y)\par
+\tab\tab Fixed \ldblquote JMP ($1234)\rdblquote  command\par
+\tab\tab Fixed SEP and REP commands.\par
+\tab\tab SEP and REP now automatically switch on/off LONGA and LONGI\par
+\par
+V1.7.2 \endash  Nov 2007\par
+\tab\tab Fixed \ldblquote RTL\rdblquote , was spelt \ldblquote REL\rdblquote\par
+\tab\tab Fixed \ldblquote PHD\rdblquote , was spelt \ldblquote PED\rdblquote\par
+\tab\tab Fixed \ldblquote PHB\rdblquote , was spelt \ldblquote PEB\rdblquote\par
+\tab\tab Fixed \ldblquote PHK\rdblquote , was spelt \ldblquote PEK\rdblquote  (spot the pattern here?)\par
+\par
+V2.0.0 \endash  May 2017\par
+\tab\tab Added Z80 (Spectrum opcodes) support\par
+\tab\tab Added SNA support\par
+\par
+V2.0.1 \endash  August 2017\par
+\tab\tab Special Z80 opcodes for ZX Spectrum Next added\par
+\tab\tab Some Z80 syntax errors fixed\par
+\tab\tab Some Z80 error reporting fixed\par
+\line V2.0.3 \endash  August 2017\par
+\tab\tab More opcodes added (see above list)\par
+\tab\tab Some more Z80 syntax errors fixed\par
+\tab\tab Some more Z80 error reporting fixed\par
+V2.0.4 \endash  August 2017\par
+\tab\tab Swapped from HLDE to DEHL\par
+\tab\tab Swapped ACC32 to A32\par
+\tab\tab Added TEST $00 command\par
+V2.0.5 \endash  August 2017\par
+\tab\tab Added\tab SAVEBIN \ldblquote filename\rdblquote ,start,len\par
+\tab\tab Added SAVESNA \ldblquote filename.sna\rdblquote ,PC [,Stack]\par
+V2.0.7 \endash  August 2017\par
+\tab\tab Fixed ld (ix+UNDEFINED),a\par
+\tab\tab Fixed locals being defined after an equate\par
+\tab\tab Fixed (IX+forward_label) issue\par
+\tab\tab SNA saving now saves some default registers so you can call ROM stuff better\par
+\tab\tab XOR A,REG/IMM now throws an error\par
+\tab\tab SUB A,REG/IMM now throws an error\par
+V2.0.8 \endash  November 2017\par
+\tab\tab Removed defuct NEXT opcodes\par
+V2.0.9 \endash  January 2018\par
+\tab\tab Updated error message format so Sublime text likes it more\par
+\tab\tab DJNZ no longer throws errors on pass 1 (forward ref labels)\par
+\tab\tab DJNZ and JR now report the correct line numbers\par
+\tab\tab Fixed CP \lquote a\rquote  where character was being upper cased\par
+\tab\tab Added \ldblquote ALIGN <expression>\rdblquote  command\par
+\tab\tab -d SYM[=VALUE] added. =VALUE optional, set to 1 if not provided\par
+\cf0\f1\fs24\par
+\cf2\f2\fs20 V2.0.10 \endash  January 2018\par
+\tab\tab Changed newline detection from 0x0d to 0x0a (what it should be these days\'85)\par
+\par
+V2.0.11 \endash  January 2018\par
+\tab\tab Changed SET to DEF (as Z80 has a SET instruction!)\par
+\tab\tab Number of bytes \ldblquote lost\rdblquote  using the ALIGN command now reported\par
+\par
+V2.0.12 \endash  May 2018\par
+\tab\tab Added OCMD command (old Ocean Z80 assembler support)\par
+\tab\tab\tab OCMD \ldblquote K<bank>\rdblquote  \endash  selects bank to assemble to\par
+\tab\tab\tab OCMD \ldblquote #SP <adderss>\rdblquote\tab - set stack address for SNA\par
+\tab\tab\tab OCMD \lquote L\rdblquote NAME\rdblquote ,<address>\rquote - incbin to an address\par
+\tab\tab Added IFLB (same as IF)\par
+\tab\tab Added ENDF (same as ENDIF)\par
+\tab\tab Added DBH  (same as HEX)\par
+\tab\tab Added ?<value>  for OCTAL support (i.e. ?173 = 123)\par
+\tab\tab Added the ability to use a string to load a value (i.e LD HL,\rdblquote 00\rdblquote )\par
+\tab\tab Added DS <size>[,value] \endash  now takes an optonal value\par
+\tab\tab You can now save out 128K SNAs. (of >48k <=128k)\par
+\tab\tab You can now save out ZXNext SNAs. (anything larger than 128k)\line\par
+V2.0.13 \endash  Sep 2018\par
+\tab\tab Added SEG command for ZX Spectrum Next Segment control\line\tab\tab SaveNEX command added\line\tab\tab MAP format changed for CSpect\line\par
+V2.0.14 \endash  Sep 2018\line\tab\tab Bug in 48K and 128K SNA file saving fixed\par
+\par
+V2.0.15 \endash  Dec 2018\par
+
+\pard\widctlpar Removed MIRROR DE instruction\par
+
+\pard\widctlpar\fi1276\li-1276 Added \ldblquote JP (C)\rdblquote  instruction\par
+Added \ldblquote BSLA DE,B\rdblquote  instruction\par
+Added \ldblquote BSRA DE,B\rdblquote  instruction\par
+Added \ldblquote BSRL DE,B\rdblquote  instruction\par
+Added \ldblquote BSRF DE,B\rdblquote  instruction\par
+Added \ldblquote BRLC DE,B\rdblquote  instruction\line\par
+
+\pard\widctlpar\li-1276 V2.0.16 \endash  \tab April 2019\par
+
+\pard\widctlpar\fi1276\li-1276 Fixed \ldblquote PUSH $1234\rdblquote  opcode (push order wrong)\line\par
+
+\pard\widctlpar\li-1276 V2.0.17 \endash  \tab May 2019\par
+
+\pard\widctlpar\fi1276\li-1276 Added \ldblquote Bank\rdblquote  and \ldblquote BankOffset\rdblquote  commands to get the physical\par
+address of a label.\par
+\par
+
+\pard\widctlpar\li-1276 V2.0.18 \endash  \tab June 2019\par
+
+\pard\widctlpar\fi1276\li-1276 Fixed a bug in \ldblquote Bank\rdblquote  and \ldblquote BankOff\rdblquote  commands\line\line V2.0.19 \endash  \tab December 2019\par
+You can now reference Label@local (i.e. LD HL,label@local)\par
+\line V2.0.20 \endash  \tab December 2019\par
+Added \ldblquote LDWS\rdblquote  instruction  \line\line V2.0.21 \endash  \tab December 2019\par
+Added \ldblquote SLL\rdblquote  instruction  \par
+\par
+V2.0.22 \endash  \tab April 2020\par
+
+\pard\widctlpar\fi1276\li164 Fixed \ldblquote align\rdblquote  for use with segments\par
+Fixed \ldblquote org\rdblquote  so it works with segments\par
+You can now use _ in binary (ie. %11_00_1111 )\par
+\par
+
+\pard\widctlpar\fi1276\li-1276 V2.0.23 \endash  \tab June 2020\par
+
+\pard\widctlpar\fi1276\li164 Fixed a crash when an expression has a divide by 0\par
+\par
+
+\pard\widctlpar V3.0.03 -   November 2020\line             Ported to C# so it\rquote s now cross platform\line             Fixed bug with crash over 3300 symbols\line             Fixed line counting for correct error reporting\par
+\par
+V3.1.00 -   December 6th 2020\line             Fixed bug where it didn\rquote t report undefined symbols\line             Added SNA export back in (48k and 128k)\par
+ \tab\tab Fixed a bug with Macro usage in the first ASM file\par
+            Fixed 6502 assembling \endash  and PRG export\par
+            Added \ldblquote SET\rdblquote  back in for 6502 (can also use DEF)\par
+            Put in an error when defining a label called \ldblquote Filesize\rdblquote\line\tab\tab Added 45GS02 CPU core for mega65  (opt 45gs02)\par
+\par
+V3.1.01 -   May 6th 2022\line             Fixed bug with LD A,(IX-??) and LD A,(IY-??)\par
+\par
+V3.2.0  -   May 28th 2022\line             Added FOR/NEXT loops\par
+\tab\tab Fixed a bug with Message\rdblquote\rdblquote  where last item wasn\rquote t used\par
+\line V3.2.1  -   July 22nd 2023\par
+            Equates can no longer start with a local label symbol\par
+            Locals are no longer reset by Equates/Sets/Rb/Macro etc.\par
+            Fixed LDDRX instruction byte codes\par
+            Proper Version added to assembly EXE\par
+            Change internal LEX processing and state saving/stacking\par
+
+\pard\widctlpar\fi1276\li164\par
+
+\pard\widctlpar\fi1276\li-1276\par
+\cf0\f1\fs24\par
+
+\pard\nowidctlpar\f0\lang1033\par
+}
+ 

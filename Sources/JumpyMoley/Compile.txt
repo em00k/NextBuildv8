@@ -1,0 +1,232 @@
+/NextBuildv8/Scripts/nextlib.bas:442: warning: [W150] Parameter 'nn' is never used
+/NextBuildv8/Scripts/nextlib.bas:442: warning: [W150] Parameter 'na' is never used
+/NextBuildv8/Scripts/nextlib.bas:457: warning: [W160] SUB 'MMU8new' declared as FASTCALL with 2 parameters
+/NextBuildv8/Scripts/nextlib.bas:456: warning: [W150] Parameter 'slot' is never used
+/NextBuildv8/Scripts/nextlib.bas:456: warning: [W150] Parameter 'memorybank' is never used
+/NextBuildv8/Scripts/nextlib.bas:490: warning: [W150] Parameter 'memorybank' is never used
+/NextBuildv8/Scripts/nextlib.bas:529: warning: [W150] Parameter 'slot' is never used
+/NextBuildv8/Scripts/nextlib.bas:566: warning: [W150] Parameter 'slot' is never used
+/NextBuildv8/Scripts/nextlib.bas:578: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:578: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:578: warning: [W150] Parameter 's' is never used
+/NextBuildv8/Scripts/nextlib.bas:608: warning: [W150] Parameter 'switch' is never used
+/NextBuildv8/Scripts/nextlib.bas:625: warning: [W160] SUB 'ScrollLayer' declared as FASTCALL with 2 parameters
+/NextBuildv8/Scripts/nextlib.bas:624: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:624: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:637: warning: [W160] SUB 'PlotL2' declared as FASTCALL with 3 parameters
+/NextBuildv8/Scripts/nextlib.bas:636: warning: [W150] Parameter 'X' is never used
+/NextBuildv8/Scripts/nextlib.bas:636: warning: [W150] Parameter 'Y' is never used
+/NextBuildv8/Scripts/nextlib.bas:636: warning: [W150] Parameter 'T' is never used
+/NextBuildv8/Scripts/nextlib.bas:682: warning: [W160] SUB 'PlotL2Shadow' declared as FASTCALL with 3 parameters
+/NextBuildv8/Scripts/nextlib.bas:681: warning: [W150] Parameter 'X' is never used
+/NextBuildv8/Scripts/nextlib.bas:681: warning: [W150] Parameter 'Y' is never used
+/NextBuildv8/Scripts/nextlib.bas:681: warning: [W150] Parameter 'T' is never used
+/NextBuildv8/Scripts/nextlib.bas:703: warning: [W160] SUB 'CIRCLEL2' declared as FASTCALL with 4 parameters
+/NextBuildv8/Scripts/nextlib.bas:702: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:702: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:702: warning: [W150] Parameter 'radius' is never used
+/NextBuildv8/Scripts/nextlib.bas:702: warning: [W150] Parameter 'col' is never used
+/NextBuildv8/Scripts/nextlib.bas:903: warning: [W160] SUB 'NextRegA' declared as FASTCALL with 2 parameters
+/NextBuildv8/Scripts/nextlib.bas:902: warning: [W150] Parameter 'reg' is never used
+/NextBuildv8/Scripts/nextlib.bas:902: warning: [W150] Parameter 'value' is never used
+/NextBuildv8/Scripts/nextlib.bas:917: warning: [W150] Parameter 'bank' is never used
+/NextBuildv8/Scripts/nextlib.bas:932: warning: [W150] Parameter 'source' is never used
+/NextBuildv8/Scripts/nextlib.bas:932: warning: [W150] Parameter 'dest' is never used
+/NextBuildv8/Scripts/nextlib.bas:1011: warning: [W150] Parameter 'Total' is never used
+/NextBuildv8/Scripts/nextlib.bas:1011: warning: [W150] Parameter 'spraddress' is never used
+/NextBuildv8/Scripts/nextlib.bas:1011: warning: [W150] Parameter 'bank' is never used
+/NextBuildv8/Scripts/nextlib.bas:1044: warning: [W160] SUB 'InitSprites2' declared as FASTCALL with 3 parameters
+/NextBuildv8/Scripts/nextlib.bas:1043: warning: [W150] Parameter 'Total' is never used
+/NextBuildv8/Scripts/nextlib.bas:1043: warning: [W150] Parameter 'spraddress' is never used
+/NextBuildv8/Scripts/nextlib.bas:1043: warning: [W150] Parameter 'bank' is never used
+/NextBuildv8/Scripts/nextlib.bas:1103: warning: [W150] Parameter 'spriteid' is never used
+/NextBuildv8/Scripts/nextlib.bas:1103: warning: [W150] Parameter 'visible' is never used
+/NextBuildv8/Scripts/nextlib.bas:1127: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:1127: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:1127: warning: [W150] Parameter 'spriteid' is never used
+/NextBuildv8/Scripts/nextlib.bas:1127: warning: [W150] Parameter 'pattern' is never used
+/NextBuildv8/Scripts/nextlib.bas:1127: warning: [W150] Parameter 'mflip' is never used
+/NextBuildv8/Scripts/nextlib.bas:1127: warning: [W150] Parameter 'anchor' is never used
+/NextBuildv8/Scripts/nextlib.bas:1258: warning: [W150] Parameter 'fname' is never used
+/NextBuildv8/Scripts/nextlib.bas:1425: warning: [W150] Parameter 'bank' is never used
+/NextBuildv8/Scripts/nextlib.bas:1608: warning: [W150] Parameter 'filen' is never used
+/NextBuildv8/Scripts/nextlib.bas:1608: warning: [W150] Parameter 'address' is never used
+/NextBuildv8/Scripts/nextlib.bas:1608: warning: [W150] Parameter 'length' is never used
+/NextBuildv8/Scripts/nextlib.bas:1608: warning: [W150] Parameter 'offset' is never used
+/NextBuildv8/Scripts/nextlib.bas:1740: warning: [W150] Parameter 'address' is never used
+/NextBuildv8/Scripts/nextlib.bas:1740: warning: [W150] Parameter 'length' is never used
+/NextBuildv8/Scripts/nextlib.bas:1869: warning: [W150] Parameter 'X' is never used
+/NextBuildv8/Scripts/nextlib.bas:1869: warning: [W150] Parameter 'Y' is never used
+/NextBuildv8/Scripts/nextlib.bas:1869: warning: [W150] Parameter 'T' is never used
+/NextBuildv8/Scripts/nextlib.bas:1869: warning: [W150] Parameter 'B' is never used
+/NextBuildv8/Scripts/nextlib.bas:1956: warning: [W150] Parameter 'X' is never used
+/NextBuildv8/Scripts/nextlib.bas:1956: warning: [W150] Parameter 'Y' is never used
+/NextBuildv8/Scripts/nextlib.bas:1956: warning: [W150] Parameter 'T' is never used
+/NextBuildv8/Scripts/nextlib.bas:2026: warning: [W150] Parameter 'X' is never used
+/NextBuildv8/Scripts/nextlib.bas:2026: warning: [W150] Parameter 'Y' is never used
+/NextBuildv8/Scripts/nextlib.bas:2026: warning: [W150] Parameter 'T' is never used
+/NextBuildv8/Scripts/nextlib.bas:2026: warning: [W150] Parameter 'b' is never used
+/NextBuildv8/Scripts/nextlib.bas:2130: warning: [W150] Parameter 'X' is never used
+/NextBuildv8/Scripts/nextlib.bas:2130: warning: [W150] Parameter 'Y' is never used
+/NextBuildv8/Scripts/nextlib.bas:2130: warning: [W150] Parameter 'T' is never used
+/NextBuildv8/Scripts/nextlib.bas:2130: warning: [W150] Parameter 'b' is never used
+/NextBuildv8/Scripts/nextlib.bas:2130: warning: [W150] Parameter 'c' is never used
+/NextBuildv8/Scripts/nextlib.bas:2225: warning: [W160] SUB 'FDoTile16' declared as FASTCALL with 4 parameters
+/NextBuildv8/Scripts/nextlib.bas:2224: warning: [W150] Parameter 'tile' is never used
+/NextBuildv8/Scripts/nextlib.bas:2224: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:2224: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:2224: warning: [W150] Parameter 'bank' is never used
+/NextBuildv8/Scripts/nextlib.bas:2377: warning: [W160] SUB 'FDoTile8' declared as FASTCALL with 4 parameters
+/NextBuildv8/Scripts/nextlib.bas:2376: warning: [W150] Parameter 'tile' is never used
+/NextBuildv8/Scripts/nextlib.bas:2376: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:2376: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:2376: warning: [W150] Parameter 'bank' is never used
+/NextBuildv8/Scripts/nextlib.bas:2519: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:2519: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:2519: warning: [W150] Parameter 'm' is never used
+/NextBuildv8/Scripts/nextlib.bas:2519: warning: [W150] Parameter 'fntbnk' is never used
+/NextBuildv8/Scripts/nextlib.bas:2519: warning: [W150] Parameter 'colormask' is never used
+/NextBuildv8/Scripts/nextlib.bas:2620: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:2620: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:2620: warning: [W150] Parameter 'm' is never used
+/NextBuildv8/Scripts/nextlib.bas:2620: warning: [W150] Parameter 'fntbnk' is never used
+/NextBuildv8/Scripts/nextlib.bas:2765: warning: [W160] SUB 'FPlotL2' declared as FASTCALL with 3 parameters
+/NextBuildv8/Scripts/nextlib.bas:2764: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:2764: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:2764: warning: [W150] Parameter 'c' is never used
+/NextBuildv8/Scripts/nextlib.bas:2829: warning: [W160] SUB 'FPlotLineV' declared as FASTCALL with 4 parameters
+/NextBuildv8/Scripts/nextlib.bas:2828: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:2828: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:2828: warning: [W150] Parameter 'h' is never used
+/NextBuildv8/Scripts/nextlib.bas:2828: warning: [W150] Parameter 'c' is never used
+/NextBuildv8/Scripts/nextlib.bas:2905: warning: [W160] SUB 'FPlotLineW' declared as FASTCALL with 4 parameters
+/NextBuildv8/Scripts/nextlib.bas:2904: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:2904: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:2904: warning: [W150] Parameter 'w' is never used
+/NextBuildv8/Scripts/nextlib.bas:2904: warning: [W150] Parameter 'c' is never used
+/NextBuildv8/Scripts/nextlib.bas:2983: warning: [W150] Parameter 'address' is never used
+/NextBuildv8/Scripts/nextlib.bas:2983: warning: [W150] Parameter 'colours' is never used
+/NextBuildv8/Scripts/nextlib.bas:2983: warning: [W150] Parameter 'offset' is never used
+/NextBuildv8/Scripts/nextlib.bas:3029: warning: [W150] Parameter 'colour' is never used
+/NextBuildv8/Scripts/nextlib.bas:3096: warning: [W150] Parameter 'x1' is never used
+/NextBuildv8/Scripts/nextlib.bas:3096: warning: [W150] Parameter 'x2' is never used
+/NextBuildv8/Scripts/nextlib.bas:3096: warning: [W150] Parameter 'y1' is never used
+/NextBuildv8/Scripts/nextlib.bas:3096: warning: [W150] Parameter 'y2' is never used
+/NextBuildv8/Scripts/nextlib.bas:3113: warning: [W150] Parameter 'x1' is never used
+/NextBuildv8/Scripts/nextlib.bas:3113: warning: [W150] Parameter 'x2' is never used
+/NextBuildv8/Scripts/nextlib.bas:3113: warning: [W150] Parameter 'y1' is never used
+/NextBuildv8/Scripts/nextlib.bas:3113: warning: [W150] Parameter 'y2' is never used
+/NextBuildv8/Scripts/nextlib.bas:3129: warning: [W150] Parameter 'x1' is never used
+/NextBuildv8/Scripts/nextlib.bas:3129: warning: [W150] Parameter 'x2' is never used
+/NextBuildv8/Scripts/nextlib.bas:3129: warning: [W150] Parameter 'y1' is never used
+/NextBuildv8/Scripts/nextlib.bas:3129: warning: [W150] Parameter 'y2' is never used
+/NextBuildv8/Scripts/nextlib.bas:3145: warning: [W150] Parameter 'x1' is never used
+/NextBuildv8/Scripts/nextlib.bas:3145: warning: [W150] Parameter 'x2' is never used
+/NextBuildv8/Scripts/nextlib.bas:3145: warning: [W150] Parameter 'y1' is never used
+/NextBuildv8/Scripts/nextlib.bas:3145: warning: [W150] Parameter 'y2' is never used
+/NextBuildv8/Scripts/nextlib.bas:3161: warning: [W150] Parameter 'address' is never used
+/NextBuildv8/Scripts/nextlib.bas:3161: warning: [W150] Parameter 'blkoff' is never used
+/NextBuildv8/Scripts/nextlib.bas:3161: warning: [W150] Parameter 'numberoftiles' is never used
+/NextBuildv8/Scripts/nextlib.bas:3161: warning: [W150] Parameter 'x' is never used
+/NextBuildv8/Scripts/nextlib.bas:3161: warning: [W150] Parameter 'y' is never used
+/NextBuildv8/Scripts/nextlib.bas:3161: warning: [W150] Parameter 'width' is never used
+/NextBuildv8/Scripts/nextlib.bas:3161: warning: [W150] Parameter 'mapwidth' is never used
+/NextBuildv8/Scripts/nextlib.bas:3340: warning: [W150] Parameter 'repeats' is never used
+/NextBuildv8/Scripts/nextlib.bas:3360: warning: [W150] Parameter 'repeats' is never used
+/NextBuildv8/Scripts/nextlib_ints.bas:42: warning: [W150] Parameter 'musicbank' is never used
+/NextBuildv8/Scripts/nextlib_ints.bas:56: warning: [W150] Parameter 'sfxtoplay' is never used
+/NextBuildv8/Scripts/nextlib_ints.bas:67: warning: [W160] SUB 'InitMusic' declared as FASTCALL with 3 parameters
+/NextBuildv8/Scripts/nextlib_ints.bas:66: warning: [W150] Parameter 'playerbank' is never used
+/NextBuildv8/Scripts/nextlib_ints.bas:66: warning: [W150] Parameter 'musicbank' is never used
+/NextBuildv8/Scripts/nextlib_ints.bas:66: warning: [W150] Parameter 'musicaddoffset' is never used
+/NextBuildv8/Scripts/nextlib_ints.bas:416: warning: [W150] Parameter 'bank' is never used
+C:/NextBuildv8/zxbasic/src/arch/zxnext/library/keys.bas:41: warning: [W150] Parameter 'scancode' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:197: warning: [W100] Using default implicit type 'ubyte' for 'wait'
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:573: warning: [W100] Using default implicit type 'ubyte' for 'a'
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:608: warning: [W100] Using default implicit type 'uinteger' for 'addr'
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:780: warning: [W100] Using default implicit type 'uinteger' for 'add'
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:886: warning: [W100] Using default implicit type 'uinteger' for 'xadd'
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:895: warning: [W160] SUB 'pokeBank' declared as FASTCALL with 3 parameters
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:894: warning: [W150] Parameter 'bank' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:894: warning: [W150] Parameter 'value' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:894: warning: [W150] Parameter 'addressoffset' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:1323: warning: [W160] SUB 'SetupTileHW' declared as FASTCALL with 2 parameters
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:1322: warning: [W150] Parameter 'tileaddr' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:1322: warning: [W150] Parameter 'tiledata' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:1374: warning: [W160] SUB 'UpdateTilemap' declared as FASTCALL with 3 parameters
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:1373: warning: [W150] Parameter 'xx' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:1373: warning: [W150] Parameter 'yy' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:1373: warning: [W150] Parameter 'vv' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:1392: warning: [W160] SUB 'CopyToBanks' declared as FASTCALL with 3 parameters
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:1391: warning: [W150] Parameter 'startb' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:1391: warning: [W150] Parameter 'destb' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:1391: warning: [W150] Parameter 'nrbanks' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:1479: warning: [W150] Parameter 'sample' is never used
+/NextBuildv8/Scripts/nextlib.bas:530: warning: [W190] Function 'GetMMU' should return a value
+/NextBuildv8/Scripts/nextlib.bas:541: warning: [W190] Function 'checkints' should return a value
+/NextBuildv8/Scripts/nextlib.bas:567: warning: [W190] Function 'GetReg' should return a value
+/NextBuildv8/Scripts/nextlib.bas:1405: warning: [W190] Function 'ReserveBank' should return a value
+C:/NextBuildv8/zxbasic/src/arch/zxnext/library/keys.bas:42: warning: [W190] Function 'MultiKeys' should return a value
+C:/NextBuildv8/zxbasic/src/arch/zxnext/library/keys.bas:60: warning: [W190] Function 'GetKeyScanCode' should return a value
+/NextBuildv8/Scripts/nextlib.bas:442: warning: [W170] Function 'MMU8' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:456: warning: [W170] Function 'MMU8new' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:490: warning: [W170] Function 'MMU16' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:529: warning: [W170] Function 'GetMMU' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:566: warning: [W170] Function 'GetReg' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:578: warning: [W170] Function 'Debug' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:624: warning: [W170] Function 'ScrollLayer' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:636: warning: [W170] Function 'PlotL2' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:681: warning: [W170] Function 'PlotL2Shadow' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:702: warning: [W170] Function 'CIRCLEL2' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:917: warning: [W170] Function 'swapbank' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:932: warning: [W170] Function 'zx7Unpack' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:1011: warning: [W170] Function 'InitSprites' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:1188: warning: [W170] Function 'LoadBMPOld' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:1258: warning: [W170] Function 'LoadBMP' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:1402: warning: [W170] Function 'ReserveBank' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:1425: warning: [W170] Function 'FreeBank' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:1204: warning: [W170] Function 'LoadSD' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:1740: warning: [W170] Function 'SaveSD' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:1869: warning: [W170] Function 'DoTileBank16' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:1956: warning: [W170] Function 'DoTile8' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:2026: warning: [W170] Function 'DoTileBank8' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:2130: warning: [W170] Function 'DoTileBank8Test' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:2224: warning: [W170] Function 'FDoTile16' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:2376: warning: [W170] Function 'FDoTile8' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:2519: warning: [W170] Function 'L2Text' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:2620: warning: [W170] Function 'FL2Text' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:2764: warning: [W170] Function 'FPlotL2' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:2828: warning: [W170] Function 'FPlotLineV' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:2904: warning: [W170] Function 'FPlotLineW' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:2983: warning: [W170] Function 'PalUpload' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:3113: warning: [W170] Function 'ClipULA' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:3161: warning: [W170] Function 'TileMap' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:3317: warning: [W170] Function 'FlipBuffer' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:3329: warning: [W170] Function 'EnableShadow' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:3334: warning: [W170] Function 'DisableShadow' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:3360: warning: [W170] Function 'WaitRetrace2' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib.bas:3390: warning: [W170] Function 'WaitKey' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib_ints.bas:28: warning: [W170] Function 'StopMusic' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib_ints.bas:35: warning: [W170] Function 'PlayMusic' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib_ints.bas:42: warning: [W170] Function 'NewMusic' is never called and has been ignored
+/NextBuildv8/Scripts/nextlib_ints.bas:230: warning: [W170] Function 'DisableIM' is never called and has been ignored
+C:/NextBuildv8/zxbasic/src/arch/zxnext/library/keys.bas:22: warning: [W170] Function 'GetKey' is never called and has been ignored
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:242: warning: [W170] Function 'CheckPots' is never called and has been ignored
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:322: warning: [W170] Function 'ClearBank' is never called and has been ignored
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:73: warning: [W150] Variable 'plld' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:101: warning: [W150] Variable 'keypressed' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:780: warning: [W150] Variable 'add' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:86: warning: [W150] Variable 'plvel' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:1021: warning: [W150] Variable 'd' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:1249: warning: [W170] Function 'ShowHud' is never called and has been ignored
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:1261: warning: [W170] Function 'PlayerHit' is never called and has been ignored
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:1303: warning: [W170] Function 'DrawMap' is never called and has been ignored
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:1373: warning: [W170] Function 'UpdateTilemap' is never called and has been ignored
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:1546: warning: [W170] Function 'CopperWaitLine' is never called and has been ignored
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:74: warning: [W150] Variable 'plch' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:75: warning: [W150] Variable 'potx' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:75: warning: [W150] Variable 'poty' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:85: warning: [W150] Variable 'cc' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:97: warning: [W150] Variable 'scrollcount' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:110: warning: [W150] Variable 'swordtimer' is never used
+C:\\NextBuildv8\\Sources\\JumpyMoley\\holeymoley_scroll_copperfx.bas:111: warning: [W150] Variable 'throw' is never used

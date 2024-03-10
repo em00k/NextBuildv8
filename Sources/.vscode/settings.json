@@ -1,0 +1,30 @@
+{
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.cursorStyle": "block",
+  "files.defaultLanguage": ".bas",
+  "telemetry.enableCrashReporter": false,
+  "telemetry.enableTelemetry": false,
+  "[em00k.nextbuild]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "editor.tokenColorCustomizations": {
+    "comments": "#2ccf2c",
+    "numbers": "#e06565",
+    "keywords": "#f1db14",
+    "functions": "#13ad34"
+  },
+
+  "marksToOutline.mark": "sub ", // Keyword to look for
+  "marksToOutline.availableLanguages": "nextbuild", // * | comma-separated list of language ids
+  "marksToOutline.highlightMarks": true, // should highlight lines or not
+  "marksToOutline.darkColor": "hsla(0, 100%, 100%, 0.07)", // higlight color for dark themes
+  "marksToOutline.lightColor": "hsla(0, 0%, 0%, 0.07)",
+  "asm-code-lens.enableCodeLenses": true,
+"editor.detectIndentation": false,
+"workbench.colorTheme": "Andromeda Colorizer",
+"explorer.sortOrder": "modified",
+"editor.autoClosingQuotes": "never" // highlight color for light themes
+
+}
+
