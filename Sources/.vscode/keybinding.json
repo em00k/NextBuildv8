@@ -1,5 +1,14 @@
-{
-    "key": "F6",
-    "command": "workbench.action.tasks.runTask",
-    "args": "Compile ZXbasic"
-  }
+[
+    {
+        "key": "f5",
+        "command": "workbench.action.tasks.build"
+    },
+    {
+        "key": "f6",
+        "command": "workbench.action.tasks.runTask"
+    },
+    {
+        "key": "f7",
+        "command": "workbench.action.tasks.reRunTask"
+    }
+]

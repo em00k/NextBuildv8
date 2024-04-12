@@ -43,21 +43,21 @@ End
 ' for modules we're going to need something different that the NB7 InitMusic etc 
 ' Main module should initailis the IM2 and 
 function dist(byval dista as integer,byval distb as integer,byval distc as integer,byval distd as integer) as ubyte
-C=(((dista - distc) * (dista - distc)) + ((distb - distd) * (distb - distd)))
-asm 
-    ;BREAK 
-    ; use John Metcalfs fast sqr 
-    ; http://www.retroprogramming.com/2017/07/a-fast-z80-integer-square-root.html
-    fastsqr: ld a,h : 	ld de,0B0C0h : 	add a,e : jr c,sq7 : ld a,h : 	ld d,0F0h
-    sq7: add a,d : jr nc,sq6 : res 5,d : db 254 
-    sq6: sub d : sra d : set 2,d : add a,d : jr nc,sq5 : res 3,d : db 254 
-    sq5: sub d : sra d : inc d : add a,d : jr nc,sq4 : res 1,d : db 254 
-    sq4: sub d : sra d : ld h,a : add hl,de : jr nc,sq3 : ld e,040h : db 210
-    sq3: sbc hl,de : sra d : ld a,e : rra : or 010h : ld e,a : add hl,de : jr nc,sq2 : and 0DFh : db 218 
-    sq2: sbc hl,de : sra d : rra : or 04h : ld e,a : add hl,de : jr nc,sq1 : and 0F7h : db 218
-    sq1: sbc hl,de : sra d : rra : inc a : ld e,a : add hl,de : jr nc,sq0 : and 0FDh
-    sq0: sra d : rra : cpl : ld hl,0 : ADD_HL_A : ld (._C),a
-END ASM 
+    C=(((dista - distc) * (dista - distc)) + ((distb - distd) * (distb - distd)))
+    asm 
+        ;BREAK 
+        ; use John Metcalfs fast sqr 
+        ; http://www.retroprogramming.com/2017/07/a-fast-z80-integer-square-root.html
+        fastsqr: ld a,h : 	ld de,0B0C0h : 	add a,e : jr c,sq7 : ld a,h : 	ld d,0F0h
+        sq7: add a,d : jr nc,sq6 : res 5,d : db 254 
+        sq6: sub d : sra d : set 2,d : add a,d : jr nc,sq5 : res 3,d : db 254 
+        sq5: sub d : sra d : inc d : add a,d : jr nc,sq4 : res 1,d : db 254 
+        sq4: sub d : sra d : ld h,a : add hl,de : jr nc,sq3 : ld e,040h : db 210
+        sq3: sbc hl,de : sra d : ld a,e : rra : or 010h : ld e,a : add hl,de : jr nc,sq2 : and 0DFh : db 218 
+        sq2: sbc hl,de : sra d : rra : or 04h : ld e,a : add hl,de : jr nc,sq1 : and 0F7h : db 218
+        sq1: sbc hl,de : sra d : rra : inc a : ld e,a : add hl,de : jr nc,sq0 : and 0FDh
+        sq0: sra d : rra : cpl : ld hl,0 : ADD_HL_A : ld (._C),a
+    END ASM 
     Return C
 end function
 
@@ -124,7 +124,7 @@ Sub Main()
 	
 	InitSprites2(16,0,26)		' init sprites in bank 26
 	L2Text(0,0,"MODULE 3",29,0)
-	L2Text(0,1,"MOUSE "+NStr(mouse_mox)+NStr(mouse_moy),29,0)
+	L2Text(0,1,"MOUSE "+Str(mouse_mox)+Str(mouse_moy),29,0)
 
 
 	L2Text(0,3,"1 - STOP, 2 - PLAY",29,0)
@@ -180,7 +180,7 @@ Sub Main()
 			NewMusic(58)				' new tune in bank 57'
 		elseif a = code "7"	and key = 0 
 			L2Text(0,7,"SAMPLE "+NStr(b),29,0)
-			poke $fd3f,b
+			poke $fd3f,b                ' 
 			if b < 5
 				b = b + 1
 			else 

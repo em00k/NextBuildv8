@@ -24,7 +24,8 @@ asm
 	ayfxtoplay			EQU 	$fd58 			; 1 byte for sample to play in FF no sample 
 	ayfxbankinplaycode	EQU 	$fd3e
 	ctc_sample_toplay	EQU 	$fd3f
-;	ctc_sample_table	EQU 	$fd60		; sample of samples ot play
+	second_mod_address	EQU 	$fd60 			; address of 2nd mod if TS
+;	ctc_sample_table	EQU 	$fd60			; sample of samples ot play
 
 end asm
 
@@ -42,14 +43,20 @@ sub fastcall PlayMusic()
 	end asm 
 end sub 
 
-sub fastcall NewMusic(byval musicbank as ubyte)
+sub fastcall NewMusic(byval musicbank as ubyte, secondmodule as uinteger=0)
 	asm 
-		di 
+		di  
+		; BREAK 
 		ld 		(bankbuffersplayernl+1),a 
 		inc 	a 
 		ld 		(bankbuffersplayernl+2),a 
 		ld 		a,3 
 		ld 		(sfxenablednl+1),a 
+		ld 		de, $fd60 
+		ex		de, hl 
+		ld 		(hl), e 
+		inc 	hl 
+		ld 		(hl), d 
 		ei 
 	end asm 
 end sub 
@@ -78,12 +85,16 @@ Sub fastcall InitMusic(playerbank as byte, musicbank as ubyte, musicaddoffset as
 			exx 
 			; call    _checkints                      ; were ints on so we know if we need to turn them back on after 
 			di 										; ensure interrupts are disbled 
-
+			 
 			ld      (aybank1+1),a 					; a = player bank 
 			pop     af 
 			ld      (ayseta+1),a 					; tune bank 
-			pop     de								
-			ld      (aysetde+1),de 					; tune offset in bank  0 = 16383
+			pop     de			
+			; BREAK					
+			ld 		hl, $fd60
+			ld 		(hl), e
+			inc 	hl  
+			ld 		(hl), d 
 			
 			getreg($52)
 			ld 		(exitplayerinit+3),a  			; get and store the banks for on exit 
@@ -100,15 +111,26 @@ Sub fastcall InitMusic(playerbank as byte, musicbank as ubyte, musicaddoffset as
 			nextreg $52,a 						    ; put player in place 
 			ld      (bankbuffersplayernl),a 		; store bank 
 	ayseta:         
-			ld      a, 0 
+			ld      a,0
 			ld      (bankbuffersplayernl+1),a 		; store bank 
 			nextreg $50,a
 			inc     a
 			nextreg $51,a
-	aysetde:
-			ld      de,$0000                        ; smc from above 
-			ld      hl,$0000                        ; point to start of tune in user bank 
-			; add     hl,de 
+	aysetde:	; smc from above dont more DE below
+			ld 		hl, $fd60 
+			ld 		e, (hl)
+			inc 	hl 
+			ld 		d, (hl)
+			ld 		a, d 						; is de = 0 
+			or 		e 				
+			jr 		z, 2F					; yes its not a ts song 
+			ld      a, %0001_0000  				; Else its a ts 
+			jr 		1F
+	2:
+			ld      a, %0000_0000  				; ACB
+	1:			
+			ld 		($4000+10), a 					; set bits for autodetect TS
+			ld      hl,0                        ; point to start of tune in user bank 
 			push    ix 
 			call    $4003							; call the player init 
 			pop     ix 
@@ -138,7 +160,7 @@ Sub fastcall InitMusic(playerbank as byte, musicbank as ubyte, musicaddoffset as
 			ld      (exitplayernl+3),a              ; save the bank below 
 			getreg($50) : ld (exitplayernl+7),a              	; set exit banks 
 			getreg($51) : ld (exitplayernl+11),a
-
+			
 			ld      hl,bankbuffersplayernl			; get the player bank 
 			ld      a,(hl)
 			nextreg $52,a							; put in close 2 
@@ -155,7 +177,7 @@ Sub fastcall InitMusic(playerbank as byte, musicbank as ubyte, musicaddoffset as
 			ld      a,(sfxenablednl+1)
 			cp      3
 			jr      z,re_init_music 
-
+			
 
 			push    ix 
 			call    $4005					; play frame of music 
@@ -164,7 +186,7 @@ Sub fastcall InitMusic(playerbank as byte, musicbank as ubyte, musicaddoffset as
 
 	exitplayernl:
 			nextreg $52,$0a
-			nextreg $50,$00
+			nextreg $50,$00					; patched frpm entry 
 			nextreg $51,$01
 
 	ayrepairestack2:
@@ -172,9 +194,30 @@ Sub fastcall InitMusic(playerbank as byte, musicbank as ubyte, musicaddoffset as
 			ret 
 
 	re_init_music:
+			ld 		hl, $fd60 
+			ld 		e, (hl)
+			inc 	hl 
+			ld 		d, (hl)
+			ld 		a, d 						; is de = 0 
+			or 		e 				
+			jr 		z, 2F						; yes its not a ts song 
+			ld      a, %0001_0000  				; Else its a ts 
+			jr 		1F
+		2:
+			ld      a, %0000_0000  				; ACB
+		1:			
+			ld 		($4000+10), a 				; set bits for autodetect TS
+			ld      hl,0                        ; point to start of tune in user bank 
+	
 			ld		a, 1
 			ld      (sfxenablednl+1),a 
-			ld		hl,0000							; where pt3 tune starts 
+			; ld      a, %0001_0100  				; ACB
+			; ld 		($4000+10), a 					; set bits for autodetect TS
+			push 	hl 
+			push 	de 
+			call 	$4008 
+			pop 	de 
+			pop 	hl
 			call	$4003							; re-init the player 
 			jp      exitplayernl
 
@@ -220,7 +263,7 @@ Sub fastcall SetUpIM()
         ld      (hl),d 	
 
 		nextreg VIDEO_INTERUPT_CONTROL_NR_22,%00000110          ; ULA off, Line on, MSB 0 
-		nextreg VIDEO_INTERUPT_VALUE_NR_23,190					; LSB of Line interrupt 
+		nextreg VIDEO_INTERUPT_VALUE_NR_23,192					; LSB of Line interrupt 
 		
         im      2                           ; enabled the interrupts 
 
@@ -296,6 +339,7 @@ Sub fastcall ISR()
 	skipfxplayernl:		
 		ld      a,(sfxenablednl+1) 							;' is music enabled?
 		or      a : jr z,skipmusicplayer
+		
 		ld 		bc,65533	: ld a,255:out (c),a	                ; second AY chip 
 		call    playmusicnl						;' if so player frame of music 
 
@@ -303,6 +347,7 @@ Sub fastcall ISR()
 		ld		a,(ctc_sample_toplay)
 		or		a 
 		jr 		z,isr_replace_port
+		
 		call    play_sample                         ; call the ctc sample player
 
 	end asm 
@@ -542,7 +587,7 @@ sub fastcall CallbackSFX()
 		inc 	a												; slots 0 & 1 0000- $3fff 
 		nextreg $52,a                                         
 		
-		ld bc,65533	: ld a,254:out (c),a	                    ; second AY chip 
+		ld bc,65533	: ld a,253:out (c),a	                    ; second AY chip 
 
 		ld 		bc,$03fd
 		ld 		ix,afxChDesc
@@ -811,7 +856,7 @@ Sub fastcall SetUpCTC()
 
 		di 
 		; // ld		d,114 										; 
-		ld		a,(sampletiming)
+		;ld		a,(sampletiming)
 		ld 		d,112
 		ld		a,0    										; manually set timing 
 		ld		hl,.timing_tab
@@ -943,12 +988,14 @@ end sub
 sub fastcall PlaySample(byval sample as ubyte)
 	asm 
 		ld		(ctc_sample_toplay),a 
+		ret
 	end asm 
 end sub 
 
 sub fastcall SetCTCSampleTable(byval ctc_address as uinteger)
 	asm 
 		ld 		(ctc_sample_table),hl 
+		ret
 	end asm 
 end sub 
 
@@ -1042,7 +1089,7 @@ sub fastcall PlayCTC()
         sbc     hl,de 				; sample end - offset 
 		
         jr      nc,playing			; is sample_offset < sample_end? Then jr to playing  
-		;BREAK  
+		; BREAK  
 		jr		c,done_playing
 
 		ld 		hl,(sample_start)	; reset offset 

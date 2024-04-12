@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Compile ZXbasic",
+            "label": "Build Current Source",
             "type": "shell",
             "runOptions": {
                 "instanceLimit": 10
@@ -17,12 +17,12 @@
                 "-s"
             ],
             "windows": {
-                "command": "python",
+                "command": "./../zxbasic/python/python.exe",
                 "args": [
                     "./../Scripts/nextbuild.py",
                     "-b",
                     "${file}",
-                    "-s"
+                   // "-s"
                 ]
             },
             "presentation": {
@@ -48,11 +48,12 @@
             }
         },
         {
-            "label": "Compile Modules",
+            "label": "MODULE : Build Module",
             "type": "shell",
             "command": "python3",
             "args": [
-                "./../Scripts/module.py",
+                "./../Scripts/build.py",
+                "-s",
                 "${file}"
             ],
             "group": {
@@ -61,8 +62,10 @@
             "windows": {
                 "command": "./../zxbasic/python/python.exe",
                 "args": [
-                    "./../Scripts/module.py",
-                    "${file}"
+                    "./../Scripts/build.py",
+                    "-b",
+                    "${file}",
+                    "-s"
                 ]
             },
             "presentation": {
@@ -87,14 +90,86 @@
             }
         },
         {
-            "label": "Build Modules and run in CSpect",
+            "label": "MODULE : Build Module & Run Master NEX",
             "type": "shell",
-            "command": "mono ./../Emu/Cspect/Cspect.exe -16bit -nojoy -brk -tv -vsync -nextrom -map=${fileDirname}/${fileBasenameNoExtension}.bas.map -zxnext -fill=00 -mmc=${fileDirname}/data/ ${fileDirname}/${fileBasenameNoExtension}.NEX",
+            "command": "python3",
+            "args": [
+                "./../Scripts/build.py",
+                "-e",
+                "${file}"
+            ],
+            "dependsOn": [
+                "MODULE : Build Module"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true,
+            },
             "windows": {
-                "command": "./../Emu/Cspect/Cspect.exe -w3 -fill=0 -16bit -brk -tv -vsync -nextrom -map=${fileDirname}/${fileBasenameNoExtension}.bas.map -zxnext -mmc=${fileDirname}\\data\\ ${fileDirname}/${fileBasenameNoExtension}.NEX"
+                "command": "./../zxbasic/python/python.exe",
+                "args": [
+                    "./../Scripts/build.py",
+                    "-b",
+                    "${file}",
+                    "-e"
+                ]
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+
+        },
+        {
+            "label": "MODULE : Build all modules",
+            "dependsOn":{ "type": ""},
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "./../Scripts/build.py",
+                "-s",
+                "${file}",
+                "-m"
+            ],
+            "group": {
+                "kind": "build"
+            },
+            "windows": {
+                "command": "./../zxbasic/python/python.exe",
+                "args": [
+                    "./../Scripts/build.py",
+                    "-b",
+                    "${file}",
+                    "-m"
+                ]
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
+
+        },
+        {
+            "label": "MODULE : Build Modules and run in CSpect",
+            "type": "shell",
+            "command": "mono ./../Emu/Cspect/Cspect.exe -16bit -nojoy -brk -tv -vsync -nextrom -map=${fileDirname}/${fileBasenameNoExtension}.map -zxnext -fill=00 -mmc=${fileDirname}/data/ ${fileDirname}/${fileBasenameNoExtension}.NEX",
+            "windows": {
+                "command": "./../zxbasic/python/python.exe",
+                "args": [
+                    "./../Scripts/build.py",
+                    "-b",
+                    "${file}",
+                    "-e"
+                ]
             },
             "dependsOn": [
-                "Compile Modules"
+                "MODULE : Build all modules"
             ],
             "group": {
                 "kind": "test"
@@ -104,9 +179,10 @@
                 "reveal": "always",
                 "panel": "shared",
                 "showReuseMessage": false,
-                "clear": true
+                "clear": false
             }
         },
+        
         {
             "label": "Reset Tasks",
             "type": "process",
@@ -120,18 +196,19 @@
             },
             "group": {
                 "kind": "test",
-                "isDefault": true
+                "isDefault": false
             }
         },
         {
             "label": "Run in Cspect",
             "type": "shell",
-            "command": "mono ./../Emu/Cspect/Cspect.exe -16bit -nojoy -brk -tv -vsync -nextrom -map=${fileDirname}/${fileBasenameNoExtension}.bas.map -zxnext -fill=00 -mmc=${fileDirname}/data/ ${fileDirname}/${fileBasenameNoExtension}.NEX",
+            "command": "mono ./../Emu/Cspect/Cspect.exe -16bit -nojoy -brk -tv -vsync -nextrom -map=${fileDirname}/${fileBasenameNoExtension}.map -zxnext -fill=00 -mmc=${fileDirname}/data/ ${fileDirname}/${fileBasenameNoExtension}.NEX",
             "windows": {
-                "command": "./../Emu/Cspect/Cspect.exe -w3 -16bit -brk -tv -vsync -rewind -nextrom -map=${fileDirname}/${fileBasenameNoExtension}.bas.map -zxnext -mmc=${fileDirname}\\data\\ ${fileDirname}/${fileBasenameNoExtension}.NEX"
+                "command": "./../Emu/Cspect/Cspect.exe -w3 -16bit -brk -tv -vsync -nextrom -map=${fileDirname}/${fileBasenameNoExtension}.map -zxnext -mmc=${fileDirname}\\data\\ ${fileDirname}/${fileBasenameNoExtension}.NEX"
             },
             "dependsOn": [
-                "Compile ZXbasic"
+                "Build Current Source"
+                
             ],
             "presentation": {
                 "echo": true,
@@ -140,16 +217,28 @@
                 "showReuseMessage": false,
                 "clear": false
             },
-            "problemMatcher": [],
+            "problemMatcher": {
+                "owner": "nextbuild",
+                "fileLocation": [
+                    "absolute"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "severity": 3,
+                    "message": 4
+                }
+            },
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             }
         },
         {
-            "label": "Reset Next",
+            "label": "Reset Next (Requires Koome Server)",
             "type": "shell",
-            "command": "mono ./../Emu/Cspect/Cspect.exe -16bit -nojoy -brk -tv -vsync -nextrom -map=${fileDirname}/${fileBasenameNoExtension}.bas.map -zxnext -fill=00 -mmc=${fileDirname}/data/ ${fileDirname}/${fileBasenameNoExtension}.NEX",
+            //"command": "mono ./../Emu/Cspect/Cspect.exe -16bit -nojoy -brk -tv -vsync -nextrom -map=${fileDirname}/${fileBasenameNoExtension}.map -zxnext -fill=00 -mmc=${fileDirname}/data/ ${fileDirname}/${fileBasenameNoExtension}.NEX",
             "windows": {
                 "command": "curl http://192.168.1.132/API/RESET -f -s"
             },
@@ -171,65 +260,14 @@
             }
         },
         {
-            "label": "Rerun last compiled NEX",
+            "label": "MODULE : Run Master NEX",
             "type": "shell",
-            "command": "mono ./../Emu/Cspect/Cspect.exe -16bit -nojoy -brk -tv -vsync -nextrom -map=${fileDirname}/${fileBasenameNoExtension}.bas.map -zxnext -fill=00 -mmc=${fileDirname}/data/ ${fileDirname}/${fileBasenameNoExtension}.NEX",
-            "windows": {
-                "command": "./../Emu/Cspect/Cspect.exe -w3 -16bit -brk -tv -vsync -nextrom -map=${fileDirname}/${fileBasenameNoExtension}.bas.map -zxnext -mmc=${fileDirname}\\data\\ ${fileDirname}/${fileBasenameNoExtension}.NEX"
-            },
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "panel": "shared",
-                "showReuseMessage": false,
-                "clear": false
-            }
-        },
-        {
-            "label": "Generate TAP",
-            "type": "shell",
-            "command": "python3",
+            "command": "./../zxbasic/python/python.exe",
             "args": [
-                "./../Scripts/nextbuild.py",
+                "./../Scripts/build.py",
                 "-b",
                 "${file}",
-                "-t"
-            ],
-            "windows": {
-                "command": "./../zxbasic/python/python.exe",
-                "args": [
-                    "./../Scripts/nextbuild.py",
-                    "-b",
-                    "${file}",
-                    "-t"
-                ]
-            },
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "panel": "shared",
-                "showReuseMessage": false,
-                "clear": true
-            },
-            "problemMatcher": {
-                "fileLocation": [
-                    "absolute"
-                ],
-                "pattern": {
-                    "regexp": "^(.*):(\\d+):\\s+(warning|error):\\s+(.*)$",
-                    "file": 1,
-                    "line": 2,
-                    "severity": 3,
-                    "message": 4
-                }
-            }
-        },
-        {
-            "label": "Build and run NextZXOS",
-            "type": "shell",
-            "command": "./../Scripts/makebas.bat ${fileDirname} ${fileDirname}/${fileBasenameNoExtension}",
-            "dependsOn": [
-                "Compile ZXbasic"
+                "-e"
             ],
             "presentation": {
                 "echo": true,
@@ -240,25 +278,80 @@
             },
             "problemMatcher": []
         },
-        {
-            "label": "Run compiled TAP",
-            "type": "shell",
-            "command": "powershell",
-            "args": [
-                "ii",
-                "${fileDirname}/${fileBasenameNoExtension}.tap"
-            ],
-            "dependsOn": [
-                "Generate TAP"
-            ],
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "panel": "shared",
-                "showReuseMessage": false,
-                "clear": false
-            }
-        },
+        // {
+        //     "label": "Generate TAP",
+        //     "type": "shell",
+        //     "command": "python3",
+        //     "args": [
+        //         "./../Scripts/nextbuild.py",
+        //         "-b",
+        //         "${file}",
+        //         "-t"
+        //     ],
+        //     "windows": {
+        //         "command": "./../zxbasic/python/python.exe",
+        //         "args": [
+        //             "./../Scripts/nextbuild.py",
+        //             "-b",
+        //             "${file}",
+        //             "-t"
+        //         ]
+        //     },
+        //     "presentation": {
+        //         "echo": true,
+        //         "reveal": "always",
+        //         "panel": "shared",
+        //         "showReuseMessage": false,
+        //         "clear": true
+        //     },
+        //     "problemMatcher": {
+        //         "fileLocation": [
+        //             "absolute"
+        //         ],
+        //         "pattern": {
+        //             "regexp": "^(.*):(\\d+):\\s+(warning|error):\\s+(.*)$",
+        //             "file": 1,
+        //             "line": 2,
+        //             "severity": 3,
+        //             "message": 4
+        //         }
+        //     }
+        // },
+        // {
+        //     "label": "Build and run NextZXOS",
+        //     "type": "shell",
+        //     "command": "./../Scripts/makebas.bat ${fileDirname} ${fileDirname}/${fileBasenameNoExtension}",
+        //     "dependsOn": [
+        //         "Build ZXbasic"
+        //     ],
+        //     "presentation": {
+        //         "echo": true,
+        //         "reveal": "always",
+        //         "panel": "shared",
+        //         "showReuseMessage": false,
+        //         "clear": false
+        //     },
+        //     "problemMatcher": []
+        // },
+        // {
+        //     "label": "Run Buildd TAP",
+        //     "type": "shell",
+        //     "command": "powershell",
+        //     "args": [
+        //         "ii",
+        //         "${fileDirname}/${fileBasenameNoExtension}.tap"
+        //     ],
+        //     "dependsOn": [
+        //         "Generate TAP"
+        //     ],
+        //     "presentation": {
+        //         "echo": true,
+        //         "reveal": "always",
+        //         "panel": "shared",
+        //         "showReuseMessage": false,
+        //         "clear": false
+        //     }
+        // },
         {
             "label": "Parse source file",
             "type": "shell",
@@ -303,7 +396,7 @@
             },
             "group": {
                 "kind": "test",
-                "isDefault": true
+                "isDefault": false
             },
             "problemMatcher": {
                 "fileLocation": [
@@ -325,27 +418,7 @@
                 "clear": false
             }
         },
-        {
-            "label": "Update Nextbuild from github [affects scripts & nextlib.bas, .vscode]",
-            "type": "shell",
-            "command": "powershell",
-            "windows": {
-                "command": [
-                    "wget https://raw.githubusercontent.com/em00k/NextBuild/master/Scripts/nextlib.bas -outfile ./../Scripts/nextlib.bas;",
-                    "wget https://raw.githubusercontent.com/em00k/NextBuild/master/Scripts/nextbuild.py -outfile ./../Scripts/nextlib.py;",
-                    "wget https://raw.githubusercontent.com/em00k/NextBuild/master/Sources/.vscode/tasks.json -outfile ./../Sources/.vscode/tasks.json;",
-                    "wget https://raw.githubusercontent.com/em00k/NextBuild/master/Sources/.vscode/settings.json -outfile ./../Sources/.vscode/settings.json;",
-                    "wget https://raw.githubusercontent.com/em00k/NextBuild/master/Sources/.vscode/extensions.json -outfile ./../Sources/.vscode/extensions.json;"
-                ]
-            },
-            "problemMatcher": [],
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "panel": "shared",
-                "showReuseMessage": false,
-                "clear": false
-            }
-        }
+
+        
     ]
 }

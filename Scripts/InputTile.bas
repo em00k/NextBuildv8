@@ -4,6 +4,8 @@
 ' Copyleft (k) 2008
 ' by Jose Rodriguez-Rosa (a.k.a. Boriel) <http://www.boriel.com>
 '
+' Adjusted for the TileMap for the ZX Spectrum Next - Requires TileMap-Inc.bas
+' by em00k
 ' Simple INPUT routine (not as powerful as Sinclair BASIC's), but
 ' this one uses PRINT42 routine
 ' Usage: A$ = INPUT42(MaxChars)

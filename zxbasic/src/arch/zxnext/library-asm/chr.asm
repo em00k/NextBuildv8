@@ -2,7 +2,7 @@
 ;
 
 #include once <alloc.asm>
-#include once <zxnext_utils.asm>
+
     push namespace core
 
 CHR:	; Returns HL = Pointer to STRING (NULL if no memory)
@@ -14,19 +14,19 @@ CHR:	; Returns HL = Pointer to STRING (NULL if no memory)
     PROC
 
     LOCAL __POPOUT
-    LOCAL __CHR_TEMP
+    LOCAL TMP
 
-;TMP		EQU 23629 ; (DEST System variable)
+TMP		EQU 23629 ; (DEST System variable)
 
     ld a, h
     or l
     ret z	; If Number of parameters is ZERO, return NULL STRING
-    call        __zxnbackup_sysvar_bank
+
     ld b, h
     ld c, l
 
     pop hl	; Return address
-    ld (__CHR_TEMP), hl
+    ld (TMP), hl
 
     push bc
     inc bc
@@ -68,13 +68,10 @@ __POPOUT:	; Removes out of the stack every byte and return
     jp __POPOUT
 
 __CHR_END:
-    ld hl, (__CHR_TEMP)
+    ld hl, (TMP)
     push hl		; Restores return addr
     ex de, hl	; Recovers original HL ptr
-    call __zxnbackup_sysvar_bank_restore
     ret
-__CHR_TEMP:
-        dw  0000 
 
     ENDP
 

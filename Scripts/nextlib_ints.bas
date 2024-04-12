@@ -16,13 +16,14 @@ asm
 	; we set this the location of these interrupt system addresses so they are available
 	; from all modules. 
 	; 
-    afxChDesc       	EQU     $fd00			; fixed address of afxChDesc
+    afxChDesc       	EQU     $fd02			; fixed address of afxChDesc
     sfxenablednl    	EQU     $fd40			; fixed address of sfxenablednl
 	currentmusicbanknl	EQU 	$fd44			; current music banks 2 bytes 
 	currentsfxbank		EQU 	$fd48			; current sfx bank 2 byte 
     bankbuffersplayernl EQU     $fd50			; fixed address of bankbufferplayernl
 	sampletoplay		EQU 	$fd58 			; 1 byte for sample to play in FF no sample 
 	ayfxbankinplaycode	EQU 	$fd3e
+	second_mod_address	EQU 	$fd60 			; address of 2nd mod if TS
 end asm
 
 sub fastcall StopMusic()
@@ -39,7 +40,7 @@ sub fastcall PlayMusic()
 	end asm 
 end sub 
 
-sub fastcall NewMusic(byval musicbank as ubyte)
+sub fastcall NewMusic(byval musicbank as ubyte, second_mod_address as uinteger=0)
 	asm 
 		di 
 		ld 		(bankbuffersplayernl+1),a 
@@ -47,6 +48,11 @@ sub fastcall NewMusic(byval musicbank as ubyte)
 		ld 		(bankbuffersplayernl+2),a 
 		ld 		a,3 
 		ld 		(sfxenablednl+1),a 
+		ld 		de, $fd60 			
+		ex		de, hl 
+		ld 		(hl), e 
+		inc 	hl 
+		ld 		(hl), d 
 		ei 
 	end asm 
 end sub 
@@ -72,15 +78,18 @@ Sub fastcall InitMusic(playerbank as byte, musicbank as ubyte, musicaddoffset as
 			exx                                     ; common save ret address 
 			pop     hl 
 			exx 
-			call    _checkints                      ; were ints on so we know if we need to turn them back on after 
+			; call    _checkints                      ; were ints on so we know if we need to turn them back on after 
 			di 										; ensure interrupts are disbled 
 
 			ld      (aybank1+1),a 					; a = player bank 
 			pop     af 
 			ld      (ayseta+1),a 					; tune bank 
 			pop     de								
-			ld      (aysetde+1),de 					; tune offset in bank  0 = 16383
-			
+			ld 		hl, $fd60
+			ld 		(hl), e
+			inc 	hl  
+			ld 		(hl), d 
+
 			getreg($52)
 			ld 		(exitplayerinit+3),a  			; get and store the banks for on exit 
 			ld 		(exitplayernl+3),a
@@ -101,10 +110,21 @@ Sub fastcall InitMusic(playerbank as byte, musicbank as ubyte, musicaddoffset as
 			nextreg $50,a
 			inc     a
 			nextreg $51,a
-	aysetde:
-			ld      de,00000                        ; smc from above 
-			ld      hl,$0000                        ; point to start of tune in user bank 
-			add     hl,de 
+	aysetde:	; smc from above dont more DE below
+			ld 		hl, $fd60 
+			ld 		e, (hl)
+			inc 	hl 
+			ld 		d, (hl)
+			ld 		a, d 						; is de = 0 
+			or 		e 				
+			jr 		z, aysetde2					; yes its not a ts song 
+			ld      a, %0001_0000  				; Else its a ts 
+			jr 		aysetde1
+	aysetde2:
+			ld      a, %0000_0000  				; ACB
+	aysetde1:			
+			ld 		($4000+10), a 					; set bits for autodetect TS
+			ld      hl,0                        ; point to start of tune in user bank 
 			push    ix 
 			call    $4003							; call the player init 
 			pop     ix 
@@ -121,7 +141,7 @@ Sub fastcall InitMusic(playerbank as byte, musicbank as ubyte, musicaddoffset as
 			exx : push hl : exx 
 			
 
-			ReenableInts                            ; If ints were enable before the routine restart them 
+			; ReenableInts                            ; If ints were enable before the routine restart them 
 			ret 
 
 	ayplayerstack:
@@ -132,6 +152,8 @@ Sub fastcall InitMusic(playerbank as byte, musicbank as ubyte, musicaddoffset as
 
 			getreg($52)                             ; get slot 2 bank 
 			ld      (exitplayernl+3),a              ; save the bank below 
+			getreg($50) : ld (exitplayernl+7),a              	; set exit banks 
+			getreg($51) : ld (exitplayernl+11),a
 
 			ld      hl,bankbuffersplayernl			; get the player bank 
 			ld      a,(hl)
@@ -153,7 +175,7 @@ Sub fastcall InitMusic(playerbank as byte, musicbank as ubyte, musicaddoffset as
 
 			push    ix 
 			call    $4005					; play frame of music 
-			pop ix 
+			pop		ix 
 			; push    ix 
 
 	exitplayernl:
@@ -166,9 +188,28 @@ Sub fastcall InitMusic(playerbank as byte, musicbank as ubyte, musicaddoffset as
 			ret 
 
 	re_init_music:
+			ld 		hl, $fd60 
+			ld 		e, (hl)
+			inc 	hl 
+			ld 		d, (hl)
+			ld 		a, d 						; is de = 0 
+			or 		e 				
+			jr 		z, re_init_music2						; yes its not a ts song 
+			ld      a, %0001_0000  				; Else its a ts 
+			jr 		re_init_music1
+	re_init_music2:
+			ld      a, %0000_0000  				; ACB
+	re_init_music1:			
+			ld 		($4000+10), a 				; set bits for autodetect TS
+			ld      hl,0                        ; point to start of tune in user bank 
+
 			ld		a, 1
 			ld      (sfxenablednl+1),a 
-			ld		hl,0000							; where pt3 tune starts 
+			push 	hl 
+			push 	de 
+			call 	$4008 
+			pop 	de 
+			pop 	hl
 			call	$4003							; re-init the player 
 			jp      exitplayernl
 
@@ -214,7 +255,7 @@ Sub fastcall SetUpIM()
         ld      (hl),d 	
 
 		nextreg VIDEO_INTERUPT_CONTROL_NR_22,%00000110          ; set rasterline on for line 192 
-		nextreg VIDEO_INTERUPT_VALUE_NR_23,190
+		nextreg VIDEO_INTERUPT_VALUE_NR_23,192
 		
         im      2                           ; enabled the interrupts 
         jp      _exit_im_setup
@@ -261,6 +302,12 @@ Sub fastcall ISR()
 		ld 		bc,TBBLUE_REGISTER_SELECT_P_243B
 		in 		a,(c)
 		ld 		(skipmusicplayer+1), a
+        getreg($52)
+        ld 		(exitplayernl+3),a
+        getreg($50)
+        ld		(exitplayernl+7),a
+        getreg($51)
+        ld 		(exitplayernl+11),a
 	end asm 
 	
 	' you *CAN* call a sub from here, but you will need to be careful that it doesnt use ROM calls that 
@@ -523,7 +570,7 @@ sub fastcall CallbackSFX()
 		exx								
 		push ix 
 
-		ld bc,65533	: ld a,254:out (c),a	                    ; second AY chip 
+	                    ; second AY chip 
 	 	getreg($51) : ld (ayfxrestoreslot+3),a              	; set exit banks 
 		getreg($52) : ld (ayfxrestoreslot+7),a
 
@@ -531,6 +578,8 @@ sub fastcall CallbackSFX()
 		nextreg $51,a         									; page in our banks 
 		inc 	a												; slots 0 & 1 0000- $3fff 
 		nextreg $52,a                                         
+
+		ld bc,65533	: ld a,253:out (c),a
 
 		ld 		bc,$03fd
 		ld 		ix,afxChDesc

@@ -1,21 +1,32 @@
 '!org=57344	
 '!heap=768
-'!nosys 
-'!copy=H:\modules\Sample2.nex
-
-' cp .\Sample.nex H:\modules\Sample.nex
-
+'!master=Sample.nex
+'
+' Module demo from NextBuild8
+' This is the main orchestrator that loads the common routines, sets up Interrupts and hands off loading to different modules. 
+' This demo will load 4 modules one after another, use the mouse to move to the next module
+' module 4 shows how to play ctc samples with AY & SFX 
+'
+'# sysvars MUST be loaded as will be used byt str()
+'
+' test lines for copying to my SD card
+'#!copy=H:\modules\Sample2.nex
+'#cp .\Sample.nex H:\modules\Sample.nex
+'
 ' ORG 57344 - $E000
+' This is where the Sample module will live at all times! Do not page out unless you stop interrupts. 
+' note the stack pointer will be at $dffe on entry, you may repoint that to somewhere in $e000-$ffff
+' if needs be.
 ' Fixed bank located at $E000 to $ffff
 ' Usable memory from $e000 to $ffff minus heap size
 
-' Variables are store at $4000
+' Variables are stored at $4000
 
 ' ULA is paged out and banks 24/25 live in slots 2&3
 ' For tilemap functions the relevants pages are put back 
 
 ' - Includes -------------------------------------------------------------------
-#define NOSP 					' This tells nextbuild to no set a stack pointer 
+'#define NOSP 					' This tells nextbuild to no set a stack pointer 
 #define IM2
 #define DEBUG  					' This will display an error when a file is not found
 #define NEX 					' We want to build into Sample.NEX
@@ -39,12 +50,15 @@ LoadSDBank("module4.pt3",0,0,0,59) 				' load music.pt3 into bank
 LoadSDBank("ts4000.bin",0,0,0,37) 				' load the music replayer into bank 
 LoadSDBank("game.afb",0,0,0,38) 				' load music.pt3 into bank 
 LoadSDBank("output.dat",0,0,0,60) 				' load music.pt3 into bank 
-BBBREAK
+LoadSDBank("TESKO.PT3",0,0,0,80) 				' load music.pt3 into bank 
+'
+LoadSDBank("vumeters.spr",0,0,0,81)             ' vu meters 
+
 asm 
 	 di 							; ensure interrupts are disabled 
 end asm 
 
-InitInterupts(38,37,56)			' set up interrupts sfxbank, playerbank, music bank 
+InitInterupts(38,37,80)			' set up interrupts sfxbank, playerbank, music bank 
 Main()							' Main call 
 
 ' Main entry
@@ -63,13 +77,14 @@ Sub Main()
 		; wipe ram 
 		ld 		hl,$4000 
 		ld 		de,$4001 
-		ld 		hl,(0)
+		ld 		(hl),0
 		ld 		bc,$7d00 
 		ldir 	
 	end asm 
 
 	' Start with module 1 
-	SetLoadModule(ModuleSample1,0,0)
+    
+	SetLoadModule(ModuleSample2,0,0)
 	
 	' proceeding modules will chain 
 	
@@ -92,8 +107,7 @@ ExitToBasic:
 		nextreg GLOBAL_TRANSPARENCY_NR_14,0 
 		nextreg DISPLAY_CONTROL_NR_69,0				; L2 off 
 		nextreg MMU2_4000_NR_52,10					; replace banks	
-		nextreg MMU3_6000_NR_53,11					; replace banks 
-		BREAK 
+		nextreg MMU3_6000_NR_53,11					; replace banks  
 		ld 		hl,(23730)
 		ld		sp,hl	
 		jp		56 
@@ -105,15 +119,14 @@ sub ExecModule()
 
 	dim file as string 
 
-	common$=NStr(VarLoadModule)					' get the module to load, NStr is a non ROM version of Str(ubyte)
+	common$=Str(VarLoadModule)					' get the module to load, NStr is a non ROM version of Str(ubyte)
 
-	file="module"+common$(2 to )+".bin"			' combine in string 
+	file="module"+common$+".bin"			' combine in string 
 
-	LoadSD(file,24576,$7d00,0)					' load from SD to $6000
+	LoadSD(file,24576,$7d00,0)					' load from SD to $6000, masx size 32000 - stack 
 
 	asm 
 		; call the routine
-		; BREAK
 		ld 		(execmodule_end+1),sp 			; ensure stack is always balanced 
 		call 	$6000
 	execmodule_end:
@@ -127,13 +140,13 @@ end sub
 sub InitInterupts(byval sfxbank as ubyte, byval plbank as ubyte, byval musicbank as ubyte)
 	 
 	InitSFX(sfxbank)						        ' init the SFX engine, sfx are in bank 36
-	InitMusic(plbank,musicbank,0000)		        ' init the music engine 33 has the player, 34 the pt3, 0000 the offset in bank 34
+	InitMusic(plbank,musicbank,3814)		        ' init the music engine 33 has the player, 34 the pt3, 3815 is the offset to the second module
 	SetUpCTC()							            ' init the IM2 code 
 	 
-	PlaySFX(3)                                    	' Plays SFX 
+	PlaySFX(255)                                    	' Plays SFX 
 	EnableMusic
 	EnableSFX
-
+    
 end sub 
 
 

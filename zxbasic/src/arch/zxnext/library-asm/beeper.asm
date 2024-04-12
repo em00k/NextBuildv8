@@ -9,14 +9,13 @@
     push namespace core
 
 __BEEPER:
-    call        __zxnbackup_sysvar_bank
     ex de, hl
     pop hl
     ex (sp), hl ; CALLEE
     push ix     ; BEEPER changes IX
     call 03B5h
     pop ix
-    jp        __zxnbackup_sysvar_bank
+    ret
 
     pop namespace
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# v7.9 NextBuild / NextLib by David Saphier (c) 2021 / em00k 15-Feb-2022
+# v8.0 NextBuild / NextLib by David Saphier (c) 2021 / em00k 15-Feb-2022
 # ZX Basic Compiler by (c) Jose Rodriguez
 # Thanks to Jari Komppa for help with the cfg parser 
 # Extra thanks to Jose for help integrating into the zxb python modules and nextcreator.py 
@@ -29,14 +29,7 @@ LIB_DIR = os.path.join(ZXBASIC_DIR, 'src/arch/zxnext/library')
 SRC_DIR = os.path.join(ZXBASIC_DIR, 'src')
 TOOLS_DIR = os.path.join(ZXBASIC_DIR, 'tools')
 
-print(current_dir)
-print(BASE_DIR)
-print(SCRIPTS_DIR)
-print(EMU_DIR)
-print(ZXBASIC_DIR)
-print(LIB_DIR)
-print(SRC_DIR)
-print(TOOLS_DIR)
+
 
 # print(SCRIPTS_DIR); 
 
@@ -556,17 +549,17 @@ def ZXBCompile():
         # disable warnings for unused function 
         # disable warnings for functions never called 
         if headerless == 1: 
-            #test=zxbc.main([inputfile,'--headerless','-W','160','-W','140','-W','150','-W','170','-S', org,'-O',optimize,'-H',#heap,'-M',inputfile+'.map','-e','Compile.txt','-o',head_tail[0]+'/'+filenamenoext+'.bin','-I', LIB_DIR,'-I', #SCRIPTS_DIR])
+            #test=zxbc.main([inputfile,'--headerless','-W','160','-W','140','-W','150','-W','170','-S', org,'-O',optimize,'-H',#heap,'-M',head_tail[0]+'/'+filenamenoext+'.map','-e','Compile.txt','-o',head_tail[0]+'/'+filenamenoext+'.bin','-I', LIB_DIR,'-I', #SCRIPTS_DIR])
 
-            test=zxbc.main([inputfile,arch,'--headerless','-W','160','-W','140','-W','150','-W','170','-W','190','-S', org,'-O',optimize,'-H',heap,'-M',inputfile+'.map','-o',head_tail[0]+'/'+filenamenoext+'.bin','-I', LIB_DIR,'-I', SCRIPTS_DIR])
+            test=zxbc.main([inputfile,arch,'--headerless','-W','160','-W','140','-W','150','-W','170','-W','190','-S', org,'-O',optimize,'-H',heap,'-M',head_tail[0]+'/'+filenamenoext+'.map','-o',head_tail[0]+'/'+filenamenoext+'.bin','-I', LIB_DIR,'-I', SCRIPTS_DIR])
 
 
         else: 
             # '-e','Compile.txt'
             if gentape  == 1: 
-                test=zxbc.main([inputfile,'-W','160','-W','140','-W','150','-W','170','-W','190','-S', org,'-O',optimize,'-H',heap,'-M',inputfile+'.map','-t','-B','-a','-o',head_tail[0]+'/'+filenamenoext+'.tap','-I', LIB_DIR,'-I', SCRIPTS_DIR])
+                test=zxbc.main([inputfile,'-W','160','-W','140','-W','150','-W','170','-W','190','-S', org,'-O',optimize,'-H',heap,'-M',head_tail[0]+'/'+filenamenoext+'.map','-t','-B','-a','-o',head_tail[0]+'/'+filenamenoext+'.tap','-I', LIB_DIR,'-I', SCRIPTS_DIR])
             else: 
-                test=zxbc.main([inputfile,arch,'-W','160','-W','140','-W','150','-W','170','-W','190','-S', org,'-O',optimize,'-H',heap,'-M',inputfile+'.map','-o',head_tail[0]+'/'+filenamenoext+'.bin','-I', LIB_DIR,'-I', SCRIPTS_DIR])
+                test=zxbc.main([inputfile,arch,'-W','160','-W','140','-W','150','-W','170','-W','190','-S', org,'-O',optimize,'-H',heap,'-M',head_tail[0]+'/'+filenamenoext+'.map','-o',head_tail[0]+'/'+filenamenoext+'.bin','-I', LIB_DIR,'-I', SCRIPTS_DIR])
 
     else:
         test=zxbc.main([inputfile,arch,'-S', org,'-O',optimize,'-H',heap,'-e','Compile.txt','-A','-o',head_tail[0]+'/'+filenamenoext+'.asm','-I', LIB_DIR,'-I', SCRIPTS_DIR])

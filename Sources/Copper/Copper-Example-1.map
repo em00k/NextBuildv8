@@ -1,0 +1,15 @@
+6000: .core.__START_PROGRAM
+6012: .core.__CALL_BACK__
+6014: .core.ZXBASIC_USER_DATA
+6014: .core.ZXBASIC_USER_DATA_END
+6014: .core.__MAIN_PROGRAM__
+601E: .LABEL._filename
+601E: .filename
+615E: .endfilename
+615E: .nbtempstackstart
+6161: .shadowlayerbit
+6162: .nextbuild_file_end
+6175: .core.__END_PROGRAM
+6183: ._checkints
+6198: .itbuff
+6199: ._checkints__leave

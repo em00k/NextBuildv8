@@ -14,7 +14,8 @@ asm
 	nextreg TRANSPARENCY_FALLBACK_COL_NR_4A,0
 end asm 
  border 5
-LoadSDBank("forest.pt3",0,0,0,24) 				' load music.pt3 into bank 
+'LoadSDBank("forest.pt3",0,0,0,24) 				' load music.pt3 into bank 
+LoadSDBank("tesko.ts",0,0,0,24) 				' load music.pt3 into bank 
 LoadSDBank("ts4000.bin",0,0,0,37) 				' load the music replayer into bank 
 LoadSDBank("game.afb",0,0,0,38) 				' load music.pt3 into bank 
 LoadSDBank("output.dat",0,0,0,57) 				' load music.pt3 into bank 
@@ -23,7 +24,8 @@ dim x as ubyte
 
 InitInterupts(38,37,24)	
 
-StopMusic()
+EnableMusic
+PlayMusic()
 
 do 
 	if x < 6 
@@ -32,6 +34,9 @@ do
 	else 
 		x = 0
 	endif
+    if inkey$=" "
+        PlayMusic()
+    endif 
 	WaitKey()
 
 loop 
@@ -39,9 +44,10 @@ loop
 sub InitInterupts(byval sfxbank as ubyte, byval plbank as ubyte, byval musicbank as ubyte)
 	 
 	InitSFX(sfxbank)						        ' init the SFX engine, sfx are in bank 36
-	InitMusic(plbank,musicbank,0000)		        ' init the music engine 33 has the player, 34 the pt3, 0000 the offset in bank 34
-	' SetUpIM()							            ' init the IM2 code 
-	SetUPCTC()
+	InitMusic(plbank,musicbank,3363)		        ' init the music engine 33 has the player, 34 the pt3, 0000 the offset in bank 34
+	'SetUpIM()							            ' init the IM2 code 
+    'InitMusic(plbank,musicbank,3363)		        ' init the music engine 33 has the player, 34 the pt3, 0000 the offset in bank 34
+    SetUpCTC()
 
 	PlaySFX(3)                                    	' Plays SFX 
 	EnableMusic

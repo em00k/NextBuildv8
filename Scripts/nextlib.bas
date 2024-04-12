@@ -466,9 +466,9 @@ function NStr(ins as ubyte) as string
 		ld 		(hl), d
 		dec 	hl  
 
-		ld		de, _common					; point to string we want to set
-		ex 		de, hl 						; swap hl & de - hl = string, de = source 
-		call    .core.__STORE_STR 			; do call as we need to return to complete
+		;ld		de, _common					; point to string we want to set
+		;ex 		de, hl 						; swap hl & de - hl = string, de = source 
+		;call    .core.__STORE_STR 			; do call as we need to return to complete
 		jp 		nst_finished				; the common$ assignment 
 
 	CharToAsc:		
@@ -504,7 +504,8 @@ function NStr(ins as ubyte) as string
 		ret
 
 	nst_finished: 
-         
+        ld 		hl,.LABEL._filename
+        ret 
 	ENDP 
 
 	end asm 
@@ -774,6 +775,136 @@ SUB fastcall PlotL2Shadow(byVal X as ubyte, byval Y as ubyte, byval T as ubyte)
     	push 	hl      ; restore return address
 	end asm 
 end sub   
+
+sub DrawImage(xpos as uinteger, ypos as ubyte, img_data as uinteger, frame as ubyte, transparency as ubyte = 255 )
+    
+    ' plots image on L2 256x192 mode
+    ' xpos = 0 to 255 - width of image 
+    ' ypos = 0 to 192 - height of image
+    ' frame is offset from start image derived from w * h 
+    ' img_data points to table such as 
+    ' image_test:
+    '    asm
+    '        ; bank  spare  
+    '        db  32, 00, 00
+    '        ; offset in bank  
+    '        dw 00
+    '    end asm 
+    ' 
+    asm 
+
+        push    namespace   ImagePlot
+        push    ix 
+    straight_plot:
+        ; typewriter plots large tile
+        ; de = yx, ix = source_data
+        
+        ld      e, (ix+4)                               ; x 
+        ld      d, (ix+7)                               ; y 
+        ld      (.add1+1), de                           ; save yx address 
+
+        ld      l, (ix+8)                               ; source 
+        ld      h, (ix+9)
+
+
+        push    hl 
+
+        ld      a, (ix+13)                              ; fetch trans byte
+        cp      255
+        jr      z, _no_trans
+         
+        ld      (_trans_patch+1), a                     ; set trans
+        ld      a, $b4                                  ; ldirx ED B4
+        jr      _no_trans+2
+    _no_trans:
+        ld      a, $b0                                  ; ldir = ED B0
+        ld      (_trans_patch+3), a                     ; do patch 
+
+        ld      a, (ix+11)                              ; get frame
+        pop     ix 
+
+        ld      l, (ix+3)                               ; source 
+        ld      h, (ix+4)
+
+        ld      e, (ix+1)                               ; fetch width
+        ld      d, (ix+2)                               ; fetch height
+        mul     d, e                                    ; total size 
+        ld      l, a 
+        ld      h, 0 
+        call    .core.__MUL16_FAST                      ; call MUL16 HLxDE=HL now start of data
+
+        ld      a, h                                    ; h is MSB of source data
+        and     %11100000                               ; AND with $E0
+        swapnib                                         ; now A is 0000 1110
+        srl     a                                       ; now 0000 0111
+        ld      e, (ix+0)                               ; get the bank the source date is in from table
+        add     a, e                                    ; add the offset
+        nextreg $50, a                                  ; set slot 0
+        inc     a                                       ; next bank 
+        nextreg $51, a                                  ; set slot 1
+
+        ld      a, h 
+        and     $1f                                      ; wrap h around 8kb
+        ld      h, a 
+
+        ld      b, (ix+2)                               ; height
+            
+    .add1:
+        ld      de, 0000                                ; will hold yx with self mod code
+    .line1:  
+            
+        push    bc                                      ; save bc / height 
+        call    get_xy_pos_l2                           ; get position and l2 bank in place
+        ld      b, 0                                    ; clear b 
+        ld      a,(ix+1)                                ; width
+        or      a                                       ; is width full width?
+        jr      nz, _was_not_zero                       ; check to see if we have a width of 256
+        ld      b, 1                                    ; yes, so set b to 1
+
+    _was_not_zero:
+        ld      c, a
+    _trans_patch:
+        ld      a, 0 
+        ldirx                                            ; copy line 
+        pop     bc                                      ; get back height
+        ld      de, (.add1+1)                           ; get back yx 
+        inc     d                                       ; inc y 
+        ld      (.add1+1), de                           ; save yx again
+        dec     b                                       ; decrease height 
+        jr      nz, .line1                              ; was height 0? no then loop to line1
+        ld      bc, .LAYER2_ACCESS_PORT                 ; turn off layer 2 writes
+        ld      a, 2 
+        out     (c), a 
+        pop     ix 
+        jp      image_plot_done
+
+
+    get_xy_pos_l2:
+
+        ; input d = y, e = x
+        ; uses de a bc 
+        ; push    bc
+        ld   	bc,.LAYER2_ACCESS_PORT
+        ld   	a,d                                     ; put y into A 
+        and  	$c0                                     ; yy00 0000
+
+        or   	3                                       ; yy00 0011
+        out  	(c),a                                   ; select 8k-bank    
+        ld   	a,d                                     ; yyyy yyyy
+        and  	63                                      ; 00yy yyyy	
+        ld   	d,a
+        ; pop     bc
+        ret
+
+    image_plot_done:
+        nextreg $50,$ff
+        nextreg $51,$ff
+        
+        pop     namespace
+
+    end asm 
+
+end sub 
 
 SUB fastcall CIRCLEL2(byval x as ubyte, byval y as ubyte, byval radius as ubyte, byval col as ubyte)
 
@@ -2622,7 +2753,7 @@ printloop:
 		ld a,(hl)
 		cp 32 : jp z,addspace
 		cp 33 : jp z,addspace2
-		sub 34 	
+		sub 32
 inloop:	
 		push hl : push de 
 		ex de,hl 
@@ -3405,7 +3536,7 @@ sub fastcall DisableShadow()
 	end asm 
 end sub 
 
-sub WaitRetrace(byval repeats as uinteger)
+sub fastcall WaitRetrace(byval repeats as uinteger)
 	asm 
 	PROC 
 	LOCAL readline
@@ -3421,6 +3552,7 @@ sub WaitRetrace(byval repeats as uinteger)
 			ld 		a,h
 			or 		l 
 			jr 		nz,readline 
+            ret 
 	ENDP 		
 	end asm 
 end sub  
@@ -3514,14 +3646,19 @@ sub WaitKey()
 		ENDP
 		end asm 
 end sub 
+	 
+checkints()
 
-	
+#ifndef NOSP 
+    asm 
+    nbtempstackstart:
+        ld sp,endfilename-2
+    end asm 
+    #endif 
 	asm  
 		ld iy,$5c3a	
 		jp nextbuild_file_end
 	end asm 
-	 
-	checkints()
 
 filename:
 	asm 		
@@ -3529,14 +3666,6 @@ filename:
 		DEFS 320,0
 	endfilename:	
 	end asm 
-
-	#ifndef NOSP 
-		asm 
-		nbtempstackstart:
-			ld sp,endfilename-2
-		end asm 
-	#endif 
-
 	asm 
 	;	sfxenablednl:
 	;	db 0,0 

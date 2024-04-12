@@ -1,0 +1,14 @@
+{
+    "contributes": {
+      "menus": {
+        "editor/title": [
+          {
+            "when": "resourceLangId == markdown",
+            "command": "markdown.showPreview",
+            "alt": "markdown.showPreviewToSide",
+            "group": "navigation"
+          }
+        ]
+      }
+    }
+  }

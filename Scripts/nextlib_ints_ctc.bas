@@ -549,7 +549,7 @@ sub fastcall CallbackSFX()
 		ld 		e,(hl)						;take the value of the information byte
 		inc 	hl
 				
-		sub 	b							;TBBLUE_REGISTER_SELECT_P_243B the volume register:
+		sub 	b							;select the volume register:
 		ld 		d,b							;(11-3=8, 11-2=9, 11-1=10)
 
 		ld 		b,$ff						;output the volume value
@@ -562,7 +562,7 @@ sub fastcall CallbackSFX()
 		bit 	5,e							;will the tone change?
 		jr 		z,afxFrame1					;the tone does not change
 		
-		ld 		a,3							;TBBLUE_REGISTER_SELECT_P_243B the tone registers:
+		ld 		a,3							;select the tone registers:
 		sub 	d							;3-3=0, 3-2=1, 3-1=2
 		add 	a,a							;0*2=0, 1*2=2, 2*2=4
 		

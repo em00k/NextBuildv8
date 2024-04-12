@@ -21,7 +21,7 @@ __STR_FAST:
     LOCAL RECLAIM2
     LOCAL STK_END
     ; CDELH  cant touch 
-   ; call        __zxnbackup_sysvar_bank
+    call        __zxnbackup_sysvar_bank
 
     ld hl, (STK_END)
     push hl; Stores STK_END
@@ -70,12 +70,11 @@ __STR_FAST:
 __STR_END:
     ex de, hl
     inc bc
-   ; NEXTREG 2,8
+
     call RECLAIM2 ; Frees TMP Memory
     pop hl		  ; String result
 __STR_BANKS:
-   ; jp        __zxnbackup_sysvar_bank_restore
-   ret 
+    jp        __zxnbackup_sysvar_bank_restore
 
 RECLAIM2 EQU 19E8h
 STK_END EQU 5C65h

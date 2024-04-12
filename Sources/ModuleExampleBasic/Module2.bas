@@ -37,7 +37,6 @@ dim dg          as ubyte  = 128
 dim dh          as ubyte  = 64
 dim delay       as ubyte 
 dim dhdelay     as ubyte  = 16
-dim a           as ubyte 
 
 ' This is the intialisation of the module 
 
@@ -64,11 +63,11 @@ Sub Main()
 
         if a = code "1"
             dg = dg + 1
-            L2Text(0,2,str(dg),28,255)	
+            L2Text(0,2,Nstr(dg),28,255)	
 
         elseif a = code "2"
             dh = dh + 1
-            L2Text(0,3,str(dh),28,255)	
+            L2Text(0,3,Nstr(dh),28,255)	
 
         elseif a = code " "
             exit do 

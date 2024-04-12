@@ -1,6 +1,14 @@
 '!ORG=28000
 '!HEAP=2048
-'!copy=h:\a_vertscroll.nex
+
+' Press F6 Then Pick Run In CSpect
+'
+' Jumpey Moley 
+' Small demo for NextBuild that uses the Copper to play PCM FX
+' Along with pt3 & AYFX 
+
+' This is the gfx2next line for generating the tiles. 
+' 
 '#! "assets\gfx2next.exe -tile-repeat -tile-size=8x8 -colors-4bit -block-size=4x4 assets\basicshapes.bmp data\basicsh"
 '#!asm 
 
@@ -28,7 +36,7 @@ end asm
 
 ' -- Load Block 
 
-LoadSDBank("forest.pt3",0,0,0,56) 				' load music.pt3 into bank 
+LoadSDBank("classic.pt3",0,0,0,56) 				' load music.pt3 into bank 
 LoadSDBank("vt24000.bin",0,0,0,37) 				' load the music replayer into bank 
 LoadSDBank("game.afb",0,0,0,38) 				' load music.pt3 into bank 
 
@@ -38,7 +46,7 @@ LoadSDBank("font5.spr",0,0,0,42)                        ' load font
 LoadSDBank("bonky.spr",0,0,0,43)						' sprites bank 32 
 LoadSDBank("bg.bmp",0,0,1078,45)
 
-LoadSDBank("output.dat",0,0,0,57)               ' load the sample into bank 57 
+LoadSDBank("output.dat",0,0,0,57)               ' load the sample pack, table located at end 
 
 
 'asm : nextreg $50,43 : nextreg $51,44 : end asm 
@@ -158,71 +166,46 @@ EnableSFX							            ' Enables the AYFX, use DisableSFX to top
 '// MARK: -Main Loop 
 
 do 
-	if int_done = 1 
-	asm 
-	;	nextreg TRANSPARENCY_FALLBACK_COL_NR_4A,224   ; reed 
-	end asm 
-	ReadKeys()
-	' WaitRetrace2(250)
-	asm 
-	;	nextreg TRANSPARENCY_FALLBACK_COL_NR_4A,240  ; orange 
-	end asm 
+	if int_done = 1                             ' triggered via the copper interrupt vblank
+        ReadKeys()
+        CheckCollision()
 
-	CheckCollision()
+        if dead = 0 
+                
+            UpdatePlayer()
 
-	asm 
-	;	nextreg TRANSPARENCY_FALLBACK_COL_NR_4A,124  ; green
-	end asm 
+        elseif dead = 1  
 
-	if dead = 0 
-			
-		UpdatePlayer()
+            playeranim	= 0 
+            playersprite  = 4		' ; hit frame 
+            dead = 0 
 
-	elseif dead = 1  
+        elseif dead = 2 
+            
+            t = t + 1
+            
+            if t = 255 
+                dead = 0 
+                playersprite = lastframe
+            endif 
+        elseif dead = 3
 
-		playeranim	= 0 
-		playersprite  = 4		' ; hit frame 
-		dead = 0 
+            wait = 255 
+            dead = 4
+        elseif dead = 4
+            wait = wait - 1
+            if wait = 0 
+                dead = 0 
+                goto Restart 
+            endif 
+        endif 
+        
+        UpdateSprites()
+        processthrows()
 
-	elseif dead = 2 
-		
-		t = t + 1
-		
-		if t = 255 
-			dead = 0 
-			playersprite = lastframe
-		endif 
-	elseif dead = 3
+        int_done = 0 
 
-		wait = 255 
-		dead = 4
-	elseif dead = 4
-		wait = wait - 1
-		if wait = 0 
-			dead = 0 
-			goto Restart 
-		endif 
-	endif 
-	
-
-	asm 
-	;	nextreg TRANSPARENCY_FALLBACK_COL_NR_4A,15		; blue 
-	end asm 
-
-	UpdateSprites()
-
-	processthrows()
-	
-	' ShowHud()
-	' CheckPots()	
-	asm 
-	;	nextreg TRANSPARENCY_FALLBACK_COL_NR_4A,0
-	end asm 
-	int_done = 0 
-	endif 
-	asm 
-	;	nextreg TRANSPARENCY_FALLBACK_COL_NR_4A,0
-	end asm
+    endif 
 loop 
 
 Sub MyCustomISR()
@@ -382,6 +365,8 @@ end sub
 Sub CheckCollision()
 	'// MARK: -CheckCollision()
 	' a robust collision routine for our player against the tilemap
+    ' nb. this routine got out of hand, too many checks and 
+    ' unrelated tasks (scrolling in here?) - needs a rewrite! 
 	
     const blocksize as ubyte = 3            ' how many shifts 
     const scalesize as ubyte = 14           ' x1 and x2 x1 = 14 x2 = 30
@@ -412,7 +397,6 @@ Sub CheckCollision()
 		endif 
 		ply = (oldpy )  - 1 -  cast(ubyte,velocity)
 	endif 
-    
 	if ply <= 64 and lineno>0 
 		scrolltrigger = 2
 		'if lineno > 0 : lineno = lineno - 1 : endif 
@@ -922,7 +906,7 @@ sub SetUpNPC()
 	'NextRegA($50,40)
  	for yy = 0 to 63
  		for xx=0 to 39
-		 NextRegA($50,40)
+		 NextRegA($50,40)                       ' level data into slot 0 
  			a=peek($000+cast(uinteger,ccount))
  			parama = 0 
  			paramb = 0 
@@ -935,18 +919,11 @@ sub SetUpNPC()
  				elseif a = 15	
  					a = 10			' floor spike 
 
- 				' elseif a = 55
-
- 				' 	a = 5			' HAWK
- 				' 	parama=peek($4000+cast(uinteger,ccount+1))
- 				' 	poke ($e000+cast(uinteger,ccount+1)),0
-				elseif a = 1 		' 
+				elseif a = 1 		' diamond 
 						pokeBank(54,8,cast(uinteger,yy)*20+(cast(uinteger,xx)>>1))
 						diamonds = diamonds + 1 
 						a = 0 
-						'NextRegA($50,40)
-				elseif a = 19		' 
-						' pokeBank(54,8,cast(uinteger,yy)*20+(cast(uinteger,xx)>>1))
+				elseif a = 19		' cant remember 
 						poke ($000+cast(uinteger,ccount)),0
 					   a = 16
  				elseif a = $60 		' player start 
@@ -957,7 +934,6 @@ sub SetUpNPC()
  				' (x as byte,y as byte,spriteimage as ubyte,spritetype as ubyte, parama as ubyte, paramb as ubyte)
 				 if a > 0 
 					poke ($000+cast(uinteger,ccount)),0
-
 					if a <$60
 						AddNewSprite(cast(uinteger,xx)<<3,cast(ubyte,yy),a,a,parama,paramb)
 					endif 
@@ -1027,26 +1003,17 @@ sub UpdateSprites()
 	while p<31
 
 		spraddress = ospraddress +cast(uinteger,p<<3)
-		'FL2Text(4,30,str(spraddress),42)
-		'FL2Text(4,31,str(@aSprites(p,0)),42)
-		' enable = aSprites(p,0)
 		enable = peek(spraddress)
-		'WaitKey()
 		if enable band 1 = 1			' is sprite set on 
 			spattr3=0 : tile=0
-			'sx = aSprites(p,1)
 			sx = peek(spraddress+1)
 
 			if enable =3
 				sx = sx + 255
 			endif 
-
-			' y = (aSprites(p,2)) ' band %01111111
 			y = peek(spraddress+2)
-			'y = (aSprites(p,2))
 			if y < lineno+28 and y >= lineno +1
 				y1 = -((lineno-32)<<3) -scrolly
-			'	sy = aSprites(p,2)<<3
 				sy = y<<3
 				img = peek(spraddress+4)
 				type = peek(spraddress+5)
@@ -1060,7 +1027,6 @@ sub UpdateSprites()
 						if plx>=sx-16 AND plx<=sx+16  
 								if ply>=y1+sy-64 and ply<=y1+sy+6
 								's = 2
-								'sprites(p,7)=2
 								poke(spraddress+7,2)
 							endif 
 						endif 
@@ -1076,11 +1042,9 @@ sub UpdateSprites()
 							elseif img = 11
 								PlaySFX(9)
 							endif 
-							'aSprites(p,4)=img 
 							poke(spraddress+4,img)
 
 						endif
-						'aSprites(p,7)=s
 						poke(spraddress+7,s)
 					endif 
 					
@@ -1088,9 +1052,7 @@ sub UpdateSprites()
 				endif 
 
 				if type = 8								' snek 
-					'pma = aSprites(p,6)
 					pma = peek(spraddress+6)
-					'pmb = aSprites(p,7)
 					pmb = peek(spraddress+7)
 					
 					if pma = 0							' left 
@@ -1128,7 +1090,6 @@ sub UpdateSprites()
 					endif 
 					img = img + globalframe
 					poke(spraddress+6,pma)
-					'aSprites(p,6)=pma
 					
 					if sx>=255 
 						poke(spraddress,3)
@@ -2048,6 +2009,7 @@ end sub
 copper_sample_table:
 asm 
 	copper_sample_table: 
+    ; 
 	; bank+loop , sample start, sample len
 	; eg bank 56,loop 0 = $3800 
 	; sample table sample * 6 

@@ -14,8 +14,6 @@ __zxnbackup_sysvar_bank:
         pop     bc 
         pop     af 
         nextreg     $52, $0a 
-        nextreg     $50, $ff 
-        nextreg     $51, $ff 
 	ret 
 
 __zxnbackup_sysvar_bank_restore:

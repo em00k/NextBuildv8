@@ -72,13 +72,13 @@ Sub Main()
 	' CLS256(0)
 	InitSprites2(16,0,26)								' init sprites in bank 26 for mouse 
 	L2Text(0,0,"MODULE 4",29,0)							' show some infos 
-	L2Text(0,1,"MOUSE "+NStr(mouse_mox)+NStr(mouse_moy),29,0)
+	L2Text(0,1,"MOUSE "+Str(mouse_mox)+Str(mouse_moy),29,0)
 	ShowLayer2(1)
 	Do 
 
 		ProcessMouse()									' process mouse position 
 		UpdatePointer()        							' updates the mouse pointer 
-		WaitRetrace2(190)									' wait vblank
+		WaitRetrace2(200)									' wait vblank
 		asm 
 			nextreg	MMU2_4000_NR_52,$0a
 		end asm 
@@ -114,7 +114,7 @@ Sub Main()
 		elseif a = code "6"
 			NewMusic(58)				' new tune in bank 57'
 		elseif a = code "7"	and key = 0 
-			L2Text(0,7,"SAMPLE "+NStr(b),29,0)
+			L2Text(0,7,"SAMPLE "+Str(b),29,0)
 			poke $fd3f,b
 			if b < 5
 				b = b + 1
@@ -123,7 +123,7 @@ Sub Main()
 			endif 
 			key = 1
 		elseif a = code "8"	and key = 0 
-			L2Text(0,8,"AY "+NStr(c),29,0)
+			L2Text(0,8,"AY "+Str(c),29,0)
 			PlaySFX(c)
 			if c < 95
 				c = c + 1

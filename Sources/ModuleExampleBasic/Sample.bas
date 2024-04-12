@@ -1,6 +1,6 @@
 '!org=57344
 '!heap=768
-'!nosys 
+'#!nosys 
 '!copy=H:\modules\Sample2.nex
 '#!pc=0
 
@@ -104,7 +104,7 @@ sub ExecModule()
 
 	dim file as string 
 	 
-	common$=NStr(VarLoadModule)					' get the module to load, NStr is a non ROM version of Str(ubyte)
+	common$=Str(VarLoadModule)					' get the module to load, NStr is a non ROM version of Str(ubyte)
 
 	'file="module"+common$(2 to )+".bin"			' combine in string 
 	file="module"+common$( to )+".bin"			' combine in string 

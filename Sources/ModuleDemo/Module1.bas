@@ -1,6 +1,4 @@
 ' ------------------------------------------------------------------------------
-' - BankManager Sample v.2.0 ---------------------------------------------------
-' ------------------------------------------------------------------------------
 ' - Sample module 1 ------------------------------------------------------------
 ' ------------------------------------------------------------------------------
 
@@ -10,7 +8,7 @@
 '!master=Sample.NEX
 '!copy=h:\Modules\Module1.bin
 '!org=24576
-'#!heap=768
+'!heap=768
 '!module 
 
 
@@ -67,6 +65,7 @@ Sub Init()
 		ei 
 	end asm 	
 	PlayMusic()
+    DisableSFX
 	ClipLayer2(0,255,0,255)
 	copper_stop()
 	reset_palette()
@@ -83,7 +82,8 @@ Sub Main()
 
 	DisplayPalette()
 
-	L2Text(0,0,"NEXT PALLET EDITOR",font,0)
+	L2Text(0,0,"NEXT PALLETE EDITOR"+common,font,0)
+	L2Text(0,1,"NEXT PALLETE EDITOR"+common,font,0)
 	L2Text(20,3,"- R +",font,0)
 	L2Text(20,5,"- G +",font,0)
 	L2Text(20,7,"- B +",font,0)
@@ -149,17 +149,16 @@ sub GetRGB(index as ubyte)
 
 	rgb92rgb24(c)
 	'rgb82rgb24(c)
-
-	L2Text(27,3,NStr(r),font,1)
-	L2Text(27,5,NStr(g),font,1)
-	L2Text(27,7,NStr(b),font,1)
+	L2Text(27,3,Str(r),font,1)
+	L2Text(27,5,Str(g),font,1)
+	L2Text(27,7,Str(b),font,1)
 
 end sub 
 
 sub UpdateText(x as ubyte,y as ubyte)
 
-	L2Text(x,y,NStr(mox>>3)+NStr(moy>>3),font,1)
-	L2Text(x,y+1,NStr(mbutt band 3),font,1)
+	'L2Text(x,y,NStr(mox>>3)+NStr(moy>>3),font,1)
+	'L2Text(x,y+1,NStr(mbutt band 3),font,1)
 
 end sub 
 
@@ -179,7 +178,7 @@ sub click()
 			if ty >= 0 and ty <= 15
 				index = tx + ( ty * 16)
 				L2Text(26,20,"xxxxxx",font,255)
-				L2Text(20,20,"INDEX "+NStr(index),font,0)
+				L2Text(20,20,"INDEX "+Str(index),font,0)
 				GetRGB(index)
 			endif 
 		endif 
@@ -206,4 +205,5 @@ sub DisplayPalette()
 end sub 
 #include "inc-copper.bas"
 
+common$ = "yrsy"
 
