@@ -11,7 +11,7 @@
 #define ModuleSample2 2
 #define ModuleSample3 3
 
-' VarAddress located at $4000 (look for ".__LABEL__VarStartAddress" at sample.map)
+' VarAddress located at $4000 (look for ".__LABEL__VarStartAddress" in sample.map)
 #define VarAddress $4000
 
 ' - Module manager vars --------------------------------------------------------
@@ -31,8 +31,6 @@ DIM VarLevel AS UBYTE AT VarAddress + 108
 
 ' - End vars -------------------------------------------------------------------
 #define VarsLength 109	' Sets the last address to save
-
-dim common$=" "
 
 ' - Common var tools -----------------------------------------------------------
 
@@ -142,75 +140,75 @@ function GetKey(max as ubyte) as ubyte
 end function
 
 
-function fastcall NStr(ins as ubyte) as string 
+' function fastcall NStr(ins as ubyte) as string 
 
-	asm 
-	; alternate non-rom version of str(ubyte)
-	; converts 8 bit decimal into ascii text 000 format 
-	; then assigns to common$ and is returned 
-	; 
-	PROC 
-	LOCAL Na1, Na2, skpinc, nst_finished
+' 	asm 
+' 	; alternate non-rom version of str(ubyte)
+' 	; converts 8 bit decimal into ascii text 000 format 
+' 	; then assigns to common$ and is returned 
+' 	; 
+' 	PROC 
+' 	LOCAL Na1, Na2, skpinc, nst_finished
 
-		ld 		hl,.LABEL._filename			; our fave location
-		ld		d, 0 
-		push 	hl 							; save start of string
-		call 	CharToAsc					; do conversion 
-		ld 		(hl), d						; ensure we zero terminate
-		pop 	hl 							; jump back start of string
+' 		ld 		hl,.LABEL._filename			; our fave location
+' 		ld		d, 0 
+' 		push 	hl 							; save start of string
+' 		call 	CharToAsc					; do conversion 
+' 		ld 		(hl), d						; ensure we zero terminate
+' 		pop 	hl 							; jump back start of string
 
-		ld		a,  3						; add length 
-		ld 		(hl), a 
-		inc 	hl 
-		ld 		(hl), d
-		dec 	hl  
+' 		ld		a,  3						; add length 
+' 		ld 		(hl), a 
+' 		inc 	hl 
+' 		ld 		(hl), d
+' 		dec 	hl  
 
-		ld		de, _common					; point to string we want to set
-		ex 		de, hl 						; swap hl & de - hl = string, de = source 
-		call    .core.__STORE_STR 			; do call as we need to return to complete
-		jp 		nst_finished				; the common$ assignment 
+' 		ld		de, _common					; point to string we want to set
+' 		ex 		de, hl 						; swap hl & de - hl = string, de = source 
+' 		call    .core.__STORE_STR 			; do call as we need to return to complete
+' 		jp 		nst_finished				; the common$ assignment 
 
-	CharToAsc:		
+' 	CharToAsc:		
 
-		; hl still pointing to pointer of memory 
-		ld 		hl,.LABEL._filename+2			
-		ld		c, -100
-		call	Na1
-		ld		c, -10
-		call	Na1
-		ld		c, -1
+' 		; hl still pointing to pointer of memory 
+' 		ld 		hl,.LABEL._filename+2			
+' 		ld		c, -100
+' 		call	Na1
+' 		ld		c, -10
+' 		call	Na1
+' 		ld		c, -1
 
-	Na1:
+' 	Na1:
 
-		ld		b, '0'-1
+' 		ld		b, '0'-1
 
-	Na2:
+' 	Na2:
 
-		inc		b
-		add		a, c
-		jr		c, Na2
-		sub		c					; works as add 100/10/1
-		push 	af					; safer than ld c,a
-		ld		a, b				; char is in b
+' 		inc		b
+' 		add		a, c
+' 		jr		c, Na2
+' 		sub		c					; works as add 100/10/1
+' 		push 	af					; safer than ld c,a
+' 		ld		a, b				; char is in b
 
-		ld 		(hl), a				; save char in memory 
-		inc 	hl 					; move along one byte 
+' 		ld 		(hl), a				; save char in memory 
+' 		inc 	hl 					; move along one byte 
 
-	skpinc:
+' 	skpinc:
 
-		pop 	af					
+' 		pop 	af					
 
-		ret
+' 		ret
 
-	nst_finished: 
+' 	nst_finished: 
 
-	ENDP 
+' 	ENDP 
 
-	end asm 
+' 	end asm 
 
-	return common$
+' 	return common$
 
-end function 
+' end function 
 
 sub fastcall PeekMemLen(address as uinteger,length as uinteger,byref outstring as string)
     ' assign a string from a memory block with a set length 

@@ -7,6 +7,7 @@
 # Thanks to Deufectu for the original module concept
 # This file takes a zx basic source file and compiles then generates a NEX file. 
 #
+
 import sys
 import subprocess, os, platform
 
@@ -88,28 +89,28 @@ sys.path.append(head_tail[0])                   # add to paths
 os.chdir(head_tail[0])                          # make sure we're in the working source folder 
 copy = 0                                        # for setting up copying to another location 
 heap = "2048"                                   # default heap 
-orgfound = 0
-destinationfile = "" 
-createasm=0
+orgfound = 0                                    # does the source contain '!org=
+destinationfile = ""                            # target filename
+createasm=0                                     # does the source contain '!asm 
 headerless = 0 
-optimize = '4'
-bmpfile = None
-noemu = 0
-nextzxos = 0 
-makebin = 0 
-no_nex = 0 
-module = args.modules
-gentape = args.tape
+optimize = '4'                                  # deafult '!o=4
+bmpfile = None                                  # used to include bmp into nex '!bmp=
+noemu = 0                                       # '!noemu dont start Cspect
+nextzxos = 0                                    # 
+makebin = 0                                     # '!bin make only a bin 
+no_nex = 0                                      # 
+module = args.modules                           # used for modules 
+gentape = args.tape                             
 autostart = 0 
 filename_path = ""
-master = "" 
+master = ""                                     # sets '!master=master.bas
 filename_extension = ""
 filename_noextension = ""
-#pcadd = "57344"                     # default for nextbuild 8 modules 
-pcadd = "32768"                     # default for nextbuild 8 modules 
+#pcadd = "57344"                                # default for nextbuild 8 modules 
+pcadd = "32768"                                 # default org 
 org = "0"
-arch = "--arch=zxnext"
-sysvars = 0 
+arch = "--arch=zxnext"                          # use the zxnext arc
+sysvars = 0                                     # for including sysvars 
 
 # need to get the fname and splice off extension 
 filenamenoext = head_tail[1].split('.')[1-1]
@@ -126,6 +127,10 @@ def CheckForBasic():
     else:
         print('Not a basic file')
         sys.exit(1)    
+
+    if head_tail[1] == 'nextlib.bas':
+        print("Looks like you're trying to compile the nextlib.bas!")
+        sys.exit(1) 
 
 def GenerateLoader():
 

@@ -10,10 +10,10 @@
 681D: .core.ZXBASIC_USER_DATA_END
 681D: .core.__MAIN_PROGRAM__
 6826: .core.__END_PROGRAM
-683E: .LABEL._filename
-683E: .filename
-697E: .endfilename
-697E: .nbtempstackstart
+6837: .nbtempstackstart
+6841: .LABEL._filename
+6841: .filename
+6981: .endfilename
 6981: .shadowlayerbit
 6982: .LABEL._bardata
 6982: .bardata

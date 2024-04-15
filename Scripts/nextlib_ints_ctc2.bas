@@ -7,6 +7,7 @@
 ' InitSFX() 
 ' InitMusic()
 ' SetUpIM()
+' SetUpCTC()
 '
 
 #define INTS 
@@ -380,7 +381,8 @@ temp_isr_sp:
 	PlayCTC()
 end sub 
 
-'// MARK: - PlaySFX
+' Original AYFX Engine by Shiru 
+'
 sub fastcall PlaySFXSys()				
 	'#ifdef IM2 
 	ASM 
@@ -553,8 +555,8 @@ SUB fastcall InitSFX(byval bank as ubyte)
 
 	END ASM 	
 
-	CallbackSFX()
-	PlaySFXSys()
+	CallbackSFX()					' forces inclusion of this sub 
+	PlaySFXSys()					' forces inclusion of this sub 
 	'#endif 
 END SUB 
 
@@ -827,15 +829,16 @@ Sub fastcall SetUpCTC()
 		ld		a,c
 		nextreg	VIDEO_INTERUPT_VALUE_NR_23,a				; IM2 on line BC	
 
-		;ld	bc,TBBLUE_REGISTER_SELECT_P_243B	 ; Read timing register
-		;ld	a,INTCTL
-		;out	(c),a
-		;inc	b
-		;in	a,(c)
-		;and	%00001000	 ; Preserve stackless mode
-		;or	%00000001	 ; Vector 0x00, IM2 ON
-		;out	(c),a
-		;dec	b
+		ld		bc,TBBLUE_REGISTER_SELECT_P_243B	 		; Read timing register
+		ld		a,INTCTL
+		out		(c),a
+		inc		b
+		in		a,(c)
+		and		%00001000	 								; Preserve stackless mode
+		or		%00000001	 								; Vector 0x00, IM2 ON
+		out		(c),a										; we will keep a now for the correct timing required 
+		dec		b
+
 		nextreg INTCTL,%00001001 
 		nextreg INTEN0,%00000010                            ; Interrupt enable LINE
 		nextreg INTEN1,%00000001                            ; CTC channel 0 zc/to
@@ -858,12 +861,12 @@ Sub fastcall SetUpCTC()
 		; // ld		d,114 										; 
 		;ld		a,(sampletiming)
 		ld 		d,112
-		ld		a,0    										; manually set timing 
+		; ld		a,0    										; manually set timing 
 		ld		hl,.timing_tab
 		add		a,a
 		add		hl,a
 
-		; CTC Channel 0 saple 
+		; CTC Channel 0 smaple 
 
 		ld		bc,CTC0					; Channel 0 port
 										; IMPETCRV	; Bits 7-0
@@ -884,8 +887,8 @@ Sub fastcall SetUpCTC()
 
         inc     hl
         ld		a,(hl)
-        ld		(nextsid_50hz_count),a
-        ld		(nextsid_50hz_reset),a
+        ld		(ctc1_50hz_count),a
+        ld		(ctc1_50hz_reset),a
 
 		ei 
 		ret 
@@ -952,16 +955,16 @@ Sub fastcall SetUpCTC()
         ld 		sp, temp_isr_sp3
         push    af
         db		62		; LD A,N
-        nextsid_50hz_count:	db	%10001100	; 4.4 fixed point counter
+        ctc1_50hz_count:	db	%10001100	; 4.4 fixed point counter
         sub		28		; Subtract 1.0
-        ld		(nextsid_50hz_count),a
+        ld		(ctc1_50hz_count),a
         jr		z,call_isr
         jr      nc,no_call_isr
 
     call_isr:   
 
-        db	198         ; ADD A,N
-        nextsid_50hz_reset:	db	%10001100
+        db	198         	; ADD A,N
+        ctc1_50hz_reset:	db	%10001100
 		; BREAK
         ; call    _ISR
 		; BREAK 

@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# replaces modules.py with a simpler approach
+# part of nextbuild8
+
 import sys
 import subprocess
 import os
@@ -32,6 +35,22 @@ inputfilea = args.file
 modules = args.modules
 directory_path = os.path.dirname(inputfilea)
 
+def CheckForBasic():
+    # was ther file a .bas?
+    head_tail = os.path.split(inputfilea)
+
+    testfname = head_tail[1].split('.')[1-2]
+
+    if testfname == 'bas':
+        print(".BAS file")
+    else:
+        print('Not a basic file! Exiting.')
+        sys.exit(1)    
+
+    if head_tail[1] == 'nextlib.bas':
+        print("Looks like you're trying to compile the nextlib.bas! Exiting.")
+        sys.exit(1) 
+        
 
 # Helper function to check if the filename matches the 'Module[number].bas' pattern with number between 0 and 255
 def is_valid_module_filename(filename):
@@ -64,6 +83,7 @@ def ProcessModules():
             subprocess.call(cmd)
         except Exception as e:
             print(f"Failed to process module {file}: {e}")
+            sys.exit(1)
 
     print("Copying modules to data folder...")
     # Assuming the .bin files follow a similar naming convention and need similar filtering
@@ -92,6 +112,7 @@ def ProcessSingle():
         lastfile = file
     except Exception as e:
         print(f"Failed to process module {file}: {e}")
+        sys.exit(1)
 
 
     print("Copying modules to data folder...")
@@ -203,6 +224,8 @@ def LaunchEmulator(input_file):
 # Main function to execute the script logic
 if __name__ == '__main__':
    # print(f"Modules Flag: {modules}, Single File Flag: {singlefile}")  # Debugging line
+
+    CheckForBasic()
 
     if modules:
         print("Processing modules")

@@ -5,24 +5,23 @@
 ' by Jose Rodriguez-Rosa (a.k.a. Boriel) <http://www.boriel.com>
 '
 ' Adjusted for the TileMap for the ZX Spectrum Next - Requires TileMap-Inc.bas
-' by em00k
+' 
+' Removed the requirment on input.bas byt implementing Dean Belfield's 
+' keyboard scan routines
+' 
 ' Simple INPUT routine (not as powerful as Sinclair BASIC's), but
-' this one uses PRINT42 routine
-' Usage: A$ = INPUT42(MaxChars)
+' 
+' Usage: A$ = InputTile(MaxChars, Input String, X position, Y position)
 ' ----------------------------------------------------------------
-#ifndef __LIBRARY_INPUT42__
+#ifndef __LIBRARY_INPUTTILE__
 
 REM Avoid recursive / multiple inclusion
 
-#define __LIBRARY_INPUT42__
+#define __LIBRARY_INPUTTILE__
 
 REM The input subroutine
 REM DOES NOT act like ZX Spectrum INPUT command
 REM Uses ZX SPECTRUM ROM
-
-'#include once <pos.bas>
-'#include once <csrlin.bas>
-' #include once <print42.bas>
 
 #pragma push(case_insensitive)
 #pragma case_insensitive = True
@@ -36,7 +35,8 @@ Dim     stxpos  as ubyte = 0
 dim     last_tx$ as string 
 
 FUNCTION InputTile(MaxLen AS UINTEGER, INPUTSTR as STRING, xpos as ubyte, ypos as ubyte) AS STRING
-	DIM     LastK   AS UBYTE 
+	
+    DIM     LastK   AS UBYTE 
 	DIM     result$ AS STRING
 	DIM     i       as UINTEGER
 
@@ -45,7 +45,9 @@ FUNCTION InputTile(MaxLen AS UINTEGER, INPUTSTR as STRING, xpos as ubyte, ypos a
     DIM     input_time,input_on as ubyte 
     ttexty = ypos 
     stxpos = xpos 
-	result$ = ""
+	
+    result$ = ""
+
     IF INPUTSTR$<>"" 
         result$ = INPUTSTR$
         TextATLine(stxpos,ttexty, result$,6)
@@ -56,7 +58,7 @@ FUNCTION InputTile(MaxLen AS UINTEGER, INPUTSTR as STRING, xpos as ubyte, ypos a
     ENDIF 
 
 	DO
-		PRIVATEInputShowCursor42()
+		PRIVATEInputShowCursorTile()
 
 		DO              
         
@@ -68,9 +70,9 @@ FUNCTION InputTile(MaxLen AS UINTEGER, INPUTSTR as STRING, xpos as ubyte, ypos a
             endif
           
             if input_on = 0 
-                PRIVATEInputShowCursor42()                
+                PRIVATEInputShowCursorTile()                
             else 
-                PRIVATEInputHideCursor42()
+                PRIVATEInputHideCursorTile()
             endif 
             
             WaitRetrace(1)                          ' wait at least a frame
@@ -81,7 +83,7 @@ FUNCTION InputTile(MaxLen AS UINTEGER, INPUTSTR as STRING, xpos as ubyte, ypos a
 
         IF LastK = 127 THEN                              ' backspace 
 
-            PRIVATEInputHideCursor42()
+            PRIVATEInputHideCursorTile()
 
             IF LEN(result$) THEN                        ' "Del" key code is 12
 				IF LEN(result$) = 1 THEN                ' if string only has 1 char, then del will 
@@ -187,6 +189,9 @@ FUNCTION InputTile(MaxLen AS UINTEGER, INPUTSTR as STRING, xpos as ubyte, ypos a
 END FUNCTION
 
 #pragma pop(case_insensitive)
+
+' Routine adapted from Dean Belfield's keyboard scanning routines.
+' returns keypressed if any 
 
 function fastcall GETKEYPRESSED() as ubyte 
 
@@ -372,12 +377,10 @@ end function
 ' Function 'PRIVATE' to this module.
 ' Shows a flashing cursor
 ' ------------------------------------------------------------------
-SUB PRIVATEInputShowCursor42
+SUB PRIVATEInputShowCursorTile
 	REM Print a Flashing cursor at current print position
-	'OVER 1:ink 2: PRINT42 ">" + CHR$(8): ink 0:OVER 0 :
-    'dim intext$ as string 
     intext$=chr 24
-    TextATLine(stxpos+in_xpos,ttexty,intext$,6)
+    TextATLine(stxpos+in_xpos,ttexty,intext$,6)             ' 6 is the palette colour 
 END SUB
 
 
@@ -385,9 +388,8 @@ END SUB
 ' Function 'PRIVATE' to this module.
 ' Hides the flashing cursor
 ' ------------------------------------------------------------------
-SUB  PRIVATEInputHideCursor42
+SUB  PRIVATEInputHideCursorTile
 	REM Print a Flashing cursor at current print position
-    'dim intext$ as string 
 	intext$=" "
     TextATLine(stxpos+in_xpos,ttexty,intext$,6)
 END SUB
