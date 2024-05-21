@@ -52,7 +52,7 @@ end asm
     dim b,g  as ubyte
     genpalette(200)
 	
-	ChangeTune(2)
+	ChangeTune(0)
 
     OpenFile()              ' open the pcm for streaming 
     ReadChunk()             ' fill buffers 

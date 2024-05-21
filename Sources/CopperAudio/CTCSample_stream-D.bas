@@ -136,7 +136,7 @@ sub fastcall ChangeTune(tune as ubyte)
 		tune1: 	db 		"dancefloor.pcm",0				; 15625 8bit mono 
 		; The YellowHeads - Liquid Tensions (Original Mix) [RX Recordings]
 	;	tune2: 	db 		"posit-stereo-32khz.pcm",0		; 32kz	8	stereo 
-		tune2: 	db 		"liquid-tensions.raw",0		; 32kz	8	stereo 
+		tune2: 	db 		"posit.pcm",0		; 32kz	8	stereo 
 		; UMEK - Frequency Differ (Original Mix)
 		tune3: 	db 		"frequency-differ.raw",0					; 
 		tune4: 	db 		"Hale.pcm",0
