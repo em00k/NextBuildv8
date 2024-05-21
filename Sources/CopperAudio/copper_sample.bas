@@ -3,7 +3,7 @@
 '#!nosysvars
 '#!asm
 ' NextBuild Copper Audio v2 
-' original CopperAudio by Lampros Potamianos used with permission
+' original CopperAudio by 9BitColor
 ' optimized & adapted for nextbuild by em00k
 
 
@@ -43,13 +43,12 @@ samples(3)="HH Closed"
 samples(4)="HH Open "
 samples(5)="Snare"
 samples(6)="            "
-' pause 0 
 
-' BBREAK 
 
 InitCopperAudio()
-
 PlayCopperSample(0)
+
+play = 1
 
 do 
 	
@@ -223,26 +222,6 @@ sub fastcall PlayCopperSample(sample as ubyte)
 	playerstack:
 		ld 		sp,0
 
-; '		ld		hl,$0000			; Address of sample offset in bank 
-; '		ld		de,6457			; length of sample , up to 16kb in size 
-; '		ld		a,1				; Loop forever
-; '		ld 	 	b,32				; bank to use 
-; 		; call	play_sample			; Trigger
-; '	play_sample:	
-; 
-; '		ld		(.CopperSample.sample_ptr),hl					; Address of sample
-; '		ld		(.CopperSample.sample_len),de					; Length of sample
-; 
-; '		ld		(.CopperSample.sample_loop),a					; Loop mode (0 forever)
-; 
-; '		ld		a,b 
-; '		ld		(.CopperSample.sample_bank),a 				; Save sample bank that we will work with 
-; 
-; '		ld		hl,0
-; '		ld		(.CopperSample.sample_pos),hl
-; 
-; '		ld		a,SOUNDDRIVE_DF_MIRROR_NR_2D
-; '		ld		(.CopperSample.sample_dac),a	; Sound on
 
 	end asm
 end sub 

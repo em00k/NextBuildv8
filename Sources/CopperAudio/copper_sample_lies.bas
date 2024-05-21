@@ -3,7 +3,7 @@
 '#!nosysvars
 '#!asm
 ' NextBuild Copper Audio v2 
-' original CopperAudio by Lampros Potamianos used with permission
+' original CopperAudio by 9bitcolour
 ' optimized & adapted for nextbuild by em00k
 
 
