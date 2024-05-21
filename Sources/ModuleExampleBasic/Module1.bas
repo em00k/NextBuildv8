@@ -56,6 +56,6 @@ Sub Main()
 
 	Loop 
 
-	VarLoadModule=ModuleSample2
+	VarLoadModule=ModuleSample2                         ' set VarLoadModule to the next value module we want to load next from within Sample.bas
 	
 end sub 

@@ -29,7 +29,7 @@ end asm
 
     paper 0 : ink 7 : cls 
 
-	ChangeTune(1)
+	ChangeTune(0)
 
     OpenFile()              ' open the pcm for streaming 
     ReadChunk()             ' fill buffers 

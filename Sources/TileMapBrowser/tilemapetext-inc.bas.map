@@ -1,9 +1,0 @@
-8000: .core.__START_PROGRAM
-8012: .core.__CALL_BACK__
-8014: .LABEL._pattern_buffer
-8014: .core.ZXBASIC_USER_DATA
-8014: .core.ZXBASIC_USER_DATA_END
-8014: .core.__MAIN_PROGRAM__
-8014: .pattern_buffer
-8234: .pattern_buffer_add
-8239: .core.__END_PROGRAM

@@ -13,7 +13,7 @@ end asm
 
 LoadSDBank("/lies/output.dat",0,0,0,32)	
 
-' LoadSDBank("nextsid.bin",0,0,0,33)
+LoadSDBank("nextsid.bin",0,0,0,33)
 
 dim add as uinteger
 

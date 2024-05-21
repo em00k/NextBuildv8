@@ -82,18 +82,21 @@ sub ReadKeyboard()
     pldx = MSTILL
     pldy = MSTILL
 
-    if GetKeyScanCode()=KEYP    ' right 
+    if MultiKeys(KEYP)    ' right 
         pldx = MRIGHT
         attr3 = spright
         ftimer = ftimer - 1
-    elseif GetKeyScanCode()=KEYO ' left 
+    endif 
+    if MultiKeys(KEYO) ' left 
         pldx = MLEFT
         attr3 = spleft
         ftimer = ftimer - 1
-    elseif GetKeyScanCode()=KEYA  ' down 
+    endif 
+    if MultiKeys(KEYA)  ' down 
         pldy = MDOWN
         ftimer = ftimer - 1
-    elseif GetKeyScanCode()=KEYQ  ' up
+    endif 
+    if MultiKeys(KEYQ)  ' up
         pldy = MUP 
         ftimer = ftimer - 1
     endif 

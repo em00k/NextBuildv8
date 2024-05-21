@@ -23,7 +23,7 @@
 ' Variables are stored at $4000
 
 ' ULA is paged out and banks 24/25 live in slots 2&3
-' For tilemap functions the relevants pages are put back 
+' For tilemap functions the relevant pages are put back 
 
 ' - Includes -------------------------------------------------------------------
 '#define NOSP 					' This tells nextbuild to no set a stack pointer 

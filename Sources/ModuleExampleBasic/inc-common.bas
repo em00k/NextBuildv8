@@ -1,7 +1,6 @@
+
 ' ------------------------------------------------------------------------------
-' - BankManager Sample v.2.0 ---------------------------------------------------
-' ------------------------------------------------------------------------------
-' - Common module --------------------------------------------------------------
+' - Common module adapted from Duefecto's Example ------------------------------
 ' ------------------------------------------------------------------------------
 
 ' Must be included as include "Common.bas" in all modules
@@ -12,15 +11,15 @@
 #define ModuleSample3 3
 #define ModuleSample4 4
 
-' // MARK: - VarAddress located at $4000 
+' // Variables are stored from $4000 on words. You must define the memory space
+' // yourself by adding +1 for a byte and +2 for a word etc 
+
 #define VarAddress $4000
 
 ' - Module manager vars --------------------------------------------------------
-DIM VarLoadModule AS Ubyte AT VarAddress								' Module to load
-dim VarLoadModuleParameter1 as Ubyte AT VarAddress + 1	' Parameter 1 for the module to load
-DIM VarLoadModuleParameter2 AS Ubyte AT VarAddress + 2	' Parameter 2 for the module to load
-
-
+DIM VarLoadModule AS Ubyte AT VarAddress								' VarAddress = $4000
+dim VarLoadModuleParameter1 as Ubyte AT VarAddress + 1	                ' Parameter 1 for the module to load
+DIM VarLoadModuleParameter2 AS Ubyte AT VarAddress + 2	                ' Parameter 2 for the module to load
 
 ' // MARK: - Game vars ------------------------------------------------------------------
 DIM VarLifes AS UBYTE AT VarAddress + 3
@@ -28,7 +27,7 @@ DIM VarPoints AS UINTEGER AT VarAddress + 4		' Two bytes
 DIM VarPosX AS UBYTE AT VarAddress + 6
 Dim VarPosY AS UBYTE AT VarAddress + 7
 DIM VarBytesArray(100) AS UBYTE AT VarAddress + 8	' 100 bytes
-Dim Mouse as ubyte at VarAddress + 9
+Dim Mouse as ubyte at VarAddress + 100              ' 
 
 DIM VarLevel AS UBYTE AT VarAddress + 108
 

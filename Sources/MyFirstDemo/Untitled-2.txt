@@ -1,0 +1,62 @@
+
+Sub MMU8(byval nn as ubyte, byval na as ubyte)
+Sub fastcall MMU8new(byval slot as ubyte, byval memorybank as ubyte)
+Sub fastcall MMU16(byval memorybank as ubyte)
+Function fastcall GetMMU(byval slot as ubyte) as ubyte 
+sub Debug(BYVAL x as UBYTE,byval y as ubyte, s as string)
+sub fastcall ShowLayer2(byval switch as ubyte)
+Sub fastcall ScrollLayer(byval x as ubyte,byval y as ubyte)
+SUB fastcall PlotL2(byVal X as ubyte, byval Y as ubyte, byval T as ubyte)
+SUB fastcall PlotL2Shadow(byVal X as ubyte, byval Y as ubyte, byval T as ubyte)
+
+sub DrawImage(xpos as uinteger, ypos as ubyte, img_data as uinteger, frame as ubyte, transparency as ubyte = 255 )
+Sub fastcall NextRegA(reg as ubyte,value as ubyte)
+Sub InitSprites(byVal Total as ubyte, spraddress as uinteger, bank as uinteger=0)
+Sub fastcall InitSprites2(byVal Total as ubyte, spraddress as uinteger,bank as ubyte, sprite as ubyte=0)
+sub RemoveSprite(spriteid AS UBYTE, visible as ubyte)
+
+sub UpdateSprite(ByVal x AS uinteger,ByVal y AS UBYTE,ByVal spriteid AS UBYTE,ByVal pattern AS UBYTE,ByVal mflip as ubyte,ByVal anchor as ubyte)
+sub LoadBMP(byval fname as STRING)
+Function ReserveBank() as ubyte 
+sub FreeBank(bank as ubyte)
+Sub LoadSDBank(byval filen as String,ByVal address as uinteger,ByVal length as uinteger,ByVal offset as ulong, bank as ubyte)
+Sub LoadSD(byval filen as String,ByVal address as uinteger,ByVal length as uinteger,ByVal offset as ulong)
+Sub SaveSD(byval filen as String,ByVal address as uinteger,ByVal length as uinteger)
+SUB DoTileBank16(byVal X as ubyte, byval Y as ubyte, byval T as ubyte, byval B as ubyte)
+SUB DoTile8(byVal X as ubyte, byval Y as ubyte, byval T as ubyte)
+SUB DoTileBank8(byVal X as ubyte, byval Y as ubyte, byval T as ubyte, byval b as ubyte)
+SUB DoTileBank8Test(byVal X as ubyte, byval Y as ubyte, byval T as ubyte, byval b as ubyte, byval c as ubyte)
+sub fastcall FDoTile16(tile as ubyte, x as ubyte ,y as ubyte, bank as ubyte)
+sub fastcall FDoTile8(tile as ubyte, x as ubyte ,y as ubyte, bank as ubyte)
+Sub L2Text(byval x as ubyte,byval y as ubyte ,m$ as string, fntbnk as ubyte, colormask as ubyte)
+Sub FL2Text(byval x as ubyte,byval y as ubyte ,byval m$ as string, fntbnk as ubyte)
+sub fastcall FPlotL2(y as ubyte ,x as uinteger ,c as ubyte)
+sub fastcall FPlotLineV(y as ubyte ,x as uinteger ,h as ubyte, c as ubyte)
+sub fastcall FPlotLineW(y as ubyte ,x as uinteger ,w as uinteger, c as ubyte)
+SUB PalUpload(ByVal address as uinteger, byval colours as ubyte,byval offset as ubyte, bank as ubyte=0)
+Sub CLS256(byval colour as ubyte)
+Sub ClipLayer2( byval x1 as ubyte, byval x2 as ubyte, byval y1 as ubyte, byval y2 as ubyte ) 
+Sub ClipULA( byval x1 as ubyte, byval x2 as ubyte, byval y1 as ubyte, byval y2 as ubyte ) 
+Sub ClipTile( byval x1 as ubyte, byval x2 as ubyte, byval y1 as ubyte, byval y2 as ubyte ) 
+Sub ClipSprite( byval x1 as ubyte, byval x2 as ubyte, byval y1 as ubyte, byval y2 as ubyte ) 
+sub TileMap(byval address as uinteger, byval blkoff as ubyte, byval numberoftiles as uinteger,byval x as ubyte,byval y as ubyte, byval width as ubyte, byval mapwidth as uinteger)
+sub fastcall WaitRetrace(byval repeats as uinteger)
+sub fastcall WaitRetrace2(byval repeats as ubyte)
+sub WaitKey()
+
+
+
+function CheckBlock(x as ubyte, y as ubyte, level as ubyte) as ubyte 
+
+    dim offset      as uinteger
+    dim block       as ubyte 
+    dim count       as uinteger
+
+    offset = cast(uinteger, level)*(16*12)     ' 16x12 level size
+    count = y * 12 + x 
+
+    block = peek (@level_data + offset + count )
+
+    return block 
+
+end function

@@ -1,0 +1,40 @@
+*E*nableSFX
+*D*isableSFX
+*EnableMusic
+*DisableMusic
+
+*MMU8(byval nn as ubyte, byval na as ubyte)
+*MMU16(byval memorybank as ubyte)
+
+* GetMMU(byval slot as ubyte)
+* GetReg(byval slot as ubyte)
+
+* ShowLayer2(byval switch as ubyte)
+NextRegA(reg as ubyte,value as ubyte)
+*InitSprites(byVal Total as ubyte, spraddress as uinteger)
+*InitSprites2(byVal Total as ubyte, spraddress as uinteger,bank as ubyte, sprite as ubyte=0)
+
+*RemoveSprite(spriteid AS UBYTE, visible as ubyte)
+*UpdateSprite(ByVal x AS uinteger,ByVal y AS UBYTE,ByVal spriteid AS UBYTE,ByVal pattern AS UBYTE,ByVal mflip as ubyte,ByVal anchor as ubyte)
+* LoadBMP(byval fname as STRING)
+* LoadSDBank(byval filen as String,ByVal address as uinteger,ByVal length as uinteger,ByVal offset as ulong, bank as ubyte)
+* LoadSD(byval filen as String,ByVal address as uinteger,ByVal length as uinteger,ByVal offset as ulong)
+* SaveSD(byval filen as String,ByVal address as uinteger,ByVal length as uinteger)
+* L2Text(byval x as ubyte,byval y as ubyte ,m$ as string, fntbnk as ubyte, colormask as ubyte)
+* FL2Text(byval x as ubyte,byval y as ubyte ,byval m$ as string, fntbnk as ubyte)
+* PalUpload(ByVal address as uinteger, byval colours as ubyte,byval offset as ubyte)
+
+* ClipLayer2( byval x1 as ubyte, byval x2 as ubyte, byval y1 as ubyte, byval y2 as ubyte ) 
+* ClipULA( byval x1 as ubyte, byval x2 as ubyte, byval y1 as ubyte, byval y2 as ubyte ) 
+* ClipTile( byval x1 as ubyte, byval x2 as ubyte, byval y1 as ubyte, byval y2 as ubyte ) 
+* ClipSprite( byval x1 as ubyte, byval x2 as ubyte, byval y1 as ubyte, byval y2 as ubyte ) 
+TileMap(byval address as uinteger, byval blkoff as ubyte, byval numberoftiles as uinteger,byval x as ubyte,byval y as ubyte, byval width as ubyte, byval mapwidth as uinteger)
+*WaitRetrace(byval repeats as uinteger)
+*WaitRetrace2(byval repeats as ubyte)
+
+*InitMusic(playerbank as byte, musicbank as ubyte, musicaddoffset as uinteger)
+*SetUpIM()
+*ISR()
+*PlaySFX(byval fx as ubyte)
+*InitSFX(byval bank as ubyte)
+*WaitKey() as ubyte 

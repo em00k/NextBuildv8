@@ -5,10 +5,10 @@
 881A: ._add
 881C: .core.ZXBASIC_USER_DATA_END
 881C: .core.__MAIN_PROGRAM__
-8826: .LABEL._filename
-8826: .filename
-8966: .endfilename
-8966: .nbtempstackstart
+881F: .nbtempstackstart
+8829: .LABEL._filename
+8829: .filename
+8969: .endfilename
 8969: .shadowlayerbit
 896A: .nextbuild_file_end
 8972: .startup

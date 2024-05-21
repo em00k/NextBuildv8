@@ -15,6 +15,8 @@
 ' ULA is paged out and banks 24/25 live in slots 2&3
 ' For tilemap functions the relevants pages are put back 
 
+' This example when run from NextZXOS will return back to basic on exit
+
 ' - Includes -------------------------------------------------------------------
 #define NOSP 					' This tells nextbuild to no set a stack pointer 
 #define DEBUG  					' This will display an error when a file is not found
@@ -28,8 +30,9 @@
 ' 
 ' banks 24 & 25 are already assigned 
 ' use from bank 26 on wards 
+
 LoadSDBank("testsprites.spr",0,0,0,26)	' This is the sprite in bank 26/27
-LoadSDBank("font.nxt",0,0,0,28)		' This is the font, default palette is used 8x8
+LoadSDBank("font2.nxt",0,0,0,28)		' This is the font, default palette is used 8x8
 
 asm 
 	di 							; ensure interrupts are disabled 
@@ -62,7 +65,7 @@ Sub Main()
 	;	ldir 	
 	end asm 
 
-	' Start with module 1 
+	' Start with module 2 
 	SetLoadModule(ModuleSample2,0,0)
 	
 	' proceeding modules will chain 

@@ -15,10 +15,10 @@
 8024: ._last_sample_y
 8025: .core.ZXBASIC_USER_DATA_END
 8025: .core.__MAIN_PROGRAM__
-802F: .LABEL._filename
-802F: .filename
-816F: .endfilename
-816F: .nbtempstackstart
+8028: .nbtempstackstart
+8032: .LABEL._filename
+8032: .filename
+8172: .endfilename
 8172: .shadowlayerbit
 8173: .nextbuild_file_end
 81B4: .LABEL._nasty
