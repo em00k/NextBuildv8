@@ -1,4 +1,8 @@
 
+To Compile modules press F6 to use the Build Modules with xxx choice.
+
+
+
 Sample.bas 			- orchestrator
 +- Common.bas 		- this is included in all code 
 +- Module1.bas 		- Sub module 1
