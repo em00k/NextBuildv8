@@ -2,6 +2,18 @@
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.cursorStyle": "block",
   "files.defaultLanguage": ".bas",
+  "files.exclude": {
+    // "**/*.nex": true,
+    // "**/*.bin": true,
+    // "**/*.map": true,
+    // "**/*.cfg": true,
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true
+  },
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
   "[em00k.nextbuild]": {
@@ -23,7 +35,7 @@
   "asm-code-lens.enableCodeLenses": true,
 "editor.detectIndentation": false,
 "workbench.colorTheme": "Andromeda Colorizer",
-"explorer.sortOrder": "modified",
+//"explorer.sortOrder": "modified",
 "editor.autoClosingQuotes": "never" // highlight color for light themes
 
 }

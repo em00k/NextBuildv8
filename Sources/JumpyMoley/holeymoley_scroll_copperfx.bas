@@ -44,7 +44,7 @@ LoadSDBank("./level1/leveltest.nxm",0,0,0,40)				' Where we load our levels to
 LoadSDBank("./level1/leveltest.nxt",0,0,0,41)                        ' load the tiles to bank 20
 LoadSDBank("font5.spr",0,0,0,42)                        ' load font 
 LoadSDBank("bonky.spr",0,0,0,43)						' sprites bank 32 
-LoadSDBank("bg.bmp",0,0,1078,45)
+'LoadSDBank("bg.bmp",0,0,1078,45)
 
 LoadSDBank("output.dat",0,0,0,57)               ' load the sample pack, table located at end 
 

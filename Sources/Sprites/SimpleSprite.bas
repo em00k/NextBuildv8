@@ -1,31 +1,17 @@
-' Quick Sprite Example 2
-' NextBuild (ZXB/CSpect)
-' emook2018 - use keys 1 and 2 to mess with the sine wav (dirty!)
+' Quick Sprite Example 1
+' 
+' 
 #include <nextlib.bas>
 
 paper 0: border 0 : bright 0: ink 7 : cls 
 
-dim frame,mx,my,yy,xx,count,f as ubyte 
-dim offset as fixed 
-DIM add as fixed=2.799
- 
-poke 23607,60					' for cspect to set the font correctly
-
-InitSprites(1,@Sprites)
-
-' Reg $15 Bit	Function
-' 7	Enable Lores Layer
-' 6-5	Reserved
-' 3-4	If %00, ULA is drawn under Layer 2 and Sprites; if %01, it is drawn between them, if %10 it is drawn over both
-' 2	If 1, Layer 2 is drawn over Sprites, else sprites drawn over layer 2
-' 1	Enable sprites over border
-' 0	Enable sprite visibility
-
-NextReg($15,%00001001)  	' Enable sprite visibility & Sprite ULA L2 order 
+InitSprites(1,@Sprites) 
+NextReg(SPRITE_CONTROL_NR_15,%00001001)  	' Enable sprite visibility & Sprite ULA L2 order 
 ShowLayer2(1)
 UpdateSprite(32,32,0,0,0,0)		' show our sprite we init'd
 
-pause 0
+do 
+loop 
 
 Sprites:
 ASM 

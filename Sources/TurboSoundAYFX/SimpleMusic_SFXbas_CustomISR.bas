@@ -1,6 +1,6 @@
 '!ORG=32768
 '!HEAP=2048
-'!copy=H:\Examples\SimpleTSMusic.nex
+'#!copy=H:\Examples\SimpleTSMusic.nex
 
 ' SimpeMusic_SFX demo
 ' Plays a TS song with the AYFX bank installed. 

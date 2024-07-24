@@ -1,34 +1,23 @@
-'#!sna "h:\starspri.sna" -a 
-' Quick Sprite Example
+
+' Quick Sprite Example 2
 ' NextBuild (ZXB/CSpect)
 ' emook2018 - use keys 1 and 2 to mess with the sine wav (dirty!)
+
 #include <nextlib.bas>
 
 paper 0: border 0 : bright 0: ink 7 : cls 
 
-dim frame,mx,my,yy,xx,count,f as ubyte 
+dim frame,mx,my,yy,xx,count,f,id as ubyte 
 dim offset as fixed 
 DIM add as fixed=2.799
- 
-poke 23607,60					' for cspect to set the font correctly
 
 InitSprites(16,@Sprites)
 
-' http://devnext.referata.com/wiki/Board_feature_control
-NextReg($14,$e3)  					' glbal transparency 
-NextReg($40,$18)    				' $40 Palette Index Register  I assume that colours 0-7 ink 8-15 bright ink 16+ paper etc? 	' 24 = paper bright 0 
-NextReg($41,$e3)  					' $41
-NextReg($7,$1)  					' go 7mhz 
-
-' Bit	Function
-' 7	Enable Lores Layer
-' 6-5	Reserved
-' 3-4	If %00, ULA is drawn under Layer 2 and Sprites; if %01, it is drawn between them, if %10 it is drawn over both
-' 2	If 1, Layer 2 is drawn over Sprites, else sprites drawn over layer 2
-' 1	Enable sprites over border
-' 0	Enable sprite visibility
-
-NextReg($15,%00001001)  	
+NextReg(GLOBAL_TRANSPARENCY_NR_14,$e3)  			' glbal transparency 
+NextReg(PALETTE_INDEX_NR_40,$18)    				' $40 Palette Index Register  I assume that colours 0-7 ink 8-15 bright ink 16+ paper etc? 	' 24 = paper bright 0 
+NextReg(PALETTE_VALUE_NR_41,$e3)  					' $41
+NextReg(TURBO_CONTROL_NR_07,$1)  					' go 7mhz 
+NextReg(SPRITE_CONTROL_NR_15,%00001001)  	
 
 ' to draw a sprite on screen
 ' UpdateSprite(x AS UBYTE,y AS UBYTE, spriteid AS UBYTE, pattern AS UBYTE, mflip as ubyte)
@@ -77,20 +66,6 @@ do
 		print at 0,0;add;"  "
 		pause 10
 	endif 
-	
-' 	count=count+1
-' 	if count=50
-' 		count = 0
-' 		if f=0
-' 			add=2.79
-' 			f=1
-' 			'border 1
-' 		else
-' 			f=0
-' 			add=3.09
-' 			'border 2
-' 		endif
-' 	endif 
 	
 loop
 

@@ -43,7 +43,7 @@ paper 0 : ink  6 : border 1 : cls
 ' SetUpIM()							' init the IM2 code 
 ' EnableSFX
 ' EnableMusic
-WaitKey() 
+
 Init_Music()
 dim key as ubyte 
 dim timer, oldpos as ubyte 

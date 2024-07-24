@@ -20,7 +20,7 @@ end asm
 LoadSDBank("/lies/output.dat",0,0,0,32)					'; Load sample into bank 32-33
 LoadSDBank("vt24000.bin",0,0,0,34)                  '; load the vt2 replayer 
 LoadSDBank("game.afb",0,0,0,36) 				' load an ayfx afb bank into bank 36
-LoadSDBank("love.pt3",0,0,0,38) 				' load music.pt3 into bank 34
+LoadSDBank("lies.pt3",0,0,0,38) 				' load music.pt3 into bank 34
 'LoadSDBank("lemotree.pt3",0,0,0,38) 				' load music.pt3 into bank 34
 
 ' backupsysvar() 
@@ -69,7 +69,6 @@ play = 1
 draw_sample(0)
 draw_sample(1)
 draw_sample(2)
-WaitKey()
 
 nasty: 
 

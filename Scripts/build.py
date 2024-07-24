@@ -41,10 +41,12 @@ def CheckForBasic():
 
     testfname = head_tail[1].split('.')[1-2]
 
-    if testfname == 'bas':
-        print(".BAS file")
-    else:
-        print('Not a basic file! Exiting.')
+    if testfname != 'bas':
+        # checks we are compile a bas file
+        # print(".BAS file")
+        # no need to print anything 
+    #else:
+        print('Not a basic [*.BAS] file! Exiting.')
         sys.exit(1)    
 
     if head_tail[1] == 'nextlib.bas':
@@ -104,7 +106,7 @@ def ProcessSingle():
 
     head_tail = os.path.split(inputfilea)
     tmp_path = os.path.join(head_tail[0], 'Module*.bas')
-    print("Creating module: " + inputfilea)
+    #print("Creating module: " + inputfilea)
     file = inputfilea
     try:
         cmd = [sys.executable, os.path.join(SCRIPTS_DIR, 'nextbuild.py'), '-b', file, '-q', '-s']
@@ -220,6 +222,36 @@ def LaunchEmulator(input_file):
     except FileNotFoundError:
         print("Emulator executable not found. Please check the path.")
 
+def ShowInfo():    
+    print("===============================================================================================")
+    print("NextBuild v8.1    : David Saphier / em00k - 21-Jul-2022     https://github.com/em00k/NextBuild")
+    print("ZX Basic Compiler : Jose Rodriguez aka Boriel               https://zxbasic.readthedocs.io/")
+    print("Cspect Emulator   : Mike Dailly                             https://cspect.org")
+    print("===============================================================================================")
+
+def DeleteRelatedFiles(filename):
+        """
+        Deletes files related to the given filename with extensions .cfg, .map, and .bin.
+        """
+        # Extract the directory and base name from the provided filename
+        directory = os.path.dirname(filename)
+        base_name = os.path.splitext(os.path.basename(filename))[0]
+
+        # Define the extensions to delete
+        extensions = ['.cfg', '.map', '.bin']
+
+        # Iterate through the extensions and delete the corresponding files
+        for ext in extensions:
+            related_file = os.path.join(directory, base_name + ext)
+            if os.path.exists(related_file):
+                try:
+                    os.remove(related_file)
+                    print(f"Deleted file: {related_file}")
+                except Exception as e:
+                    print(f"Failed to delete file: {related_file}. Reason: {e}")
+            else:
+                print(f"File not found: {related_file}")
+
 
 # Main function to execute the script logic
 if __name__ == '__main__':
@@ -231,7 +263,7 @@ if __name__ == '__main__':
         print("Processing modules")
         ProcessModules()
     elif singlefile:  # Changed to 'elif' to avoid potential overlap if both flags were somehow set
-        print("Processing single module")
+        ShowInfo()
         ProcessSingle()
     elif lastnex:  # Changed to 'elif' to avoid potential overlap if both flags were somehow set
 #        print(f"File: {inputfilea} ")  # Debugging line
@@ -239,3 +271,5 @@ if __name__ == '__main__':
 #        print("Run Master NEX")
         StartEmulator(inputfilea)
     # Optionally, you could call StartEmulator here or based on another condition/argument
+
+    DeleteRelatedFiles(inputfilea)

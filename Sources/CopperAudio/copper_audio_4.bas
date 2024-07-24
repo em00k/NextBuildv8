@@ -27,7 +27,7 @@ asm
     nextreg LAYER2_CONTROL_NR_70,%00_00_0000    ; 5-4 %01 = 320x256x8bpp 00 = 256x192 
 end asm 
 
-paper 0 : ink  6 : border 0 : cls 
+paper 0 : ink  6 : border 0 : cls : cls256(0)
 
 do 
     ' print "Copper Audio v2"    

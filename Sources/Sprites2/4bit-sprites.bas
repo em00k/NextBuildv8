@@ -1,7 +1,8 @@
 '!ORG=24576
 '!heap=2048
-'!copy=h:4bit.nex
-'!opt=5
+'!#copy=h:4bit.nex
+'!opt=4
+'#!asm 
 
 ' 4 bit sprites 
 ' When using 4bit sprites with UpdateSprite routine the last two bytes of the command 

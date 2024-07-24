@@ -54,13 +54,6 @@ sub TextBlock(txx as ubyte, tyy as ubyte,helptextin$,col as ubyte)
 	for x=0 to (len helptextin$)-1
 		char=code helptextin$(x)	
 		UpdateMap(xx,yy,char,col)
-		
-		'	if yy>=32
-		'		asm 
-		'			ld bc,$006b : ld a,$cf : out (c),a : ld a,$87 : out (c),a
-		'		end asm 
-		'		yy=screenlines-1
-		'	endif 
 		xx=xx+1 : if xx = 80 : yy = yy + 1 : xx = 0 : endif 
 	next 
 	endif 
