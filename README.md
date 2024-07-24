@@ -16,4 +16,5 @@ Thanks
 - Cleand up file droppings not used
 - Added back some original demos
 - Will now clean up cfg map bin files on launch
-  
+- Some of the copper audio examples are not working because they do not contain the original wav files
+- Some CTC examples are not working correctly - to be fixed
