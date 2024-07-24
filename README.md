@@ -10,3 +10,10 @@ Modules are working, but the demos need fixing. There are lots of bits that I wo
 There is also a bunch of junk that will be cleaned up as I go. 
 
 Thanks
+
+24/07/24
+
+- Cleand up file droppings not used
+- Added back some original demos
+- Will now clean up cfg map bin files on launch
+  
